@@ -1,0 +1,119 @@
+.node {
+  font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  fill: #bbb;
+}
+
+.node.controller {
+  fill: #00FF00;
+}
+
+.controller {
+  color: #00FF00;
+}
+
+.node.filter {
+  fill: #0000FF;
+}
+
+.filter {
+  color: #0000FF;
+}
+
+.node.factory {
+  fill: #0F500F;
+}
+
+.factory {
+  color: #0F500F;
+}
+
+.node.directive {
+  fill: #FF00FF;
+}
+
+.directive {
+  color: #FF00FF;
+}
+
+.node.angular {
+  fill: #FF0000;
+}
+
+.angular {
+  color: #FF0000;
+}
+
+.node:hover {
+  fill: #000;
+}
+
+.link {
+  stroke: steelblue;
+  stroke-opacity: .4;
+  fill: none;
+  pointer-events: none;
+}
+
+.node:hover,
+.node--source,
+.node--target {
+  font-weight: 700;
+}
+
+.node--source {
+  fill: #2ca02c;
+}
+
+.node--target {
+  fill: #d62728;
+}
+
+.link--source,
+.link--target {
+  stroke-opacity: 1;
+  stroke-width: 2px;
+}
+
+.link--source {
+  stroke: #d62728;
+  color: #d62728;
+}
+
+.link--target {
+  stroke: #2ca02c;
+  color: #2ca02c;
+}
+
+.chart {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.legend {
+  position: fixed;
+  display: inline-block;
+  padding: 10px;
+  top: 10px;
+  right: 10px;
+  text-align: right;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.angularjsLegend {
+  display: none;
+}
+
+.angularjsLegend.angularjs {
+  display: block;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 0.8em;
+  color: #ccc;
+}

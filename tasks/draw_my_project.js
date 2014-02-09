@@ -103,11 +103,15 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('draw_my_project', 'A grunt plugin who can draw your js files depencies', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      type: 'angularjs'
+      type: 'angularjs',
+      title: '',
+      description: ''
     });
 
     // Iterate over all specified file groups.
     this.files.forEach(function(f) {
+
+      var time = new Date().getTime();
 
       var srcIn = f.src.filter(function(filepath) {
         // Warn on and remove invalid source files (if nonull was set).
@@ -121,13 +125,29 @@ module.exports = function(grunt) {
         return grunt.file.read(filepath);
       });
 
-      // Write the destination file.
+      // Write the json file.
       grunt.file.write(f.dest, JSON.stringify(exec(srcIn, options.type)));
       var link = f.dest.split('/');
       link = link[link.length-1];
-      var pathTemplate = grunt.file.exists('template/d3.html') ? 'template/d3.html' : 'node_modules/grunt-draw-my-project/template/d3.html';
-      var content = grunt.template.process(grunt.file.read(pathTemplate), {data: {name: link}});
-      grunt.file.write(f.dest+'.html', content);
+
+      //Write template files
+      var pathTemplate = grunt.file.exists('template/d3.html') ? 'template/' : 'node_modules/grunt-draw-my-project/template/'; 
+      var templateFiles = ['d3.html', 'd3.css', 'd3.js'];
+
+      var time2 = new Date().getTime();
+
+      for(var i=0, len=templateFiles.length; i<len; i++) {
+        var content = grunt.template.process(grunt.file.read(pathTemplate + templateFiles[i]), {data: {
+          cssFileName: link+'.css',
+          jsFileName: link+'.js',
+          jsonName: link,
+          title: options.title,
+          description: options.description,
+          type: options.type,
+          timeGeneration: (time2 - time)
+        }});
+        grunt.file.write(f.dest+'.'+templateFiles[i].split('.')[1], content);
+      }
 
       // Print a success message.
       grunt.log.writeln('File "' + f.dest + '" created.');

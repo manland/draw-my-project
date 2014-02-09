@@ -1,195 +1,34 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="description" content="<%= description %>"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title>Draw <%= title %></title>
+  </head>
+  <body>
 
-.node {
-  font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  fill: #bbb;
-}
+    <div class="chart"></div>
+    <div class="legend">
+      <h1>Legend</h1>
+      <div class="link--target">Used by</div>
+      <div class="link--source">Depends on</div>
+      <div class="angularjsLegend <%= type %>">
+        <h2>AngularJs</h2>
+        <div class="angular">AngularJs class</div>
+        <div class="directive">Directive</div>
+        <div class="controller">Controller</div>
+        <div class="factory">Service</div>
+        <div class="filter">Filter</div>
+      </div>
+    </div>
 
-.node.controller {
-  fill: #00FF00;
-}
+    <footer>Generated in <%= timeGeneration %>msc with &#9829; by <a href="https://github.com/manland/draw-my-project">Draw my project</a></footer>
 
-.node.filter {
-  fill: #0000FF;
-}
+    <link rel="stylesheet" type="text/css" href="<%= cssFileName %>">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript" src="<%= jsFileName %>"></script>
 
-.node.factory {
-  fill: #0F500F;
-}
-
-.node.directive {
-  fill: #FF00FF;
-}
-
-.node.angular {
-  fill: #FF0000;
-}
-
-.node:hover {
-  fill: #000;
-}
-
-.link {
-  stroke: steelblue;
-  stroke-opacity: .4;
-  fill: none;
-  pointer-events: none;
-}
-
-.node:hover,
-.node--source,
-.node--target {
-  font-weight: 700;
-}
-
-.node--source {
-  fill: #2ca02c;
-}
-
-.node--target {
-  fill: #d62728;
-}
-
-.link--source,
-.link--target {
-  stroke-opacity: 1;
-  stroke-width: 2px;
-}
-
-.link--source {
-  stroke: #d62728;
-}
-
-.link--target {
-  stroke: #2ca02c;
-}
-
-</style>
-<body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script>
-
-var diameter = 800,
-    radius = diameter / 2,
-    innerRadius = radius - 120;
-
-var cluster = d3.layout.cluster()
-    .size([360, innerRadius])
-    .sort(null)
-    .value(function(d) { return d.size; });
-
-var bundle = d3.layout.bundle();
-
-var line = d3.svg.line.radial()
-    .interpolate("bundle")
-    .tension(.85)
-    .radius(function(d) { return d.y; })
-    .angle(function(d) { return d.x / 180 * Math.PI; });
-
-var svg = d3.select("body").append("svg")
-    .attr("width", diameter)
-    .attr("height", diameter)
-  .append("g")
-    .attr("transform", "translate(" + radius + "," + radius + ")");
-
-var link = svg.append("g").selectAll(".link"),
-    node = svg.append("g").selectAll(".node");
-
-d3.json("<%= name %>", function(error, classes) {
-  var nodes = cluster.nodes(packageHierarchy(classes)),
-      links = packageImports(nodes);
-
-  link = link
-      .data(bundle(links))
-    .enter().append("path")
-      .each(function(d) { d.source = d[0], d.target = d[d.length - 1]; })
-      .attr("class", "link")
-      .attr("d", line);
-
-  node = node
-      .data(nodes.filter(function(n) { return !n.children; }))
-    .enter().append("text")
-      .attr("class", function(d) { return "node " + d.type; })
-      .attr("dx", function(d) { return d.x < 180 ? 8 : -8; })
-      .attr("dy", ".31em")
-      .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")" + (d.x < 180 ? "" : "rotate(180)"); })
-      .style("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
-      .text(function(d) { return d.key; })
-      .on("mouseover", mouseovered)
-      .on("mouseout", mouseouted);
-});
-
-function mouseovered(d) {
-  node
-      .each(function(n) { n.target = n.source = false; });
-
-  link
-      .classed("link--target", function(l) { if (l.target === d) return l.source.source = true; })
-      .classed("link--source", function(l) { if (l.source === d) return l.target.target = true; })
-    .filter(function(l) { return l.target === d || l.source === d; })
-      .each(function() { this.parentNode.appendChild(this); });
-
-  node
-      .classed("node--target", function(n) { return n.target; })
-      .classed("node--source", function(n) { return n.source; });
-}
-
-function mouseouted(d) {
-  link
-      .classed("link--target", false)
-      .classed("link--source", false);
-
-  node
-      .classed("node--target", false)
-      .classed("node--source", false);
-}
-
-d3.select(self.frameElement).style("height", diameter + "px");
-
-// Lazily construct the package hierarchy from class names.
-function packageHierarchy(classes) {
-  var map = {};
-
-  function find(name, data) {
-    var node = map[name], i;
-    if (!node) {
-      node = map[name] = data || {name: name, children: []};
-      if (name.length) {
-        node.parent = find(name.substring(0, i = name.lastIndexOf(".")));
-        node.parent.children.push(node);
-        node.key = name.substring(i + 1);
-      }
-    }
-    return node;
-  }
-
-  classes.forEach(function(d) {
-    find(d.name, d);
-  });
-
-  return map[""];
-}
-
-// Return a list of imports for the given array of nodes.
-function packageImports(nodes) {
-  var map = {},
-      imports = [];
-
-  // Compute a map from name to node.
-  nodes.forEach(function(d) {
-    map[d.name] = d;
-  });
-
-  // For each import, construct a link from the source to target node.
-  nodes.forEach(function(d) {
-    if (d.imports) d.imports.forEach(function(i) {
-      imports.push({source: map[d.name], target: map[i]});
-    });
-  });
-
-  return imports;
-}
-
-</script>
+  </body>
+</html>  
