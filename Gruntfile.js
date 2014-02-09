@@ -45,6 +45,22 @@ module.exports = function(grunt) {
         files: {
           'tmp/skimbo': ['test/fixtures/skimbo/**/*.js']
         }
+      },
+      sturvive: {
+        options: {
+          type: 'requirejs'
+        },
+        files: {
+          'tmp/sturvive': ['test/fixtures/sturvive/**/*.js']
+        }
+      },
+      goo: {
+        options: {
+          type: 'requirejs'
+        },
+        files: {
+          'tmp/goo': ['test/fixtures/goo-require.js']
+        }
       }
 
     },

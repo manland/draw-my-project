@@ -55,6 +55,24 @@ exports.draw_my_project = {
     test.equal(actual, expected, 'should transform angularjs files into chart.');
 
     test.done();
+  },
+  sturvive: function(test) {
+    test.expect(1);
+    
+    var actual = grunt.file.read('tmp/sturvive');
+    var expected = grunt.file.read('test/expected/sturvive.json');
+    test.equal(actual, expected, 'should transform require files into chart.');
+
+    test.done();
+  },
+  goo: function(test) {
+    test.expect(1);
+    
+    var actual = grunt.file.read('tmp/goo');
+    var expected = grunt.file.read('test/expected/goo-require.json');
+    test.equal(actual, expected, 'should transform require files into chart.');
+
+    test.done();
   }
 
 };
