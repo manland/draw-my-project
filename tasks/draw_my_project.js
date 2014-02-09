@@ -68,9 +68,6 @@ var foundNode = function foundNode(nodes, src) {
       nodes[name].size = nodes[name].size + 1;
       nodes[name].imports = imports;
       nodes[name].type = type;
-      console.log('<<<<<<<<<<<<');
-      console.log(name, type);
-      console.log('<<<<<<<<<<<<');
     }
     matches = temp.match(regexClassName);
   }
@@ -119,7 +116,8 @@ module.exports = function(grunt) {
       grunt.file.write(f.dest, JSON.stringify(exec(srcIn)));
       var link = f.dest.split('/');
       link = link[link.length-1];
-      var content = grunt.template.process(grunt.file.read('template/d3.html'), {data: {name: link}});
+      var pathTemplate = grunt.file.exists('template/d3.html') ? 'template/d3.html' : 'node_modules/grunt-draw-my-project/template/d3.html';
+      var content = grunt.template.process(grunt.file.read(pathTemplate), {data: {name: link}});
       grunt.file.write(f.dest+'.html', content);
 
       // Print a success message.
