@@ -1,0 +1,41 @@
+{
+  "name": "grunt-draw-my-project",
+  "description": "A grunt plugin that draws your javascript project dependencies.",
+  "version": "0.1.0",
+  "homepage": "http://manland.github.io/draw-my-project",
+  "author": {
+    "name": "Romain Maneschi",
+    "url": "http://romain.maneschi.fr"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/manland/draw-my-project.git"
+  },
+  "bugs": {
+    "url": "https://github.com/manland/draw-my-project/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://manland.github.io/draw-my-project/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.2"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.2"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}

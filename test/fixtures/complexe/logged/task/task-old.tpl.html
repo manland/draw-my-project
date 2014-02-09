@@ -1,0 +1,28 @@
+<div ng-controller="TaskController">
+
+	<div ng-show="showAddSection">
+		<input type="text" ng-model="addTaskDuration" placeholder="duration">
+		<div class="datePickerContainer">
+			<input type="text" ng-model="addTaskDate" placeholder="date" ng-focus="showDatePicker=!showDatePicker">
+			<div class="datePicker" ng-show="showDatePicker">
+				<date-picker select-date="setTaskDate" first-day-of-week="1" default-selected-date="addTaskDate"></date-picker>
+			</div>
+		</div>
+		<select ng-model="addTaskProject" ng-options="p.name for p in projects">
+      	</select>
+
+		<button ng-click="add()">Ok</button>
+	</div>
+
+	<button ng-show="showAddSection" ng-click="showAddSection=!showAddSection">Cancel</button>
+	<button ng-hide="showAddSection" ng-click="showAddSection=!showAddSection">Add</button>
+	<button ng-click="add1000Tasks()">Add 1000 tasks</button>
+
+	<h1>All tasks</h1>
+
+	<ul>
+		<li>Delete all <button ng-click="deleteAll()">X</button></li>
+		<li ng-repeat="task in tasks">{{task.duration}}h the {{task.date | date:'longDate'}} on {{task.project.name}} <button ng-click="modify(task)">Mod</button><button ng-click="delete(task._id)">X</button></li>
+	</ul>
+
+</div>

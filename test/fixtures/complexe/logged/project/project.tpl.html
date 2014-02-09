@@ -1,0 +1,18 @@
+<div ng-controller="ProjectController">
+
+	<div ng-show="showAddSection">
+		<input type="text" ng-model="addProjectName" placeholder="name">
+
+		<button ng-click="add()">Ok</button>
+	</div>
+
+	<button ng-show="showAddSection" ng-click="showAddSection=!showAddSection">Cancel</button>
+	<button ng-hide="showAddSection" ng-click="showAddSection=!showAddSection">Add</button>
+
+	<h1>All projects</h1>
+
+	<ul>
+		<li>Delete all <button ng-click="deleteAll()">X</button></li>
+		<li ng-repeat="project in projects">{{project.name}} <button ng-click="modify(project)">Mod</button><button ng-click="delete(project._id)">X</button></li>
+	</ul>
+</div>

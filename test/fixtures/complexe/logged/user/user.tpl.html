@@ -1,0 +1,19 @@
+<div ng-controller="UserController">
+
+	<div ng-show="showAddSection">
+		<input type="text" ng-model="addUserLogin" placeholder="login">
+		<input type="text" ng-model="addUserPassword" placeholder="password">
+		<button ng-click="add()">Ok</button>
+	</div>
+
+	<button ng-show="showAddSection" ng-click="showAddSection=!showAddSection">Cancel</button>
+	<button ng-hide="showAddSection" ng-click="showAddSection=!showAddSection">Add</button>
+
+	<h1>All users</h1>
+
+	<ul>
+		<li>Delete all <button ng-click="deleteAll()">X</button></li>
+		<li ng-repeat="user in users">{{user.login}}  <button ng-click="modify(user)">Mod</button><button ng-click="delete(user._id)">X</button></li>
+	</ul>
+
+</div>
