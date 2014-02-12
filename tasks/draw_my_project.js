@@ -10,7 +10,7 @@
 
 var regex = {
   angularjs: {
-    regexClassName: /.*?.(controller|factory|directive|filter)\(['|"](.+?)['|"]/,
+    regexClassName: /.*?[^$](controller|factory|directive|filter)\(['|"](.+?)['|"]/,
     regexImports: /function/
   },
   requirejs: {
