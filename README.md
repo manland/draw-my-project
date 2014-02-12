@@ -1,6 +1,6 @@
 # grunt-draw-my-project
 
-> A grunt plugin who can draw your js files depencies
+> A grunt plugin that draws your javascript project dependencies.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.2`
@@ -37,46 +37,81 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.type
 Type: `String`
-Default value: `',  '`
+Default value: `angularjs`
+Accepted values : `angularjs`, `requirejs`
 
-A string value that is used to do something with whatever.
+A string value that is used to find node and dependecies type.
 
-#### options.punctuation
+#### options.nbNodeByFile
+Type: `Int`
+Default value: `1`
+Special value: `-1` infinite search
+
+An int to indicate the number of node who can be found in a file. In most case, one file have one class declaration, but for minified files all dependencies are in one file, so you must set this number to -1.
+
+#### options.title
 Type: `String`
-Default value: `'.'`
+Default value: `Draw my project`
 
-A string value that is used to do something else with whatever else.
+A string value that is used in title of html result page.
+
+#### options.description
+Type: `String`
+Default value: `Draw your project dependencies !`
+
+A string value that is used in description of html result page.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, the default options are used. So if the `app.js` file is a simple AngularJs project with one `Controller`, the generated result should show a one wheel dependencies with one dependence.
 
 ```js
 grunt.initConfig({
   draw_my_project: {
     options: {},
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      'dest/default_options': ['src/app.js'],
     },
   },
 });
 ```
 
 #### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+In this example, custom options are used to generate dependencies. So if the `minified.js` file is a RequireJs project with all dependencies. The generated result should show a wheel dependencies with all dependences.
 
 ```js
 grunt.initConfig({
   draw_my_project: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      type: 'requirejs',
+      nbNodeByFile: '-1',
+      title: 'My project title',
+      description: 'My project can do anything !'
     },
     files: {
-      'dest/default_options': ['src/testing', 'src/123'],
+      'dest/default_options': ['src/minified.js'],
+    },
+  },
+});
+```
+
+#### Custom Options
+In this example, custom options are used to generate dependencies. So if the `*.js` files are RequireJs project with all dependencies. The generated result should show a wheel dependencies with all dependences.
+
+```js
+grunt.initConfig({
+  draw_my_project: {
+    options: {
+      type: 'requirejs',
+      nbNodeByFile: '-1',
+      title: 'My project title',
+      description: 'My project can do anything !'
+    },
+    files: {
+      'dest/default_options': ['src/**/*.js'],
     },
   },
 });
@@ -86,4 +121,18 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+
+###0.1.2
+
+* fix #1
+* fix #2
+* improve README
+
+###0.1.1
+
+* add RequireJs dependencies
+* improve generated css
+
+###0.1.0
+
+* first release based on AngularJs
