@@ -32,6 +32,9 @@ module.exports = function(grunt) {
     draw_my_project: {
 
       simple: {
+        options: {
+          nbNodeByFile: 3
+        },
         files: {
           'tmp/simple': ['test/fixtures/simple.js']
         }
@@ -56,7 +59,8 @@ module.exports = function(grunt) {
       },
       goo: {
         options: {
-          type: 'requirejs'
+          type: 'requirejs',
+          nbNodeByFile: -1
         },
         files: {
           'tmp/goo': ['test/fixtures/goo-require.js']

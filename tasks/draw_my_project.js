@@ -33,10 +33,10 @@ var buildNode = function buildNode(name, optImports, optType) {
   };
 };
 
-var foundImports = function foundImports(nodes, src, type) {
+var foundImports = function foundImports(nodes, src, options) {
   var imports = [];
 
-  var regexImports = regex[type].regexImports;
+  var regexImports = regex[options.type].regexImports;
 
   var temp = src;
   var matches = temp.match(regexImports);
@@ -58,12 +58,13 @@ var foundImports = function foundImports(nodes, src, type) {
   return imports;
 };
 
-var foundNode = function foundNode(nodes, src, type) {
-  var regexClassName = regex[type].regexClassName;
+var foundNode = function foundNode(nodes, src, options) {
+  var regexClassName = regex[options.type].regexClassName;
 
   var temp = src;
   var matches = temp.match(regexClassName);
-  while(matches !== null) {
+  var count = 0;
+  while(matches !== null && (options.nbNodeByFile === -1 || count < options.nbNodeByFile)) {
     var nodeType = matches[1];
     var name = matches[2];
     var firstCrochet = temp.indexOf('[', matches.index);
@@ -71,7 +72,7 @@ var foundNode = function foundNode(nodes, src, type) {
     var imports = [];
     temp = temp.substr(firstCrochet);
     if(firstCrochet < firstFunction) {
-      imports = foundImports(nodes, temp, type);
+      imports = foundImports(nodes, temp, options);
     }
     if(nodes[name] === undefined) {
       nodes[name] = buildNode(name, imports, nodeType);
@@ -81,15 +82,16 @@ var foundNode = function foundNode(nodes, src, type) {
       nodes[name].type = nodeType;
     }
     matches = temp.match(regexClassName);
+    count = count + 1;
   }
 
   return nodes;
 };
 
-var exec = function exec(src, type) {
+var exec = function exec(src, options) {
   var nodes = {};
   for(var i=0, len=src.length; i<len; i++) {
-    nodes = foundNode(nodes, src[i], type);
+    nodes = foundNode(nodes, src[i], options);
   }
   var temp = [];
   for(var key in nodes) {
@@ -104,8 +106,9 @@ module.exports = function(grunt) {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       type: 'angularjs',
-      title: '',
-      description: ''
+      nbNodeByFile: 1,
+      title: 'Draw my project',
+      description: 'Draw your project dependencies !'
     });
 
     // Iterate over all specified file groups.
@@ -126,7 +129,7 @@ module.exports = function(grunt) {
       });
 
       // Write the json file.
-      grunt.file.write(f.dest, JSON.stringify(exec(srcIn, options.type)));
+      grunt.file.write(f.dest, JSON.stringify(exec(srcIn, options)));
       var link = f.dest.split('/');
       link = link[link.length-1];
 
