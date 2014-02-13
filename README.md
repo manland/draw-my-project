@@ -135,6 +135,12 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+###0.1.3
+
+* fix #2
+* fix #4
+* add a menu according to #3 (first shoot)
+
 ###0.1.2
 
 * fix #1
