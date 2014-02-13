@@ -64,7 +64,7 @@ var foundNode = function foundNode(nodes, src, options) {
   var temp = src;
   var matches = temp.match(regexClassName);
   var count = 0;
-  while(matches !== null && (options.nbNodeByFile === -1 || count < options.nbNodeByFile)) {
+  while(matches !== null) {
     var nodeType = matches[1];
     var name = matches[2];
     var firstCrochet = temp.indexOf('[', matches.index);
@@ -81,8 +81,12 @@ var foundNode = function foundNode(nodes, src, options) {
       nodes[name].imports = imports;
       nodes[name].type = nodeType;
     }
-    matches = temp.match(regexClassName);
     count = count + 1;
+    if(options.nbNodeByFile === -1 || count < options.nbNodeByFile) {
+      matches = temp.match(regexClassName);
+    } else {
+      matches = null;
+    }
   }
 
   return nodes;
