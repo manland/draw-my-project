@@ -84,7 +84,7 @@
   color: #2ca02c;
 }
 
-.chart {
+.chart, .menu {
   display: inline-block;
   vertical-align: top;
 }

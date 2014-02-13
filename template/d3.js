@@ -1,6 +1,6 @@
-var diameter = 1200,
+var diameter = 700,
     radius = diameter / 2,
-    innerRadius = radius - 200;
+    innerRadius = radius - 100;
 
 var cluster = d3.layout.cluster()
     .size([360, innerRadius])
@@ -27,6 +27,9 @@ var link = svg.append("g").selectAll(".link"),
 d3.json("<%= jsonName %>", function(error, classes) {
   var nodes = cluster.nodes(packageHierarchy(classes)),
       links = packageImports(nodes);
+  
+  listenFilterInput();
+  fillMenu(classes);
 
   link = link
       .data(bundle(links))
@@ -117,4 +120,48 @@ function packageImports(nodes) {
   });
 
   return imports;
+}
+
+function listenFilterInput() {
+  var filterInputElement = document.getElementsByClassName('filterInput')[0];
+  var menuElement = document.getElementsByClassName('menu')[0];
+  filterInputElement.onkeyup = function(evt) {
+    var filter = evt.target.value;
+    for(var i=1, len=menuElement.children.length; i<len; i++) {
+      var element = menuElement.children[i];
+      if(filter === '' || element.innerHTML.indexOf(filter) === 0) {
+        element.style.display = 'block';
+      } else {
+        element.style.display = 'none';
+      }
+    }
+  };
+}
+
+function fillMenu(classes) {
+  var menuElement = document.getElementsByClassName('menu')[0];
+  var tmp = classes.sort(function(a, b) {
+    return a.name.localeCompare(b.name);
+  }); 
+  tmp.forEach(function(classe) {
+    var d = document.createElement('div');
+    d.innerHTML = classe.name;
+    d.onmouseover = function(evt) {
+      node
+        .each(function(n) {
+          if(n.name === evt.target.innerHTML) {
+            mouseovered(n);
+          }
+        });
+    };
+    d.onmouseout = function(evt) {
+      node
+        .each(function(n) {
+          if(n.name === evt.target.innerHTML) {
+            mouseouted(n);
+          }
+        });
+    };
+    menuElement.appendChild(d);
+  });
 }
