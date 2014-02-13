@@ -1,6 +1,6 @@
-var diameter = 800,
+var diameter = 1200,
     radius = diameter / 2,
-    innerRadius = radius - 120;
+    innerRadius = radius - 200;
 
 var cluster = d3.layout.cluster()
     .size([360, innerRadius])
@@ -84,7 +84,7 @@ function packageHierarchy(classes) {
     if (!node) {
       node = map[name] = data || {name: name, children: []};
       if (name.length) {
-        node.parent = find(name.substring(0, i = name.lastIndexOf(".")));
+        node.parent = find(name.substring(0, i = name.lastIndexOf("<%= pathSeparator %>")));
         node.parent.children.push(node);
         node.key = name.substring(i + 1);
       }

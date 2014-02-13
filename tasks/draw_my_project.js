@@ -8,14 +8,34 @@
 
 'use strict';
 
-var regex = {
+var configs = {
   angularjs: {
     regexClassName: /.*?[^$](controller|factory|directive|filter)\(['|"](.+?)['|"]/,
-    regexImports: /function/
+    regexImports: /function/,
+    callbackAfter: function(nodes, options) {
+      if(options.sortByAngularType === true) {
+        var key;
+        //first add path to imports
+        for(key in nodes) {
+          for(var i=0, len=nodes[key].imports.length; i<len; i++) {
+            var importName = nodes[key].imports[i];
+            nodes[key].imports[i] = nodes[importName].type + options.pathSeparator + nodes[importName].name;
+          }
+        }
+        //second add path to node
+        for(key in nodes) {
+          nodes[key].name = nodes[key].type + options.pathSeparator + nodes[key].name;
+        }
+      }
+      return nodes;
+    }
   },
   requirejs: {
     regexClassName: /(define)\(['|"](.+?)['|"]/,
-    regexImports: /function/
+    regexImports: /function/,
+    callbackAfter: function(nodes, options) {
+      return nodes;
+    }
   }
 };
 
@@ -36,7 +56,7 @@ var buildNode = function buildNode(name, optImports, optType) {
 var foundImports = function foundImports(nodes, src, options) {
   var imports = [];
 
-  var regexImports = regex[options.type].regexImports;
+  var regexImports = configs[options.type].regexImports;
 
   var temp = src;
   var matches = temp.match(regexImports);
@@ -59,7 +79,7 @@ var foundImports = function foundImports(nodes, src, options) {
 };
 
 var foundNode = function foundNode(nodes, src, options) {
-  var regexClassName = regex[options.type].regexClassName;
+  var regexClassName = configs[options.type].regexClassName;
 
   var temp = src;
   var matches = temp.match(regexClassName);
@@ -97,6 +117,7 @@ var exec = function exec(src, options) {
   for(var i=0, len=src.length; i<len; i++) {
     nodes = foundNode(nodes, src[i], options);
   }
+  nodes = configs[options.type].callbackAfter(nodes, options);
   var temp = [];
   for(var key in nodes) {
     temp.push(nodes[key]);
@@ -111,6 +132,8 @@ module.exports = function(grunt) {
     var options = this.options({
       type: 'angularjs',
       nbNodeByFile: 1,
+      pathSeparator: '/',
+      sortByAngularType: true,
       title: 'Draw my project',
       description: 'Draw your project dependencies !'
     });
@@ -148,6 +171,7 @@ module.exports = function(grunt) {
           cssFileName: link+'.css',
           jsFileName: link+'.js',
           jsonName: link,
+          pathSeparator: options.pathSeparator,
           title: options.title,
           description: options.description,
           type: options.type,

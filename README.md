@@ -51,6 +51,19 @@ Special value: `-1` infinite search
 
 An int to indicate the number of node who can be found in a file. In most case, one file have one class declaration, but for minified files all dependencies are in one file, so you must set this number to -1.
 
+#### options.pathSeparator
+Type: `String`
+Default value: `/`
+
+A string value to indicate the path separator. Permit to aggregate same classes in the final graph. If `options.type === angularjs` and `options.sortByAngularType === true` all classes are grouped by service, factory, directive, controller or filter.
+
+#### options.sortByAngularType
+Type: `Boolean`
+Default value: `true`
+<i>Ignored if options.type is requirejs</i>
+
+A boolean value to indicate if classes must be grouped by service, factory, directive, controller or filter.
+
 #### options.title
 Type: `String`
 Default value: `Draw my project`
