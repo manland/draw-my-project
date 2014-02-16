@@ -1,5 +1,5 @@
 /**
- * grunt-draw-my-project - v0.1.3 - 2014-02-16
+ * grunt-draw-my-project - v0.2.0 - 2014-02-16
  * http://manland.github.io/draw-my-project
  *
  * Copyright (c) 2014 Romain Maneschi : http://romain.maneschi.fr

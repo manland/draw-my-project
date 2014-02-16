@@ -135,6 +135,13 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+###0.2.0
+
+* new beatiful skin made by @undless
+* add hierarchical chart
+* close #6
+* close #3
+
 ###0.1.3
 
 * fix #2
