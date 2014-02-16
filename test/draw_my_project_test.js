@@ -32,7 +32,7 @@ exports.draw_my_project = {
   simple: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/simple');
+    var actual = grunt.file.read('tmp/simple.json');
     var expected = grunt.file.read('test/expected/simple.json');
     test.equal(actual, expected, 'should transform angularjs files into chart.');
 
@@ -41,7 +41,7 @@ exports.draw_my_project = {
   complexe: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/complexe');
+    var actual = grunt.file.read('tmp/complexe.json');
     var expected = grunt.file.read('test/expected/complexe.json');
     test.equal(actual, expected, 'should transform angularjs files into chart.');
 
@@ -50,7 +50,7 @@ exports.draw_my_project = {
   skimbo: function(test) {
     test.expect(1);
     
-    var actual = grunt.file.read('tmp/skimbo');
+    var actual = grunt.file.read('tmp/skimbo.json');
     var expected = grunt.file.read('test/expected/skimbo.json');
     test.equal(actual, expected, 'should transform angularjs files into chart.');
 
@@ -59,7 +59,7 @@ exports.draw_my_project = {
   sturvive: function(test) {
     test.expect(1);
     
-    var actual = grunt.file.read('tmp/sturvive');
+    var actual = grunt.file.read('tmp/sturvive.json');
     var expected = grunt.file.read('test/expected/sturvive.json');
     test.equal(actual, expected, 'should transform require files into chart.');
 
@@ -68,7 +68,7 @@ exports.draw_my_project = {
   goo: function(test) {
     test.expect(1);
     
-    var actual = grunt.file.read('tmp/goo');
+    var actual = grunt.file.read('tmp/goo.json');
     var expected = grunt.file.read('test/expected/goo-require.json');
     test.equal(actual, expected, 'should transform require files into chart.');
 

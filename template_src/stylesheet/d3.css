@@ -3,6 +3,12 @@
   fill: #bbb;
 }
 
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
 .node.controller {
   fill: #00FF00;
 }
@@ -82,38 +88,4 @@
 .link--target {
   stroke: #2ca02c;
   color: #2ca02c;
-}
-
-.chart, .menu {
-  display: inline-block;
-  vertical-align: top;
-}
-
-.legend {
-  position: fixed;
-  display: inline-block;
-  padding: 10px;
-  top: 10px;
-  right: 10px;
-  text-align: right;
-  border: 1px solid #000;
-  border-radius: 5px;
-}
-
-.angularjsLegend {
-  display: none;
-}
-
-.angularjsLegend.angularjs {
-  display: block;
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 0.8em;
-  color: #ccc;
 }

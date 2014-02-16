@@ -129,13 +129,17 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('draw_my_project', 'A grunt plugin who can draw your js files depencies', function() {
     // Merge task-specific and/or target-specific options with these defaults.
+    grunt.template.addDelimiters("square", "[%", "%]");
     var options = this.options({
       type: 'angularjs',
       nbNodeByFile: 1,
       pathSeparator: '/',
       sortByAngularType: true,
       title: 'Draw my project',
-      description: 'Draw your project dependencies !'
+      description: 'Draw your project dependencies !',
+      templateFiles: [
+        'node_modules/grunt-draw-my-project/template/**/*'
+      ]
     });
 
     // Iterate over all specified file groups.
@@ -156,28 +160,56 @@ module.exports = function(grunt) {
       });
 
       // Write the json file.
-      grunt.file.write(f.dest, JSON.stringify(exec(srcIn, options)));
+      var resData = JSON.stringify(exec(srcIn, options));
+      grunt.file.write(f.dest + '.json', resData);
       var link = f.dest.split('/');
       link = link[link.length-1];
 
-      //Write template files
-      var pathTemplate = grunt.file.exists('template/d3.html') ? 'template/' : 'node_modules/grunt-draw-my-project/template/'; 
-      var templateFiles = ['d3.html', 'd3.css', 'd3.js'];
-
       var time2 = new Date().getTime();
 
-      for(var i=0, len=templateFiles.length; i<len; i++) {
-        var content = grunt.template.process(grunt.file.read(pathTemplate + templateFiles[i]), {data: {
-          cssFileName: link+'.css',
-          jsFileName: link+'.js',
-          jsonName: link,
-          pathSeparator: options.pathSeparator,
-          title: options.title,
-          description: options.description,
-          type: options.type,
-          timeGeneration: (time2 - time)
-        }});
-        grunt.file.write(f.dest+'.'+templateFiles[i].split('.')[1], content);
+      var files = grunt.file.expand(options.templateFiles);
+      for(var i=0, len=files.length; i<len; i++) {
+        if(grunt.file.isFile(files[i])) {
+
+          //delete template root dir
+          var directories = files[i].split('/');
+          var finalPath = '';
+          for(var t=1, lenD=directories.length; t<lenD; t++) {
+            if(finalPath !== '') {
+              finalPath = finalPath + '/';
+            }
+            finalPath = finalPath + directories[t];
+          }
+
+          //select files to process because for img break the file !
+          var extension = files[i].split('.');
+          extension = extension[extension.length-1];
+          if(extension === 'js' | extension === 'css' || extension === 'html') {
+            var content = grunt.template.process(grunt.file.read(files[i]), {
+              delimiters: 'square',
+              data: {
+                name: options.title,
+                description: options.description,
+                pathSeparator: options.pathSeparator,
+                type: options.type,
+                timeGeneration: (time2 - time),
+                jsonData: resData
+              }
+            });
+
+            //Replace JSON.parse("...") by JSON.parse('...') because all objects are write with ""
+            var matches = content.match(/JSON.parse\((\".+?)\"\)/g);
+            if(matches !== null && matches.length > 0) {
+              var toUpdate = matches[0];
+              toUpdate = toUpdate.replace(/JSON.parse\(\"/g, "JSON.parse('");
+              toUpdate = toUpdate.replace(/\"\)/g, "')");
+              content = content.replace(/JSON.parse\((\".+?)\"\)/g, toUpdate);
+            }
+            grunt.file.write(f.dest+'/'+finalPath, content);
+          } else {
+            grunt.file.copy(files[i], f.dest+'/'+finalPath);
+          }
+        }
       }
 
       // Print a success message.

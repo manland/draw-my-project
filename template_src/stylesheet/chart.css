@@ -1,0 +1,9 @@
+.chart {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  padding-top: 60px;
+  background-color: #FAFAFA;
+}

@@ -9,5 +9,12 @@
   "undef": true,
   "boss": true,
   "eqnull": true,
-  "node": true
+  "node": true,
+  "globals": {
+    "angular": false,
+    "d3": false,
+    "document": false,
+    "self": false,
+    "_": false
+  }
 }

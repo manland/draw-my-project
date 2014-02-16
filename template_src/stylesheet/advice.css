@@ -1,0 +1,30 @@
+.adviceView {
+	display: inline-block;
+	position: fixed;
+	top: 55px;
+	bottom: 0;
+	right: 0;
+	padding: 5px;
+	overflow: auto;
+	border-left: 2px solid #D4D4D4;
+	max-width: 20%;
+	z-index: 90;
+	background-color: #fff;
+}
+
+	.advice {
+		background-color: #FAFAFA;
+		border-radius: 1px 3px 3px 1px;
+		margin: 5px;
+		padding: 8px;
+	}
+
+	.advice.hot {
+		border-left: 3px solid #DB0000;
+		color: #DB0000;
+	}
+
+	.advice.significant {
+		border-left: 3px solid #F79700;
+		color: #F79700;
+	}

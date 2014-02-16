@@ -1,0 +1,14 @@
+{
+  "name": "Draw my project",
+  "ignore": [
+    ".jshintrc",
+    "**/*.txt"
+  ],
+  "dependencies": {
+    "angular": "~1.2.0",
+    "angular-route": "~1.2.0",
+    "underscore": "~1.5.2",
+    "d3": "~3.4.1"
+  },
+  "devDependencies": {}
+}

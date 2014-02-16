@@ -1,0 +1,10 @@
+.legend {
+  position: fixed;
+  display: inline-block;
+  padding: 10px;
+  top: 60px;
+  right: 22%;
+  text-align: right;
+  border: 1px solid #000;
+  border-radius: 5px;
+}

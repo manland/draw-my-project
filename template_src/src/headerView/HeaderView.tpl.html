@@ -1,0 +1,10 @@
+<img class="logo" src="assets/img/logo.png">
+<div class="title">Draw_my_project</div>
+<div class="btn" ng-click="switchAllChartsType()">Files view
+	<ul class="chartsTypeContainer" ng-show="showChartsType">
+		<li ng-repeat="chartType in allChartsType" ng-click="selectChartType(chartType)">{{chartType}}</li>
+	</ul>
+</div>
+<div class="btn btn-select-{{legendVisible}}" ng-click="switchLegend()">Legend</div>
+<div class="btn btn-select-{{filterVisible}}" ng-click="switchFilter()">Filter</div>
+<div class="btn btn-select-{{advicesVisible}}" ng-click="switchAdvices()">Advices</div>

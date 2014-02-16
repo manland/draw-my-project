@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="description" content="A grunt plugin that draws your javascript project dependencies."/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="shortcut icon" type="image/png" href="template_src/assets/img/favicon.png" />
+    <title>grunt-draw-my-project</title>
+  </head>
+	<body ng-app="app">
+
+    <noscript>
+      <h1 class="bg-red">Please, activate javascript in your browser !</h1>
+    </noscript>
+
+    <header ng-include="'src/headerView/HeaderView.tpl.html'" ng-controller="HeaderViewCtrl" ng-style="style"></header>
+    <section ng-view></section>
+    <footer>Generated in [%= timeGeneration %]msc with &#9829; by <a href="https://github.com/manland/draw-my-project">Draw my project</a></footer>
+
+    
+      <link rel="stylesheet" type="text/css" href="stylesheet/grunt-draw-my-project-0.1.3.css">
+    
+
+    
+      <script type="text/javascript" src="grunt-draw-my-project-0.1.3.js"></script>
+    
+
+	</body>
+</html>

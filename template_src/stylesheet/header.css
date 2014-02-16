@@ -1,0 +1,33 @@
+header {
+	height: 50px;
+	color: #fff;
+	background-color: #444;
+	border-bottom: 5px solid #D4D4D4;
+	padding-left: 10px;
+	position: fixed;
+	width: 100%;
+	z-index: 100;
+}
+
+	header .btn, header .title {
+		line-height: 50px;
+	}
+
+	.chartsTypeContainer {
+		position: fixed;
+	}
+
+	.logo {
+		border-radius: 50%;
+		width: 28px;
+		height: 27px;
+		border: 1px solid #fff;
+		vertical-align: middle;
+	}
+
+	.title {
+		display: inline-block;
+		vertical-align: middle;
+		padding-right: 40px;
+		padding-left: 10px;
+	}

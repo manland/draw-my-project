@@ -1,0 +1,16 @@
+.btn {
+	display: inline-block;
+	background-color: #222;
+	cursor: pointer;
+	vertical-align: middle;
+	padding: 0 25px;
+	margin: 0 5px;
+}
+
+.btn-select-true {
+	background-color: #222;
+}
+
+.btn-select-false {
+	background-color: transparent;
+}

@@ -1,0 +1,6 @@
+<div class="filterView" ng-controller="FilterViewCtrl">
+  <input type="text" class="filterInput" placeholder="Filter..." ng-model="search">
+  <ul>
+    <li ng-repeat="node in nodes | filter:search" ng-mouseover="mouseOver(node)" ng-mouseout="mouseOut(node)">{{node}}</li>
+  </ul>
+</div>
