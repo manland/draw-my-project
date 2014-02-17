@@ -36,6 +36,13 @@ var configs = {
     callbackAfter: function(nodes, options) {
       return nodes;
     }
+  },
+  nodejs: {
+    regexClassName: /(require)\(['|"](.+)['|"]\)/,
+    regexImports: /module.exports\s*=\s*[new]*([^\(]+)/,
+    callbackAfter: function(nodes, options) {
+      return nodes;
+    }
   }
 };
 

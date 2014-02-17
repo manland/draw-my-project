@@ -198,6 +198,14 @@ module.exports = function(grunt) {
         files: {
           'tmp/goo': ['test/fixtures/goo-require.js']
         }
+      },
+      timeChecking: {
+        options: {
+          type: 'nodejs'
+        },
+        files: {
+          'tmp/timeChecking': ['test/fixtures/timeChecking/**/*.js']
+        }
       }
 
     }

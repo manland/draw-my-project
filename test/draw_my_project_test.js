@@ -73,6 +73,15 @@ exports.draw_my_project = {
     test.equal(actual, expected, 'should transform require files into chart.');
 
     test.done();
+  },
+  timeChecking: function(test) {
+    test.expect(1);
+    
+    var actual = grunt.file.read('tmp/timeChecking.json');
+    var expected = grunt.file.read('test/expected/timeChecking.json');
+    test.equal(actual, expected, 'should transform nodejs files into chart.');
+
+    test.done();
   }
 
 };
