@@ -162,8 +162,6 @@ module.exports = function(grunt) {
       // Write the json file.
       var resData = JSON.stringify(exec(srcIn, options));
       grunt.file.write(f.dest + '.json', resData);
-      var link = f.dest.split('/');
-      link = link[link.length-1];
 
       var time2 = new Date().getTime();
 
@@ -174,12 +172,18 @@ module.exports = function(grunt) {
           //delete template root dir
           var directories = files[i].split('/');
           var finalPath = '';
-          for(var t=1, lenD=directories.length; t<lenD; t++) {
-            if(finalPath !== '') {
-              finalPath = finalPath + '/';
+          console.log(directories);
+          for(var t=directories.length-1, lenD=0; t>=lenD; t--) {
+            if(directories[t] === 'template') {
+              t = -1;
+            } else {
+              if(finalPath !== '') {
+                finalPath = '/' + finalPath;
+              }
+              finalPath = directories[t] + finalPath;
             }
-            finalPath = finalPath + directories[t];
           }
+          console.log('finalPath', finalPath);
 
           //select files to process because for img break the file !
           var extension = files[i].split('.');
