@@ -135,8 +135,9 @@ module.exports = function(grunt) {
       nbNodeByFile: 1,
       pathSeparator: '/',
       sortByAngularType: true,
-      title: 'Draw my project',
+      title: 'Draw_my_project',
       description: 'Draw your project dependencies !',
+      favicon: 'assets/img/logo.png',
       templateFiles: [
         'node_modules/grunt-draw-my-project/template/**/*'
       ]
@@ -193,6 +194,7 @@ module.exports = function(grunt) {
               data: {
                 name: options.title,
                 description: options.description,
+                favicon: options.favicon,
                 pathSeparator: options.pathSeparator,
                 type: options.type,
                 timeGeneration: (time2 - time),

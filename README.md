@@ -76,6 +76,12 @@ Default value: `Draw your project dependencies !`
 
 A string value that is used in description of html result page.
 
+#### options.favicon
+Type: `String`
+Default value: `assets/img/logo.png`
+
+A string value that is used in favicon of html result page.
+
 ### Usage Examples
 
 #### Default Options

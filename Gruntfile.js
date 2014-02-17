@@ -174,6 +174,10 @@ module.exports = function(grunt) {
         }
       },
       skimbo: {
+        options: {
+          title: 'Skimbo',
+          description: 'Manage your social life !'
+        },
         files: {
           'tmp/skimbo': ['test/fixtures/skimbo/**/*.js']
         }
@@ -261,9 +265,6 @@ module.exports = function(grunt) {
           data: {
             scripts: jsFiles,
             styles: cssFiles,
-            description: grunt.config( 'pkg.description' ),
-            name: grunt.config('pkg.name'),
-            favicon: grunt.config('app_files.favicon'),
             nojs_sentence: grunt.config('nojs_sentence')
           }
         });

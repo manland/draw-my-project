@@ -6,7 +6,6 @@ module.exports = {
   nojs_sentence: 'Please, activate javascript in your browser !',
 
   app_files: {
-    favicon: 'template_src/assets/img/favicon.png',
     js: [ 'template_src/src/**/*.js' ],
     html: [ 'template_src/index.tpl.html' ],
     tplHtml: [ 'template_src/src/**/*.tpl.html' ],
