@@ -93,7 +93,8 @@ module.exports = function(grunt) {
         options: {
           banner: '<%= meta.banner %>'
         },
-        src: [ 
+        src: [
+          'template_src/stylesheet/reset.css',
           '<%= app_files.stylesheet %>',
         ],
         dest: '<%= compile_dir %>/stylesheet/<%= pkg.name %>-<%= pkg.version %>.css'

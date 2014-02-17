@@ -172,7 +172,6 @@ module.exports = function(grunt) {
           //delete template root dir
           var directories = files[i].split('/');
           var finalPath = '';
-          console.log(directories);
           for(var t=directories.length-1, lenD=0; t>=lenD; t--) {
             if(directories[t] === 'template') {
               t = -1;
@@ -183,12 +182,12 @@ module.exports = function(grunt) {
               finalPath = directories[t] + finalPath;
             }
           }
-          console.log('finalPath', finalPath);
 
           //select files to process because for img break the file !
           var extension = files[i].split('.');
           extension = extension[extension.length-1];
           if(extension === 'js' | extension === 'css' || extension === 'html') {
+            console.log('process : ', files[i]);
             var content = grunt.template.process(grunt.file.read(files[i]), {
               delimiters: 'square',
               data: {
