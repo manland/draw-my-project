@@ -39,7 +39,9 @@ var configs = {
   }
 };
 
-var buildNode = function buildNode(name, optImports, optType) {
+var buildNode = function buildNode(name, optFilepath, optSize, optImports, optType) {
+  var filepath = optFilepath || '';
+  var size = optSize || 1;
   var imports = optImports || [];
   var type = optType || '';
   if(name.charAt(0) === '$' && type === '') {
@@ -47,7 +49,8 @@ var buildNode = function buildNode(name, optImports, optType) {
   } 
   return {
     name: name,
-    size: 1,
+    filepath: filepath,
+    size: size,
     imports: imports,
     type: type
   };
@@ -78,7 +81,7 @@ var foundImports = function foundImports(nodes, src, options) {
   return imports;
 };
 
-var foundNode = function foundNode(nodes, src, options) {
+var foundNode = function foundNode(nodes, src, filepath, options) {
   var regexClassName = configs[options.type].regexClassName;
 
   var temp = src;
@@ -95,9 +98,10 @@ var foundNode = function foundNode(nodes, src, options) {
       imports = foundImports(nodes, temp, options);
     }
     if(nodes[name] === undefined) {
-      nodes[name] = buildNode(name, imports, nodeType);
+      nodes[name] = buildNode(name, filepath, src.length, imports, nodeType);
     } else {
-      nodes[name].size = nodes[name].size + 1;
+      nodes[name].filepath = filepath;
+      nodes[name].size = src.length;
       nodes[name].imports = imports;
       nodes[name].type = nodeType;
     }
@@ -112,10 +116,10 @@ var foundNode = function foundNode(nodes, src, options) {
   return nodes;
 };
 
-var exec = function exec(src, options) {
+var exec = function exec(files, options) {
   var nodes = {};
-  for(var i=0, len=src.length; i<len; i++) {
-    nodes = foundNode(nodes, src[i], options);
+  for(var i=0, len=files.length; i<len; i++) {
+    nodes = foundNode(nodes, files[i].src, files[i].filepath, options);
   }
   nodes = configs[options.type].callbackAfter(nodes, options);
   var temp = [];
@@ -148,7 +152,7 @@ module.exports = function(grunt) {
 
       var time = new Date().getTime();
 
-      var srcIn = f.src.filter(function(filepath) {
+      var filesIn = f.src.filter(function(filepath) {
         // Warn on and remove invalid source files (if nonull was set).
         if (!grunt.file.exists(filepath)) {
           grunt.log.warn('Source file "' + filepath + '" not found.');
@@ -157,11 +161,14 @@ module.exports = function(grunt) {
           return true;
         }
       }).map(function(filepath) {
-        return grunt.file.read(filepath);
+        return {
+          filepath: filepath,
+          src: grunt.file.read(filepath)
+        };
       });
 
       // Write the json file.
-      var resData = JSON.stringify(exec(srcIn, options));
+      var resData = JSON.stringify(exec(filesIn, options));
       grunt.file.write(f.dest + '.json', resData);
 
       var time2 = new Date().getTime();
