@@ -141,6 +141,16 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+###0.2.1
+
+* first shoot of #7 but hot experimental
+* close #16
+* close #15
+* close #13
+* close #12
+* close #9
+* close #8
+
 ###0.2.0
 
 * new beatiful skin made by @undless
