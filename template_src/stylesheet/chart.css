@@ -1,9 +1,16 @@
 .chart {
-  display: inline-block;
-  vertical-align: top;
-  position: relative;
+  position: absolute;
   width: 100%;
-  text-align: center;
+  height: 100%;
   padding-top: 60px;
   background-color: #FAFAFA;
+}
+
+.chart svg {
+	position: absolute;
+	top: 10px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
 }
