@@ -44,8 +44,6 @@ angular.module('app').service('SizePackageChartService', [
             .text(function(d) { return d.name.substring(0, d.r / 3); });
         };
 
-        d3.select(domElement).style("height", (diameter + 50) + "px");
-
         draw(data);
       },
       mouseOver: function(nodeName) {
