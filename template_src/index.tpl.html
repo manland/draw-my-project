@@ -16,7 +16,7 @@
 
     <header ng-include="'src/headerView/HeaderView.tpl.html'" ng-controller="HeaderViewCtrl" ng-style="style"></header>
     <section ng-view></section>
-    <footer>Generated in [%= timeGeneration %]msc with &#9829; by <a href="https://github.com/manland/draw-my-project">Draw my project</a></footer>
+    <footer>Generated in [%= timeGeneration %]msc with &#9829; by <a href="https://github.com/manland/draw-my-project" target="_blank">Draw my project</a></footer>
 
     <% styles.forEach( function ( file ) { %>
       <link rel="stylesheet" type="text/css" href="<%= file %>">
