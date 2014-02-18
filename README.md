@@ -82,6 +82,18 @@ Default value: `assets/img/logo.png`
 
 A string value that is used in favicon of html result page.
 
+#### options.link
+Type: `String`
+Default value: `https://github.com/manland/draw-my-project`
+
+A string value that is used to link in header.
+
+#### options.urlLogo
+Type: `String`
+Default value: `assets/img/logo.png`
+
+A string value that is used in src of img header.
+
 ### Usage Examples
 
 #### Default Options

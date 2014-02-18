@@ -176,7 +176,10 @@ module.exports = function(grunt) {
       skimbo: {
         options: {
           title: 'Skimbo',
-          description: 'Manage your social life !'
+          description: 'Manage your social life !',
+          link: 'http://blog.skimbo.fr',
+          favicon: 'assets/img/skimbo.png',
+          urlLogo: 'assets/img/skimbo.png'
         },
         files: {
           'tmp/skimbo': ['test/fixtures/skimbo/**/*.js']

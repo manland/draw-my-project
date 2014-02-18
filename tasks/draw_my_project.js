@@ -149,6 +149,8 @@ module.exports = function(grunt) {
       title: 'Draw_my_project',
       description: 'Draw your project dependencies !',
       favicon: 'assets/img/logo.png',
+      link: 'https://github.com/manland/draw-my-project',
+      urlLogo: 'assets/img/logo.png',
       templateFiles: [
         'node_modules/grunt-draw-my-project/template/**/*'
       ]
@@ -206,9 +208,11 @@ module.exports = function(grunt) {
             var content = grunt.template.process(grunt.file.read(files[i]), {
               delimiters: 'square',
               data: {
-                name: options.title,
+                title: options.title,
                 description: options.description,
                 favicon: options.favicon,
+                link: options.link,
+                urlLogo: options.urlLogo,
                 pathSeparator: options.pathSeparator,
                 type: options.type,
                 timeGeneration: (time2 - time),

@@ -1,5 +1,7 @@
-<img class="logo" src="assets/img/logo.png">
-<div class="title">Draw_my_project</div>
+<a href="[%= link %]">
+	<img class="logo" src="[%= urlLogo %]">
+	<div class="title">[%= title %]</div>
+</a>
 <div class="btn" ng-click="switchAllChartsType()">Files view
 	<ul class="chartsTypeContainer" ng-show="showChartsType">
 		<li ng-repeat="chartType in allChartsType" ng-click="selectChartType(chartType)">{{chartType}}</li>

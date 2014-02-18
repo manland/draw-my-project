@@ -19,6 +19,7 @@ header {
 
 	.logo {
 		vertical-align: middle;
+		height: 32px;
 	}
 
 	.title {
@@ -26,4 +27,5 @@ header {
 		vertical-align: middle;
 		padding-right: 40px;
 		padding-left: 10px;
+		color: #fff;
 	}
