@@ -45,7 +45,7 @@ angular.module('app').service('SizeChartService', [
 
           g.append("path")
             .attr("d", arc)
-            .attr("class", "link")
+            .attr("class", function(d) { return "node " + d.data.type; })
             .on("mouseover", mouseovered)
             .on("mouseout", mouseouted);
 
@@ -53,7 +53,6 @@ angular.module('app').service('SizeChartService', [
             .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
             .attr("dy", ".35em")
             .style("text-anchor", "middle")
-            .attr("class", function(d) { return "node " + d.data.type; })
             .text(function(d) { 
               var i = d.data.name.lastIndexOf(constantsService.getPathSeparator()); 
               return d.data.name.substring(i + 1); 
