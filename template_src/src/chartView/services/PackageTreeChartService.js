@@ -65,7 +65,7 @@ angular.module('app').service('PackageTreeChartService', [
           node = svg.selectAll(".node")
               .data(nodes)
             .enter().append("g")
-              .attr("class", "node")
+              .attr("class", function(d) { return "node " + d.type; })
               .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
               .on("mouseover", mouseovered)
               .on("mouseout", mouseouted);

@@ -7,9 +7,11 @@ angular.module('app').controller('HeaderViewCtrl', [
 
     $scope.allChartsType = headerViewService.getAllChartsType();
 
+    var openHeight = (50+($scope.allChartsType.length*50));
+
     $scope.switchAllChartsType = function() {
       $scope.showChartsType = !$scope.showChartsType;
-      $scope.style.height = $scope.showChartsType === true ? '155px' : '';
+      $scope.style.height = $scope.showChartsType === true ? openHeight+'px' : '';
     };
 
     $scope.selectChartType = function(chartType) {

@@ -1,6 +1,6 @@
 angular.module('app').service('ChartService', [
-  'DataService', 'WheelDependenciesChartService', 'PackageTreeChartService',
-  function(dataService, wheelDependenciesChartService, packageTreeChartService) {
+  'DataService', 'WheelDependenciesChartService', 'PackageTreeChartService', 'SizeChartService', 'SizePackageChartService',
+  function(dataService, wheelDependenciesChartService, packageTreeChartService, sizeChartService, sizePackageChartService) {
 
     var allCharts = [
       {
@@ -12,6 +12,18 @@ angular.module('app').service('ChartService', [
       }, {
         name: 'Package Tree',
         chart: packageTreeChartService,
+        data: function() {
+          return dataService.getHierarchicalData();
+        }
+      }, {
+        name: 'Size',
+        chart: sizeChartService,
+        data: function() {
+          return dataService.getData();
+        }
+      }, {
+        name: 'Size Package',
+        chart: sizePackageChartService,
         data: function() {
           return dataService.getHierarchicalData();
         }

@@ -18,6 +18,7 @@ angular.module('app').service('DataService', [
             lastPackage = {
               name: p,
               children: [],
+              type: node.type,
               size: node.size
             };
             find = undefined;
@@ -42,6 +43,7 @@ angular.module('app').service('DataService', [
               lastPackage.children.push({
                 name: p,
                 children: [],
+                type: node.type,
                 size: node.size
               });
             } else {

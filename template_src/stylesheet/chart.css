@@ -1,16 +1,14 @@
 .chart {
-  position: absolute;
+  position: relative;
   width: 100%;
-  height: 100%;
   padding-top: 60px;
-  background-color: #FAFAFA;
 }
 
-.chart svg {
-	position: absolute;
-	top: 10px;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	margin: auto;
-}
+	.chart svg {
+		position: absolute;
+		top: 10px;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+	}
