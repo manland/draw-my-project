@@ -153,6 +153,15 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+###0.2.2
+
+* close #10
+* close #19
+* close #14 : new charts, need more graphical work
+* close #20
+* close #23
+* close #18
+
 ###0.2.1
 
 * first shoot of #7 but hot experimental

@@ -1,7 +1,7 @@
 {
   "name": "grunt-draw-my-project",
   "description": "A grunt plugin that draws your javascript project dependencies.",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "homepage": "http://manland.github.io/draw-my-project",
   "author": {
     "name": "Romain Maneschi",

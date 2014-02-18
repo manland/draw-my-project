@@ -1,5 +1,5 @@
 /**
- * grunt-draw-my-project - v0.2.1 - 2014-02-17
+ * grunt-draw-my-project - v0.2.2 - 2014-02-18
  * http://manland.github.io/draw-my-project
  *
  * Copyright (c) 2014 Romain Maneschi : http://romain.maneschi.fr
@@ -54,14 +54,20 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 	background-color: transparent;
 }
 .chart {
-  display: inline-block;
-  vertical-align: top;
   position: relative;
   width: 100%;
-  text-align: center;
   padding-top: 60px;
-  background-color: #FAFAFA;
 }
+
+	.svgContainer {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		text-align: center;
+	}
 .node {
   font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
   fill: #bbb;
@@ -207,11 +213,8 @@ header {
 	}
 
 	.logo {
-		border-radius: 50%;
-		width: 28px;
-		height: 27px;
-		border: 1px solid #fff;
 		vertical-align: middle;
+		height: 32px;
 	}
 
 	.title {
@@ -219,6 +222,7 @@ header {
 		vertical-align: middle;
 		padding-right: 40px;
 		padding-left: 10px;
+		color: #fff;
 	}
 .legend {
   position: fixed;
@@ -240,4 +244,5 @@ header {
 body {
 	font-family: sans-serif;
 	font-size: 12px;
+	background-color: #FAFAFA;
 }
