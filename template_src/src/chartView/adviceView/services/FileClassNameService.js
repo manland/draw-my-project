@@ -1,5 +1,6 @@
 angular.module('app').service('FileClassNameService', [
-  function() {
+  'ConstantsService',
+  function(constantsService) {
 
     var advices;
 
@@ -8,7 +9,22 @@ angular.module('app').service('FileClassNameService', [
         advices = [];
       },
       visit: function(node) {
-        //TODO : get filename and set if different class
+        if(node.filepath !== '') {
+          var names = node.filepath.split('/');
+          var filename = names[names.length - 1];
+          filename = filename.split('.')[0];
+          names = node.name.split(constantsService.getPathSeparator());
+          var name = names[names.length - 1];
+          name = name.split('.')[0];
+          if(name.toUpperCase() !== filename.toUpperCase()) {
+            advices.push({
+              node: node,
+              name: name + ' have not same name as filename ' + filename + ' !',
+              gravityLevel: 2,
+              gravity: 'hot'
+            });
+          }
+        }
       },
       end: function(nodes) {
         return advices;
