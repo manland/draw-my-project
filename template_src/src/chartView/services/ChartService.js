@@ -19,7 +19,7 @@ angular.module('app').service('ChartService', [
         name: 'Size',
         chart: sizeChartService,
         data: function() {
-          return dataService.getData();
+          return dataService.getHierarchicalData();
         }
       }, {
         name: 'Size Package',

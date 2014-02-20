@@ -2,62 +2,137 @@ angular.module('app').service('SizeChartService', [
   'ConstantsService',
   function(constantsService) {
 
+    var totalSize = 0, vis;
+
+    var getAncestors = function getAncestors(node) {
+      var path = [];
+      var current = node;
+      while (current.parent) {
+        path.unshift(current);
+        current = current.parent;
+      }
+      return path;
+    };
+
     var mouseovered = function mouseovered(d) {
-      console.log(d);
+      var percentage = (100 * d.value / totalSize).toPrecision(3);
+      var percentageString = percentage + '%';
+      if (percentage < 0.1) {
+        percentageString = '< 0.1%';
+      }
+
+      var sequenceArray = getAncestors(d);
+
+      var name = sequenceArray.map(function(node) {
+        return node.name;
+      }).join('/');
+      
+      d3.select('#percentage').text(name + ' ' + percentageString);
+
+      // Fade all the segments.
+      d3.selectAll('path').style('opacity', 0.3);
+
+      // Then highlight only those that are an ancestor of the current segment.
+      vis.selectAll('path').filter(function(node) {
+        return (sequenceArray.indexOf(node) >= 0);
+      }).style('opacity', 1);
     };
 
     var mouseouted = function mouseouted(d) {
+      // Hide the breadcrumb trail
+      d3.select('#trail').style('visibility', 'hidden');
+
+      // Deactivate all segments during transition.
+      d3.selectAll('path').on('mouseover', null);
+
+      // Transition each segment to full opacity and then reactivate it.
+      d3.selectAll('path')
+        .transition()
+        .duration(1000)
+        .style('opacity', 1)
+        .each('end', function() {
+          d3.select(this).on('mouseover', mouseovered);
+        });
+
+      d3.select('#explanation')
+        .transition()
+        .duration(1000)
+        .style('visibility', 'hidden');
     };
 
     return {
       buildChart: function(domElement, data) {
-        var width = 700,
-            height = 800,
-            radius = Math.min(width, height) / 2;
+        // Dimensions of sunburst.
+        var width = 750;
+        var height = 500;
+        var radius = Math.min(width, height) / 2;
 
-        var color = d3.scale.ordinal()
-            .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+        // Breadcrumb dimensions: width, height, spacing, width of tip/tail.
+        var b = {
+          w: 75, h: 30, s: 3, t: 10
+        };
 
-        var arc = d3.svg.arc()
-            .outerRadius(radius - 10)
-            .innerRadius(0);
+        // Mapping of step names to colors.
+        var colors = {
+          "home": "#5687d1",
+          "product": "#7b615c",
+          "search": "#de783b",
+          "account": "#6ab975",
+          "other": "#a173d1",
+          "end": "#bbbbbb"
+        };
 
-        var pie = d3.layout.pie()
-            .sort(null)
-            .value(function(d) { return d.size; });
-
-        var svg = d3.select(domElement).append("svg")
+        vis = d3.select(domElement).append("svg:svg")
             .attr("width", width)
             .attr("height", height)
-          .append("g")
+            .append("svg:g")
+            .attr("id", "container")
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-        var draw = function draw(data) {
+        var partition = d3.layout.partition()
+            .size([2 * Math.PI, radius * radius])
+            .value(function(d) { return d.size; });
 
-          data.forEach(function(d) {
-            d.size = +d.size;
-          });
+        var arc = d3.svg.arc()
+            .startAngle(function(d) { return d.x; })
+            .endAngle(function(d) { return d.x + d.dx; })
+            .innerRadius(function(d) { return Math.sqrt(d.y); })
+            .outerRadius(function(d) { return Math.sqrt(d.y + d.dy); });
 
-          var g = svg.selectAll(".arc")
-              .data(pie(data))
-            .enter().append("g")
-              .attr("class", "arc");
+        // Main function to draw and set up the visualization, once we have the data.
+        var draw = function draw(json) {
 
-          g.append("path")
-            .attr("d", arc)
-            .attr("class", function(d) { return "node " + d.data.type; })
-            .on("mouseover", mouseovered)
-            .on("mouseout", mouseouted);
+          // Bounding circle underneath the sunburst, to make it easier to detect
+          // when the mouse leaves the parent g.
+          vis.append("svg:circle")
+              .attr("r", radius)
+              .style("opacity", 0);
 
-          g.append("text")
-            .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-            .attr("dy", ".35em")
-            .style("text-anchor", "middle")
-            .text(function(d) { 
-              var i = d.data.name.lastIndexOf(constantsService.getPathSeparator()); 
-              return d.data.name.substring(i + 1); 
+          // For efficiency, filter nodes to keep only those large enough to see.
+          var nodes = partition.nodes(json)
+            .filter(function(d) {
+              return (d.dx > 0.005); // 0.005 radians = 0.29 degrees
             });
 
+          var path = vis.data([json]).selectAll("path")
+            .data(nodes)
+            .enter().append("svg:path")
+            .attr("display", function(d) { return d.depth ? null : "none"; })
+            .attr("d", arc)
+            .attr("fill-rule", "evenodd")
+            .style("fill", function(d) { return colors[d.name]; })
+            .style("opacity", 1)
+            .attr("class", function(d) { return "node " + d.type; })
+            .on("mouseover", mouseovered);
+
+          // Add the mouseleave handler to the bounding circle.
+          d3.select("#container").on("mouseleave", mouseouted);
+
+          // Get total size of the tree = value of root node from partition.
+          totalSize = path.node().__data__.value;
+
+          d3.select(domElement).append("div")
+            .attr('id', 'percentage');
         };
 
         draw(data);

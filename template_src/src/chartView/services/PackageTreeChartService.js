@@ -3,6 +3,16 @@ angular.module('app').service('PackageTreeChartService', [
 
     var link, node;
 
+    var getAncestors = function getAncestors(node) {
+      var path = [];
+      var current = node;
+      while (current.parent) {
+        path.unshift(current);
+        current = current.parent;
+      }
+      return path;
+    };
+
     var mouseovered = function mouseovered(d) {
       node.each(function(n) { n.target = n.source = false; });
 
