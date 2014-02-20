@@ -7,7 +7,7 @@ angular.module('app').service('DataService', [
 
     var buildHierarchicalData = function buildHierarchicalData() {
       var res = {
-        name: 'rootNode',
+        name: '',
         children: []
       };
       data.forEach(function(node) {
