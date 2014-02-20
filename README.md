@@ -153,6 +153,14 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+###0.2.3
+
+* close #14 : new hierarchical pie chart
+* close #24 : save view state in localStorage
+* close #11 : rework colors
+* close #25 : add size controller too important advice (if >80% of services size)
+* close #27 : add too inject dependencies advice (if >5 significant and >10 hot) 
+
 ###0.2.2
 
 * close #10

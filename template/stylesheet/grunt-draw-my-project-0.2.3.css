@@ -1,5 +1,5 @@
 /**
- * grunt-draw-my-project - v0.2.2 - 2014-02-18
+ * grunt-draw-my-project - v0.2.3 - 2014-02-20
  * http://manland.github.io/draw-my-project
  *
  * Copyright (c) 2014 Romain Maneschi : http://romain.maneschi.fr
@@ -61,7 +61,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
 	.svgContainer {
 		position: absolute;
-		top: 0;
+		top: 60px;
 		bottom: 0;
 		left: 0;
 		right: 0;
@@ -80,43 +80,43 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 }
 
 .node.controller {
-  fill: #00FF00;
+  fill: #87C338;
 }
 
 .controller {
-  color: #00FF00;
+  color: #87C338;
 }
 
 .node.filter {
-  fill: #0000FF;
+  fill: #3F447E;
 }
 
 .filter {
-  color: #0000FF;
+  color: #3F447E;
 }
 
 .node.factory {
-  fill: #0F500F;
+  fill: #F05B29;
 }
 
 .factory {
-  color: #0F500F;
+  color: #F05B29;
 }
 
 .node.directive {
-  fill: #FF00FF;
+  fill: #3A015B;
 }
 
 .directive {
-  color: #FF00FF;
+  color: #3A015B;
 }
 
 .node.angular {
-  fill: #FF0000;
+  fill: #DF0400;
 }
 
 .angular {
-  color: #FF0000;
+  color: #DF0400;
 }
 
 .node:hover {
@@ -215,6 +215,7 @@ header {
 	.logo {
 		vertical-align: middle;
 		height: 32px;
+		width: 32px;
 	}
 
 	.title {
@@ -245,4 +246,61 @@ body {
 	font-family: sans-serif;
 	font-size: 12px;
 	background-color: #FAFAFA;
+}
+
+body.on {
+	background-color: #FAFAFA;
+}
+body.off {
+	background-color: #333;
+}
+.onoffswitch {
+    position: relative; 
+    width: 70px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    float: right;
+    margin-right: 25px;
+    margin-top: 7px;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #D4D4D4; border-radius: 10px;
+}
+.onoffswitch-inner {
+    width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #FAFAFA; color: #333333;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #333333; color: #FAFAFA;
+    text-align: right;
+}
+.onoffswitch-switch {
+    width: 10px; margin: 10px;
+    background: #FFFFFF;
+    border: 2px solid #D4D4D4; border-radius: 10px;
+    position: absolute; top: 0; bottom: 0; right: 36px;
+    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
 }
