@@ -11,6 +11,7 @@
   "eqnull": true,
   "node": true,
   "globals": {
+    "localStorage": false,
     "angular": false,
     "d3": false,
     "document": false,

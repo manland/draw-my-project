@@ -30,8 +30,22 @@ angular.module('app').service('ChartService', [
       }
     ];
 
-    var currentChart = allCharts[0];
+    var selectChart = function selectChart(chartType) {
+      currentChart = undefined;
+      for(var i=0, len=allCharts.length; i<len && currentChart === undefined; i++) {
+        if(allCharts[i].name === chartType) {
+          currentChart = allCharts[i];
+        }
+      }
+      localStorage.defaultChart = chartType;
+      onTypeChartChangeCallbacks.forEach(function(callback) {
+        callback();
+      });
+    };
+
     var onTypeChartChangeCallbacks = [];
+    var currentChart = localStorage.defaultChart === undefined ? 'Wheel Dependencies' : localStorage.defaultChart;
+    selectChart(currentChart);
 
     return {
       getAllChartsType: function() {
@@ -40,15 +54,7 @@ angular.module('app').service('ChartService', [
         });
       },
       selectChart: function(chartType) {
-        currentChart = undefined;
-        for(var i=0, len=allCharts.length; i<len && currentChart === undefined; i++) {
-          if(allCharts[i].name === chartType) {
-            currentChart = allCharts[i];
-          }
-        }
-        onTypeChartChangeCallbacks.forEach(function(callback) {
-          callback();
-        });
+        selectChart(chartType);
       },
       onTypeChartChange: function(callback) {
         onTypeChartChangeCallbacks.push(callback);
