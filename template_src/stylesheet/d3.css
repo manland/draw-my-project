@@ -10,43 +10,43 @@
 }
 
 .node.controller {
-  fill: #00FF00;
+  fill: #87C338;
 }
 
 .controller {
-  color: #00FF00;
+  color: #87C338;
 }
 
 .node.filter {
-  fill: #0000FF;
+  fill: #3F447E;
 }
 
 .filter {
-  color: #0000FF;
+  color: #3F447E;
 }
 
 .node.factory {
-  fill: #0F500F;
+  fill: #F05B29;
 }
 
 .factory {
-  color: #0F500F;
+  color: #F05B29;
 }
 
 .node.directive {
-  fill: #FF00FF;
+  fill: #3A015B;
 }
 
 .directive {
-  color: #FF00FF;
+  color: #3A015B;
 }
 
 .node.angular {
-  fill: #FF0000;
+  fill: #DF0400;
 }
 
 .angular {
-  color: #FF0000;
+  color: #DF0400;
 }
 
 .node:hover {

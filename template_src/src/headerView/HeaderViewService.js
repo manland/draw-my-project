@@ -1,6 +1,6 @@
 angular.module('app').service('HeaderViewService', [
-  'ChartViewService', 'ChartService',
-  function(chartViewService, chartService) {
+  'ChartViewService', 'ChartService', 'OnOffSwitchService',
+  function(chartViewService, chartService, onOffSwitchService) {
 
     return {
       getAllChartsType: function() {
@@ -20,6 +20,9 @@ angular.module('app').service('HeaderViewService', [
       },
       switchAdvices: function() {
         chartViewService.switchAdvices();
+      },
+      switchBodyBackground: function() {
+        onOffSwitchService.switchTo();
       }
     };
 

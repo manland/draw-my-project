@@ -3,3 +3,10 @@ body {
 	font-size: 12px;
 	background-color: #FAFAFA;
 }
+
+body.on {
+	background-color: #FAFAFA;
+}
+body.off {
+	background-color: #333;
+}

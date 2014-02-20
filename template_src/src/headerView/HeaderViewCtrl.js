@@ -7,7 +7,7 @@ angular.module('app').controller('HeaderViewCtrl', [
 
     $scope.allChartsType = headerViewService.getAllChartsType();
 
-    var openHeight = (50+($scope.allChartsType.length*50));
+    var openHeight = (50 + ($scope.allChartsType.length * 50));
 
     $scope.switchAllChartsType = function() {
       $scope.showChartsType = !$scope.showChartsType;
@@ -35,6 +35,15 @@ angular.module('app').controller('HeaderViewCtrl', [
     $scope.switchAdvices = function() {
       headerViewService.switchAdvices();
       $scope.advicesVisible = headerViewService.isVisible('advices');
+    };
+
+    var countClick = 0;
+
+    $scope.switchBodyBackground = function() {
+      countClick = countClick + 1;
+      if(countClick % 2 === 0) {
+        headerViewService.switchBodyBackground();
+      }
     };
 
   }
