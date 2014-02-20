@@ -135,7 +135,8 @@ module.exports = function(grunt) {
       files: [ 
         'tasks/*.js',
         '<%= app_files.html %>', 
-        '<%= app_files.js %>', 
+        '<%= app_files.js %>',
+        '<%= app_files.tplHtml %>',
         '<%= vendor_files.js %>', 
         '<%= app_files.assets %>', 
         '<%= app_files.stylesheet %>', 
