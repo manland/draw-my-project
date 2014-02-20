@@ -1,16 +1,17 @@
 angular.module('app').service('AdviceViewService', [
   'DataService', 'ChartService', 'RootScopeService', 
   'SizeControllerTooImportantService', 'ControllerImportsService', 
-  'NotUsedService', 'FileClassNameService',
+  'NotUsedService', 'FileClassNameService', 'TooInjectDependenciesServices',
   function(dataService, chartService, rootScopeService, 
     sizeControllerTooImportantService, controllerImportsService, 
-    notUsedService, fileClassNameService) {
+    notUsedService, fileClassNameService, tooInjectDependenciesServices) {
 
     var advicesServices = [
       rootScopeService, 
       sizeControllerTooImportantService,
       controllerImportsService, 
       notUsedService, 
+      tooInjectDependenciesServices,
       fileClassNameService
     ];
     var advices;
