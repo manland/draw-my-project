@@ -1,8 +1,18 @@
 angular.module('app').service('AdviceViewService', [
-  'DataService', 'ChartService', 'RootScopeService', 'ControllerImportsService', 'NotUsedService', 'FileClassNameService',
-  function(dataService, chartService, rootScopeService, controllerImportsService, notUsedService, fileClassNameService) {
+  'DataService', 'ChartService', 'RootScopeService', 
+  'SizeControllerTooImportantService', 'ControllerImportsService', 
+  'NotUsedService', 'FileClassNameService',
+  function(dataService, chartService, rootScopeService, 
+    sizeControllerTooImportantService, controllerImportsService, 
+    notUsedService, fileClassNameService) {
 
-    var advicesServices = [rootScopeService, controllerImportsService, notUsedService, fileClassNameService];
+    var advicesServices = [
+      rootScopeService, 
+      sizeControllerTooImportantService,
+      controllerImportsService, 
+      notUsedService, 
+      fileClassNameService
+    ];
     var advices;
 
     return {
