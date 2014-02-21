@@ -101,6 +101,13 @@ module.exports = function(grunt) {
       }
     },
 
+    cssmin: {
+      minify: {
+        src: ['<%= compile_dir %>/stylesheet/<%= pkg.name %>-<%= pkg.version %>.css'],
+        dest: '<%= compile_dir %>/stylesheet/<%= pkg.name %>-<%= pkg.version %>.css'
+      }
+    },
+
     uglify: {
       compile: {
         options: {
@@ -226,6 +233,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-angular-templates');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   //TODO : mincss, minhtml, angularjstpl2js
 
@@ -234,7 +242,7 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['draw_my_project', 'nodeunit']);
   grunt.registerTask('build', ['clean', 'copy:build', 'index:build', 'test']);
   grunt.registerTask('dev', ['jshint', 'build', 'watch']);
-  grunt.registerTask('compile', ['jshint', 'build', 'ngtemplates', 'concat:compile_js', 'concat:compile_css', 'copy:compile', 'uglify:compile', 'index:compile', 'test']);
+  grunt.registerTask('compile', ['jshint', 'build', 'ngtemplates', 'concat:compile_js', 'concat:compile_css', 'cssmin', 'copy:compile', 'uglify:compile', 'index:compile', 'test']);
   grunt.registerTask('default', ['jshint', 'test']);
 
   grunt.registerMultiTask( 'index', 'Process index.html template', function () {
