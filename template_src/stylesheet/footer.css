@@ -5,5 +5,9 @@ footer {
   width: 100%;
   text-align: center;
   font-size: 0.8em;
-  color: #ccc;
+  color: #666;
 }
+
+	footer a {
+		color: inherit;
+	}
