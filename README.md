@@ -5,10 +5,22 @@
 ## Getting Started
 This plugin requires Grunt `~0.4.2`
 
-If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
+If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin by add this line in your package.json :
+
+```json
+...
+devDependencies: {
+   ...
+   "grunt-draw-my-project": "git://github.com/manland/draw-my-project.git"
+   ...
+}
+...
+```
+
+And make a :
 
 ```shell
-npm install grunt-draw-my-project --save-dev
+npm install
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
