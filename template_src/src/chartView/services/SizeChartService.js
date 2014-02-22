@@ -144,7 +144,8 @@ angular.module('app').service('SizeChartService', [
           totalSize = path.node().__data__.value;
 
           d3.select(domElement).append("div")
-            .attr('id', 'percentage');
+            .attr('id', 'percentage')
+            .attr('style', 'top:'+(height/2)+'px');
         };
 
         draw(data);
