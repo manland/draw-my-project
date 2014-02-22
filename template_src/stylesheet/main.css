@@ -4,6 +4,13 @@ body {
 	background-color: #FAFAFA;
 }
 
+body {
+	-webkit-transition: background 0.5s ease-in-out;
+	-moz-transition: background 0.5s ease-in-out;
+	-o-transition: background 0.5s ease-in-out;
+	transition: background 0.5s ease-in-out;
+}
+
 body.on {
 	background-color: #FAFAFA;
 }

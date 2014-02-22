@@ -10,7 +10,7 @@ angular.module('app').service('SizePackageChartService', [
 
     return {
       buildChart: function(domElement, data) {
-        var diameter = 700,
+        var diameter = 600,
           format = d3.format(",d");
 
         var pack = d3.layout.pack()

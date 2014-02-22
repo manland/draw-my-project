@@ -2,7 +2,7 @@ angular.module('app').service('SizeChartService', [
   'ConstantsService',
   function(constantsService) {
 
-    var totalSize = 0, vis;
+    var totalSize = 0, vis, nodes;
 
     var getAncestors = function getAncestors(node) {
       var path = [];
@@ -12,6 +12,18 @@ angular.module('app').service('SizeChartService', [
         current = current.parent;
       }
       return path;
+    };
+
+    var findNode = function findNode(nodeName, nodes) {
+      if(nodeName !== undefined) {
+        return _.find(nodes, function(n) {
+          var name = nodeName.split(constantsService.getPathSeparator());
+          name = name[name.length-1];
+          if(n.name === name) {
+            return n;
+          }
+        });
+      }
     };
 
     var mouseovered = function mouseovered(d) {
@@ -109,7 +121,7 @@ angular.module('app').service('SizeChartService', [
               .style("opacity", 0);
 
           // For efficiency, filter nodes to keep only those large enough to see.
-          var nodes = partition.nodes(json)
+          nodes = partition.nodes(json)
             .filter(function(d) {
               return (d.dx > 0.005); // 0.005 radians = 0.29 degrees
             });
@@ -138,8 +150,13 @@ angular.module('app').service('SizeChartService', [
         draw(data);
       },
       mouseOver: function(nodeName) {
+        var n = findNode(nodeName, nodes);
+        if(n !== undefined) {
+          mouseovered(n);
+        }
       },
       mouseOut: function(nodeName) {
+        mouseouted();
       }
     };
 

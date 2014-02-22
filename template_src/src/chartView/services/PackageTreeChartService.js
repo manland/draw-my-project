@@ -1,32 +1,41 @@
 angular.module('app').service('PackageTreeChartService', [
-  function() {
+  'ConstantsService',
+  function(constantsService) {
 
-    var link, node;
+    var link, node, links, nodes;
 
-    var getAncestors = function getAncestors(node) {
-      var path = [];
-      var current = node;
-      while (current.parent) {
-        path.unshift(current);
-        current = current.parent;
+    var findNode = function findNode(nodeName, nodes) {
+      if(nodeName !== undefined) {
+        return _.find(nodes, function(n) {
+          var name = nodeName.split(constantsService.getPathSeparator());
+          name = name[name.length-1];
+          if(n.name === name) {
+            return n;
+          }
+        });
       }
-      return path;
     };
 
     var mouseovered = function mouseovered(d) {
       node.each(function(n) { n.target = n.source = false; });
 
-      link.classed("link--target", function(l) { 
+      link
+      .classed("link--target", function(l) { 
         if (l.target === d) {
           return l.source.source = true; 
         }
-      }).classed("link--source", function(l) { 
+      })
+      .classed("link--source", function(l) { 
         if (l.source === d) {
           return l.target.target = true;
         }
-      }).filter(function(l) { 
+      })
+      .filter(function(l) { 
         return l.target === d || l.source === d; 
-      }).each(function() { this.parentNode.appendChild(this); });
+      })
+      .each(function() { 
+        this.parentNode.appendChild(this); 
+      });
 
       node
         .classed("node--target", function(n) { return n.target; })
@@ -63,8 +72,8 @@ angular.module('app').service('PackageTreeChartService', [
             .attr("transform", "translate(" + radius + "," + radius + ")");
 
         var draw = function draw(root) {
-          var nodes = tree.nodes(root),
-              links = tree.links(nodes);
+          nodes = tree.nodes(root);
+          links = tree.links(nodes);
 
           link = svg.selectAll(".link")
               .data(links)
@@ -93,18 +102,10 @@ angular.module('app').service('PackageTreeChartService', [
         draw(data);
       },
       mouseOver: function(nodeName) {
-        node.each(function(n) {
-          if(n.name === nodeName) {
-            mouseovered(n);
-          }
-        });
+        mouseovered(findNode(nodeName, nodes));
       },
       mouseOut: function(nodeName) {
-        node.each(function(n) {
-          if(n.name === nodeName) {
-            mouseouted(n);
-          }
-        });
+        mouseouted();
       }
     };
 

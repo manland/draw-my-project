@@ -141,11 +141,7 @@ angular.module('app').service('WheelDependenciesChartService', [
         });
       },
       mouseOut: function(nodeName) {
-        node.each(function(n) {
-          if(n.name === nodeName) {
-            mouseouted(n);
-          }
-        });
+        mouseouted();
       }
     };
 
