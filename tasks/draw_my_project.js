@@ -86,8 +86,8 @@ module.exports = function(grunt) {
       });
 
       // Write the json file.
-      var resData = JSON.stringify(exec(filesIn, options));
-      grunt.file.write(f.dest + '.json', resData);
+      var resData = exec(filesIn, options);
+      grunt.file.write(f.dest + '.json', JSON.stringify(resData));
 
       var time2 = new Date().getTime();
 
@@ -112,8 +112,7 @@ module.exports = function(grunt) {
           //select files to process because for img break the file !
           var extension = files[i].split('.');
           extension = extension[extension.length-1];
-          if(extension === 'js' | extension === 'css' || extension === 'html') {
-            console.log('process : ', files[i]);
+          if(extension === 'js' || extension === 'css' || extension === 'html') {
             var content = grunt.template.process(grunt.file.read(files[i]), {
               delimiters: 'square',
               data: {
@@ -125,18 +124,24 @@ module.exports = function(grunt) {
                 pathSeparator: options.pathSeparator,
                 type: options.type,
                 timeGeneration: (time2 - time),
-                jsonData: resData.nodes,
-                jsonAdvices: resData.advices,
+                jsonData: JSON.stringify(resData.nodes),
+                jsonAdvices: JSON.stringify(resData.advices),
               }
             });
 
             //Replace JSON.parse("...") by JSON.parse('...') because all objects are write with ""
             var matches = content.match(/JSON.parse\((\".+?)\"\)/g);
             if(matches !== null && matches.length > 0) {
+              //data
               var toUpdate = matches[0];
               toUpdate = toUpdate.replace(/JSON.parse\(\"/g, "JSON.parse('");
               toUpdate = toUpdate.replace(/\"\)/g, "')");
-              content = content.replace(/JSON.parse\((\".+?)\"\)/g, toUpdate);
+              content = content.replace(matches[0], toUpdate);
+              //advices
+              toUpdate = matches[1];
+              toUpdate = toUpdate.replace(/JSON.parse\(\"/g, "JSON.parse('");
+              toUpdate = toUpdate.replace(/\"\)/g, "')");
+              content = content.replace(matches[1], toUpdate);
             }
             grunt.file.write(f.dest+'/'+finalPath, content);
           } else {
