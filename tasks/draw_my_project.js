@@ -9,126 +9,23 @@
 'use strict';
 
 var configs = {
-  angularjs: {
-    regexClassName: /.*?[^$](controller|factory|directive|filter)\(['|"](.+?)['|"]/,
-    regexImports: /function/,
-    callbackAfter: function(nodes, options) {
-      if(options.sortByAngularType === true) {
-        var key;
-        //first add path to imports
-        for(key in nodes) {
-          for(var i=0, len=nodes[key].imports.length; i<len; i++) {
-            var importName = nodes[key].imports[i];
-            nodes[key].imports[i] = nodes[importName].type + options.pathSeparator + nodes[importName].name;
-          }
-        }
-        //second add path to node
-        for(key in nodes) {
-          nodes[key].name = nodes[key].type + options.pathSeparator + nodes[key].name;
-        }
-      }
-      return nodes;
-    }
-  },
-  requirejs: {
-    regexClassName: /(define)\(['|"](.+?)['|"]/,
-    regexImports: /function/,
-    callbackAfter: function(nodes, options) {
-      return nodes;
-    }
-  },
-  nodejs: {
-    regexClassName: /(require)\(['|"](.+)['|"]\)/,
-    regexImports: /module.exports\s*=\s*[new]*([^\(]+)/,
-    callbackAfter: function(nodes, options) {
-      return nodes;
-    }
-  }
-};
-
-var buildNode = function buildNode(name, optFilepath, optSize, optImports, optType) {
-  var filepath = optFilepath || '';
-  var size = optSize || 1;
-  var imports = optImports || [];
-  var type = optType || '';
-  if(name.charAt(0) === '$' && type === '') {
-    type = 'angular';
-  } 
-  return {
-    name: name,
-    filepath: filepath,
-    size: size,
-    imports: imports,
-    type: type
-  };
-};
-
-var foundImports = function foundImports(nodes, src, options) {
-  var imports = [];
-
-  var regexImports = configs[options.type].regexImports;
-
-  var temp = src;
-  var matches = temp.match(regexImports);
-
-  if(matches !== null && matches !== undefined) {
-    temp = temp.substr(0, matches.index);
-    var importsTemp = temp.split(',');
-    for(var i=0, len=importsTemp.length; i<len; i++) {
-      var name = importsTemp[i].replace(/[^a-zA-Z0-9$\/]+/g, '');
-      if(name !== '') {
-        if(nodes[name] === undefined) {
-          nodes[name] = buildNode(name);
-        }
-        imports.push(name);
-      }
-    }
-  }
-
-  return imports;
-};
-
-var foundNode = function foundNode(nodes, src, filepath, options) {
-  var regexClassName = configs[options.type].regexClassName;
-
-  var temp = src;
-  var matches = temp.match(regexClassName);
-  var count = 0;
-  while(matches !== null) {
-    var nodeType = matches[1];
-    var name = matches[2];
-    var firstCrochet = temp.indexOf('[', matches.index);
-    var firstFunction = temp.indexOf('function', matches.index);
-    var imports = [];
-    temp = temp.substr(firstCrochet);
-    if(firstCrochet < firstFunction) {
-      imports = foundImports(nodes, temp, options);
-    }
-    if(nodes[name] === undefined) {
-      nodes[name] = buildNode(name, filepath, src.length, imports, nodeType);
-    } else {
-      nodes[name].filepath = filepath;
-      nodes[name].size = src.length;
-      nodes[name].imports = imports;
-      nodes[name].type = nodeType;
-    }
-    count = count + 1;
-    if(options.nbNodeByFile === -1 || count < options.nbNodeByFile) {
-      matches = temp.match(regexClassName);
-    } else {
-      matches = null;
-    }
-  }
-
-  return nodes;
+  angularjs: require('./parsers/angularjs'),
+  requirejs: require('./parsers/requirejs'),
+  nodejs: require('./parsers/nodejs')
 };
 
 var exec = function exec(files, options) {
   var nodes = {};
   for(var i=0, len=files.length; i<len; i++) {
-    nodes = foundNode(nodes, files[i].src, files[i].filepath, options);
+    nodes = configs[options.type].foundNode(
+      nodes, 
+      files[i].src, 
+      files[i].filepath, 
+      options
+    );
   }
   nodes = configs[options.type].callbackAfter(nodes, options);
+  //object to array
   var temp = [];
   for(var key in nodes) {
     temp.push(nodes[key]);

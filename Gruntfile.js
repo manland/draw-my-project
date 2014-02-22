@@ -140,7 +140,7 @@ module.exports = function(grunt) {
 
     watch: {
       files: [ 
-        'tasks/*.js',
+        'tasks/**/*.js',
         '<%= app_files.html %>', 
         '<%= app_files.js %>',
         '<%= app_files.tplHtml %>',
