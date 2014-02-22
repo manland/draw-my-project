@@ -4,7 +4,7 @@
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
     float: right;
     margin-right: 25px;
-    margin-top: 7px;
+    margin-top: 3px;
 }
 .onoffswitch-checkbox {
     display: none;

@@ -1,5 +1,5 @@
 header {
-	height: 50px;
+	height: 40px;
 	color: #fff;
 	background-color: #444;
 	border-bottom: 5px solid #D4D4D4;
@@ -10,7 +10,7 @@ header {
 }
 
 	header .btn, header .title {
-		line-height: 50px;
+		line-height: 40px;
 	}
 
 	.chartsTypeContainer {
