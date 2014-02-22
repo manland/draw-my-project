@@ -190,6 +190,17 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+###0.3.0
+
+* close #31 : modif footer color
+* close #32 : add a css minifier
+* close #29 : hilight node which is mouseover in filter or advices sections
+* first shoot of #38 : rework parsers architecture
+* close #34 : center text in sizeChart
+* close #28 : advices options
+* close #44 : add a triangle to show the file view menu is openbale
+* close #43 : add service provider value constant with factorie color + config run with angular color
+
 ###0.2.3
 
 * close #14 : new hierarchical pie chart
