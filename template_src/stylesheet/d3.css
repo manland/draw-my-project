@@ -25,11 +25,11 @@
   color: #3F447E;
 }
 
-.node.factory {
+.node.factory, .node.service, .node.provider, .node.value, .node.constant {
   fill: #F05B29;
 }
 
-.factory {
+.factory, .service, .provider, .value, .constant {
   color: #F05B29;
 }
 
@@ -41,11 +41,11 @@
   color: #3A015B;
 }
 
-.node.angular {
+.node.angular, .node.config, .node.run {
   fill: #DF0400;
 }
 
-.angular {
+.angular, .config, .run {
   color: #DF0400;
 }
 
