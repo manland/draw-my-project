@@ -8,6 +8,8 @@
 
 'use strict';
 
+var advicesHelper = require('./lib/advicesHelper');
+
 var configs = {
   angularjs: require('./parsers/angularjs'),
   requirejs: require('./parsers/requirejs'),
@@ -30,7 +32,14 @@ var exec = function exec(files, options) {
   for(var key in nodes) {
     temp.push(nodes[key]);
   }
-  return temp;
+  nodes = temp;
+
+  var advicesRes = advicesHelper.buildAdvices(options, nodes);
+
+  return {
+    nodes: nodes,
+    advices: advicesRes
+  };
 };
 
 module.exports = function(grunt) {
@@ -50,8 +59,11 @@ module.exports = function(grunt) {
       urlLogo: 'assets/img/logo.png',
       templateFiles: [
         'node_modules/grunt-draw-my-project/template/**/*'
-      ]
+      ],
+      advices: advicesHelper.defaults
     });
+
+    options.advices = advicesHelper.initOptions(options.advices);
 
     // Iterate over all specified file groups.
     this.files.forEach(function(f) {
@@ -113,7 +125,8 @@ module.exports = function(grunt) {
                 pathSeparator: options.pathSeparator,
                 type: options.type,
                 timeGeneration: (time2 - time),
-                jsonData: resData
+                jsonData: resData.nodes,
+                jsonAdvices: resData.advices,
               }
             });
 

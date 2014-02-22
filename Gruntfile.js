@@ -177,6 +177,9 @@ module.exports = function(grunt) {
         }
       },
       complexe: {
+        options: {
+          advices: false
+        },
         files: {
           'tmp/complexe': ['test/fixtures/complexe/**/*.js']
         }
@@ -204,6 +207,10 @@ module.exports = function(grunt) {
       goo: {
         options: {
           type: 'requirejs',
+          advices: {
+            fileClassName: false,
+            tooInjectDependencies: false
+          },
           nbNodeByFile: -1
         },
         files: {

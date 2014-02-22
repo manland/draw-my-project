@@ -106,6 +106,31 @@ Default value: `assets/img/logo.png`
 
 A string value that is used in src of img header.
 
+#### options.advices
+Type: `Object`
+Default value: `all advices`
+Special value: `false` no advice
+
+Advices :
+
+* controllerImports : `A controller must import $scope and 1 service (its own).`
+* fileClassName : `A class must have same name as its own filename.`
+* notUsed : `A class with no import and no class point to it.`
+* rootScope : `Use of $rootScope is bad.`
+* sizeControllerTooImportant : `Controller size must not be greater than 20% of services.`
+* tooInjectDependencies : `A class must not inject more than 10 classes.`
+
+An object to desable some options. To desable fileClassName and tooInjectDependencies advices just put :
+
+```js
+options: {
+  advices: {
+    fileClassName: false,
+    tooInjectDependencies: false
+  }
+}
+```
+
 ### Usage Examples
 
 #### Default Options

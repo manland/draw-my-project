@@ -28,3 +28,8 @@
 		border-left: 3px solid #F79700;
 		color: #F79700;
 	}
+
+	.advice.notserious {
+		border-left: 3px solid #444;
+		color: #444;
+	}
