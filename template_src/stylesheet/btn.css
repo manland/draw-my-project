@@ -7,6 +7,13 @@
 	margin: 0 5px;
 }
 
+.btn.multiple:after {
+	content: "▾";
+	font-size: 1.2em;
+	float: right;
+	margin-left: 10px;
+}
+
 .btn-select-true {
 	background-color: #222;
 }
