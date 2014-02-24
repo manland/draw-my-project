@@ -190,6 +190,12 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+###0.3.1
+
+* close #33 : size chart with screen size + redraw on window resize
+* first of #21 : keep node selected on click
+* continue #7 : nodejs parser
+
 ###0.3.0
 
 * close #31 : modif footer color
