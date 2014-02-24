@@ -1,6 +1,7 @@
 .node {
   font: 300 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
   fill: #bbb;
+  cursor: pointer;
 }
 
 .node circle {
@@ -49,7 +50,7 @@
   color: #DF0400;
 }
 
-.node:hover {
+.node.hover {
   fill: #000;
 }
 
@@ -60,7 +61,7 @@
   pointer-events: none;
 }
 
-.node:hover,
+.node.hover,
 .node--source,
 .node--target {
   font-weight: 700;

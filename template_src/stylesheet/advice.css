@@ -17,6 +17,11 @@
 		border-radius: 1px 3px 3px 1px;
 		margin: 5px;
 		padding: 8px;
+		cursor: pointer;
+	}
+
+	.advice:hover, .advice.hover, .advice.selected {
+		background-color: #F0F0F0;
 	}
 
 	.advice.hot {

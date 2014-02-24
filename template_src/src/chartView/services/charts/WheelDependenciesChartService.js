@@ -1,6 +1,6 @@
 angular.module('app').service('WheelDependenciesChartService', [
-  'ConstantsService', 'ScreenSizeService',
-  function(constantsService, screenSizeService) {
+  'ConstantsService', 'ScreenSizeService', 'ChartMouseService',
+  function(constantsService, screenSizeService, chartMouseService) {
 
     var link, node;
 
@@ -20,18 +20,26 @@ angular.module('app').service('WheelDependenciesChartService', [
       }).each(function() { this.parentNode.appendChild(this); });
 
       node
+        .classed("hover", function(n) { return n.name === d.name; })
         .classed("node--target", function(n) { return n.target; })
         .classed("node--source", function(n) { return n.source; });
     };
 
-    var mouseouted = function mouseouted(d) {
+    var mouseouted = function mouseouted() {
       link
         .classed("link--target", false)
         .classed("link--source", false);
 
       node
+        .classed("hover", function(d) { 
+          return _.contains(chartMouseService.getKeepNodes(), d.name); 
+        })
         .classed("node--target", false)
         .classed("node--source", false);
+    };
+
+    var mouseclick = function mouseclick(d) {
+      chartMouseService.mouseClick(d.name);
     };
 
     var packageHierarchy = function packageHierarchy(classes) {
@@ -128,7 +136,8 @@ angular.module('app').service('WheelDependenciesChartService', [
               .style("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
               .text(function(d) { return d.key; })
               .on("mouseover", mouseovered)
-              .on("mouseout", mouseouted);
+              .on("mouseout", mouseouted)
+              .on("click", mouseclick);
         };
 
         draw(data);
@@ -141,8 +150,8 @@ angular.module('app').service('WheelDependenciesChartService', [
           }
         });
       },
-      mouseOut: function(nodeName) {
-        mouseouted();
+      mouseOut: function(keepNodes) {
+        mouseouted(keepNodes);
       }
     };
 

@@ -11,6 +11,9 @@ angular.module('app').service('AdviceViewService', [
       },
       mouseOut: function(nodeName) {
         chartService.mouseOut(nodeName);
+      },
+      mouseClick: function(nodeName) {
+        chartService.mouseClick(nodeName);
       }
     };
   }

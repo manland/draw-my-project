@@ -15,6 +15,9 @@ angular.module('app').service('FilterViewService', [
       },
       mouseOut: function(nodeName) {
         chartService.mouseOut(nodeName);
+      },
+      mouseClick: function(nodeName) {
+        chartService.mouseClick(nodeName);
       }
     };
   }

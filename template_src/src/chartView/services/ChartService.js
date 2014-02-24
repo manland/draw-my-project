@@ -1,6 +1,10 @@
 angular.module('app').service('ChartService', [
-  'DataService', 'WheelDependenciesChartService', 'PackageTreeChartService', 'SizeChartService', 'SizePackageChartService',
-  function(dataService, wheelDependenciesChartService, packageTreeChartService, sizeChartService, sizePackageChartService) {
+  'DataService', 'ChartMouseService',
+  'WheelDependenciesChartService', 'PackageTreeChartService', 
+  'SizeChartService', 'SizePackageChartService',
+  function(dataService, chartMouseService,
+    wheelDependenciesChartService, packageTreeChartService, 
+    sizeChartService, sizePackageChartService) {
 
     var allCharts = [
       {
@@ -61,6 +65,9 @@ angular.module('app').service('ChartService', [
       },
       buildChart: function(domElement) {
         currentChart.chart.buildChart(domElement, currentChart.data());
+      },
+      mouseClick: function(nodeName) {
+        chartMouseService.mouseClick(nodeName);
       },
       mouseOver: function(nodeName) {
         currentChart.chart.mouseOver(nodeName);

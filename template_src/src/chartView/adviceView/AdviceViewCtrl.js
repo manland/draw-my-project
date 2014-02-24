@@ -11,6 +11,10 @@ angular.module('app').controller('AdviceViewCtrl', [
     $scope.mouseOut = function(nodeName) {
       adviceViewService.mouseOut(nodeName);
     };
+
+    $scope.mouseClick = function(nodeName) {
+      adviceViewService.mouseClick(nodeName);
+    };
     
   }
 ]);

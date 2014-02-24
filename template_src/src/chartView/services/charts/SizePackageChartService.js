@@ -1,11 +1,25 @@
 angular.module('app').service('SizePackageChartService', [
-  'ConstantsService', 'ScreenSizeService',
-  function(constantsService, screenSizeService) {
+  'ConstantsService', 'ScreenSizeService', 'ChartMouseService',
+  function(constantsService, screenSizeService, chartMouseService) {
+
+    var svg, node;
 
     var mouseovered = function mouseovered(d) {
+      svg.selectAll(".node")
+        .classed("hover", function(n) { 
+          return d !== undefined && n.name === d.name; 
+        });
     };
 
-    var mouseouted = function mouseouted(d) {
+    var mouseouted = function mouseouted() {
+      svg.selectAll(".node")
+        .classed("hover", function(d) {
+          return _.contains(chartMouseService.getKeepNodes(), d.name); 
+        });
+    };
+
+    var mouseclick = function mouseclick(d) {
+      chartMouseService.mouseClick(d.name);
     };
 
     return {
@@ -17,7 +31,7 @@ angular.module('app').service('SizePackageChartService', [
           .size([diameter - 4, diameter - 4])
           .value(function(d) { return d.size; });
 
-        var svg = d3.select(domElement).append("svg")
+        svg = d3.select(domElement).append("svg")
             .attr("width", diameter)
             .attr("height", diameter)
             .attr("viewBox", "0 0 "+diameter+" "+diameter)
@@ -25,10 +39,13 @@ angular.module('app').service('SizePackageChartService', [
             .attr("transform", "translate(2,2)");
 
         var draw = function draw(root) {
-          var node = svg.datum(root).selectAll(".node")
+          node = svg.datum(root).selectAll(".node")
               .data(pack.nodes)
             .enter().append("g")
               .attr("class", function(d) { return d.children ? "node" : "leaf node"; })
+              .on("mouseover", mouseovered)
+              .on("mouseout", mouseouted)
+              .on("click", mouseclick)
               .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
           node.append("title")
@@ -48,8 +65,13 @@ angular.module('app').service('SizePackageChartService', [
         draw(data);
       },
       mouseOver: function(nodeName) {
+        if(nodeName !== undefined) {
+          var names = nodeName.split(constantsService.getPathSeparator());
+          mouseovered({name: names[names.length-1]});
+        }
       },
       mouseOut: function(nodeName) {
+        mouseouted();
       }
     };
 

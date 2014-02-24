@@ -1,6 +1,6 @@
 angular.module('app').service('PackageTreeChartService', [
-  'ConstantsService', 'ScreenSizeService',
-  function(constantsService, screenSizeService) {
+  'ConstantsService', 'ScreenSizeService', 'ChartMouseService',
+  function(constantsService, screenSizeService, chartMouseService) {
 
     var link, node, links, nodes;
 
@@ -38,8 +38,13 @@ angular.module('app').service('PackageTreeChartService', [
       });
 
       node
+        .classed("hover", function(n) { return d !== undefined && n.name === d.name; })
         .classed("node--target", function(n) { return n.target; })
         .classed("node--source", function(n) { return n.source; });
+    };
+
+    var mouseclick = function mouseclick(d) {
+      chartMouseService.mouseClick(d.name);
     };
 
     var mouseouted = function mouseouted(d) {
@@ -48,6 +53,9 @@ angular.module('app').service('PackageTreeChartService', [
         .classed("link--source", false);
 
       node
+        .classed("hover", function(d) { 
+          return d !== undefined && _.contains(chartMouseService.getKeepNodes(), d.name); 
+        })
         .classed("node--target", false)
         .classed("node--source", false);
     };
@@ -88,7 +96,8 @@ angular.module('app').service('PackageTreeChartService', [
               .attr("class", function(d) { return "node " + d.type; })
               .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
               .on("mouseover", mouseovered)
-              .on("mouseout", mouseouted);
+              .on("mouseout", mouseouted)
+              .on("click", mouseclick);
 
           node.append("circle")
               .attr("r", 4.5);

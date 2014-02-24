@@ -12,5 +12,9 @@ angular.module('app').controller('FilterViewCtrl', [
       filterViewService.mouseOut(nodeName);
     };
 
+    $scope.mouseClick = function(nodeName) {
+      filterViewService.mouseClick(nodeName);
+    };
+
   }
 ]);

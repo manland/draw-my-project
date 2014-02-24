@@ -54,22 +54,11 @@ angular.module('app').service('SizeChartService', [
       // Hide the breadcrumb trail
       d3.select('#trail').style('visibility', 'hidden');
 
-      // Deactivate all segments during transition.
-      d3.selectAll('path').on('mouseover', null);
-
       // Transition each segment to full opacity and then reactivate it.
       d3.selectAll('path')
-        .transition()
-        .duration(1000)
-        .style('opacity', 1)
-        .each('end', function() {
-          d3.select(this).on('mouseover', mouseovered);
-        });
+        .style('opacity', 1);
 
-      d3.select('#explanation')
-        .transition()
-        .duration(1000)
-        .style('visibility', 'hidden');
+      d3.select('#percentage').text('');
     };
 
     return {

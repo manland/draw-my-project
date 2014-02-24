@@ -21,6 +21,15 @@
 	}
 
 	.filterView ul {
-		margin-left: 10px;
+		margin-left: 5px;
 		margin-top: 10px;
+	}
+
+	.filterView ul li {
+		cursor: pointer;
+		padding: 2px;
+	}
+
+	.filterView ul li:hover, .filterView ul li.hover, .filterView ul li.selected {
+		background-color: #F0F0F0;
 	}

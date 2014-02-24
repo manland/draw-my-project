@@ -1,5 +1,5 @@
 <div class="adviceView" ng-controller="AdviceViewCtrl">
   <ul>
-    <li class="advice {{advice.gravity}}" ng-repeat="advice in advices" ng-mouseover="mouseOver(advice.node.name)" ng-mouseout="mouseOut(advice.node.name)">{{advice.name}}</li>
+    <li class="advice {{advice.gravity}}" ng-repeat="advice in advices" ng-mouseover="mouseOver(advice.node.name)" ng-mouseout="mouseOut(advice.node.name)" ng-click="mouseClick(advice.node.name)">{{advice.name}}</li>
   </ul>
 </div>
