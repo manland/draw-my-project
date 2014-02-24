@@ -1,6 +1,6 @@
 angular.module('app').service('WheelDependenciesChartService', [
-  'ConstantsService',
-  function(constantsService) {
+  'ConstantsService', 'ScreenSizeService',
+  function(constantsService, screenSizeService) {
 
     var link, node;
 
@@ -77,7 +77,7 @@ angular.module('app').service('WheelDependenciesChartService', [
 
     return {
       buildChart: function(domElement, data) {
-        var diameter = 700,
+        var diameter = screenSizeService.getDiameterChart(),
           radius = diameter / 2,
           innerRadius = radius - 100;
 
@@ -97,6 +97,7 @@ angular.module('app').service('WheelDependenciesChartService', [
         var svg = d3.select(domElement).append("svg")
             .attr("width", diameter)
             .attr("height", diameter)
+            .attr("viewBox", "0 0 "+diameter+" "+diameter)
           .append("g")
             .attr("transform", "translate(" + radius + "," + radius + ")");
 

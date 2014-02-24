@@ -1,6 +1,6 @@
 angular.module('app').service('SizeChartService', [
-  'ConstantsService',
-  function(constantsService) {
+  'ConstantsService', 'ScreenSizeService',
+  function(constantsService, screenSizeService) {
 
     var totalSize = 0, vis, nodes;
 
@@ -75,9 +75,9 @@ angular.module('app').service('SizeChartService', [
     return {
       buildChart: function(domElement, data) {
         // Dimensions of sunburst.
-        var width = 750;
-        var height = 500;
-        var radius = Math.min(width, height) / 2;
+        var width = screenSizeService.getDiameterChart();
+        var height = screenSizeService.getDiameterChart();
+        var radius = screenSizeService.getDiameterChart() / 2;
 
         // Breadcrumb dimensions: width, height, spacing, width of tip/tail.
         var b = {
@@ -97,7 +97,8 @@ angular.module('app').service('SizeChartService', [
         vis = d3.select(domElement).append("svg:svg")
             .attr("width", width)
             .attr("height", height)
-            .append("svg:g")
+            .attr("viewBox", "0 0 "+width+" "+height)
+          .append("svg:g")
             .attr("id", "container")
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 

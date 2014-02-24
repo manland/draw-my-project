@@ -1,6 +1,6 @@
 angular.module('app').service('SizePackageChartService', [
-  'ConstantsService',
-  function(constantsService) {
+  'ConstantsService', 'ScreenSizeService',
+  function(constantsService, screenSizeService) {
 
     var mouseovered = function mouseovered(d) {
     };
@@ -10,7 +10,7 @@ angular.module('app').service('SizePackageChartService', [
 
     return {
       buildChart: function(domElement, data) {
-        var diameter = 600,
+        var diameter = screenSizeService.getDiameterChart(),
           format = d3.format(",d");
 
         var pack = d3.layout.pack()
@@ -20,6 +20,7 @@ angular.module('app').service('SizePackageChartService', [
         var svg = d3.select(domElement).append("svg")
             .attr("width", diameter)
             .attr("height", diameter)
+            .attr("viewBox", "0 0 "+diameter+" "+diameter)
           .append("g")
             .attr("transform", "translate(2,2)");
 

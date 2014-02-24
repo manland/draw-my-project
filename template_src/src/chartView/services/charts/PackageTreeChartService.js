@@ -1,6 +1,6 @@
 angular.module('app').service('PackageTreeChartService', [
-  'ConstantsService',
-  function(constantsService) {
+  'ConstantsService', 'ScreenSizeService',
+  function(constantsService, screenSizeService) {
 
     var link, node, links, nodes;
 
@@ -54,7 +54,7 @@ angular.module('app').service('PackageTreeChartService', [
 
     return {
       buildChart: function(domElement, data) {
-        var diameter = 700,
+        var diameter = screenSizeService.getDiameterChart(),
           radius = diameter / 2,
           innerRadius = radius - 100;
 
@@ -68,6 +68,7 @@ angular.module('app').service('PackageTreeChartService', [
         var svg = d3.select(domElement).append("svg")
             .attr("width", diameter)
             .attr("height", diameter)
+            .attr("viewBox", "0 0 "+diameter+" "+diameter)
           .append("g")
             .attr("transform", "translate(" + radius + "," + radius + ")");
 
