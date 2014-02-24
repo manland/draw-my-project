@@ -7,7 +7,7 @@ angular.module('app').controller('HeaderViewCtrl', [
 
     $scope.allChartsType = headerViewService.getAllChartsType();
 
-    var openHeight = (50 + ($scope.allChartsType.length * 50));
+    var openHeight = $scope.allChartsType.length * 50;
 
     $scope.switchAllChartsType = function() {
       $scope.showChartsType = !$scope.showChartsType;
