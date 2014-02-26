@@ -140,9 +140,11 @@ In this example, the default options are used. So if the `app.js` file is a simp
 grunt.initConfig({
   draw_my_project: {
     options: {},
-    files: {
-      'dest/default_options': ['src/app.js'],
-    },
+    your_target: {
+      files: {
+        'dest/default_options': ['src/app.js'],
+      }
+    }
   },
 });
 ```
@@ -159,9 +161,11 @@ grunt.initConfig({
       title: 'My project title',
       description: 'My project can do anything !'
     },
-    files: {
-      'dest/default_options': ['src/minified.js'],
-    },
+    your_target: {
+      files: {
+        'dest/default_options': ['src/minified.js'],
+      }
+    }
   },
 });
 ```
@@ -178,9 +182,11 @@ grunt.initConfig({
       title: 'My project title',
       description: 'My project can do anything !'
     },
-    files: {
-      'dest/default_options': ['src/**/*.js'],
-    },
+    your_target: {
+      files: {
+        'dest/default_options': ['src/**/*.js'],
+      }
+    }
   },
 });
 ```
