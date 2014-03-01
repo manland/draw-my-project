@@ -11,7 +11,7 @@ module.exports = {
   },
   end: function(nodes, options) {
     if(options.type === 'angularjs' && 
-       sizeByType['controller'] > (sizeByType['factory'] * 0.8)) {
+       sizeByType['controller'] > (sizeByType['factory'] * 0.2)) {
       advices.push({
         node: undefined,
         name: 'Your controllers are too important compared to services !',
