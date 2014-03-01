@@ -1,15 +1,35 @@
+var _ = require('underscore');
 var parsersHelper = require('../lib/parsersHelper');
 
 var regexImports = /require\(['|"](.+)['|"]\)/;
 
-var foundImports = function foundImports(regexImports, nodes, src, options) {
+var foundName = function foundName(nodeName, filepath) {
+  var path = filepath.split('/');
+  path = _.initial(path);
+  var names = nodeName.split('/');
+  var newNames = _.map(names, function(n) {
+    if(n === '..') {
+      path = _.initial(path);
+      return '';
+    } else if(n === '.') {
+      return '';
+    } else {
+      return n;
+    }
+  });
+  return path.join('/') + '/' + _.filter(newNames, function(n) {
+    return n !== '';
+  }).join('/');
+};
+
+var foundImports = function foundImports(regexImports, nodes, src, filepath, options) {
   var temp = src;
   var matches = temp.match(regexImports);
   var count = 0;
   var imports = [];
   while(matches !== null) {
-    var name = matches[1];
-    name = name.replace('./', '');
+    var name = foundName(matches[1], filepath);//.split('/');
+    //name = name[name.length-1];
     imports.push(name);
     
     if(nodes[name] === undefined) {
@@ -31,8 +51,9 @@ module.exports = {
   foundNode: function(nodes, src, filepath, options) {
     var name = filepath.split('/');
     name = name[name.length-1].split('.')[0];
+    name = foundName(name, filepath);
     var nodeType = 'nodejs';
-    imports = foundImports(regexImports, nodes, src, options);
+    imports = foundImports(regexImports, nodes, src, filepath, options);
     nodes[name] = parsersHelper.buildNode(name, filepath, src.length, imports, nodeType);
     return nodes;
   },
