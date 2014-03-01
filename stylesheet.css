@@ -88,24 +88,32 @@ header .btn {
   padding-top: 40px;
 }
 
-section {
-  padding: 10px 20px;
-}
-
-p {
+p, .list {
   font-size: 1.6em;
   padding: 10px;
   margin: 20px;
-  background-color: #ddd;
+  background-color: rgba(150, 150, 150, 0.2);
   text-align: center;
   border-radius: 5px;
   line-height: 1.15em;
+  border: 1px solid #ddd;
+  display: inline-block;
+  width: calc(30% - 30px);
+  min-width: 180px;
+  vertical-align: middle;
+  color: #fff;
 }
 
-p.min {
-  display: inline-block;
-  width: 42%;
-  vertical-align: middle;
+.list {
+  width: calc(40% - 20px);
+  min-width: 200px;
+}
+
+.list p {
+  border: none;
+  background-color: transparent;
+  width: auto;
+  margin: 0;
 }
 
 div.min {
@@ -141,8 +149,38 @@ h2 {
   margin: 20px 0;
 }
 
+.feature, .showcases {
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-top: 5px solid #444;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.feature.f1 {
+  background-image: url('assets/img/blurred/1.png');
+  border-top: none;
+}
+
+.feature.f2, .feature.f6 {
+  background-image: url('assets/img/blurred/2.png');
+}
+
+.feature.f3, .feature.f7 {
+  background-image: url('assets/img/blurred/3.png');
+}
+
+.feature.f4, .feature.f8 {
+  background-image: url('assets/img/blurred/4.png');
+}
+
+.feature.f5, .feature.f9 {
+  background-image: url('assets/img/blurred/5.png');
+}
+
 section img {
-  max-width: 42%;
+  width: 30%;
+  max-width: 30%;
   min-width: 200px;
   vertical-align: middle;
   -moz-box-shadow: 5px 5px 5px 0px #656565;
@@ -153,14 +191,7 @@ section img {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
-}
-
-.centerImg {
-  text-align: center;
-}
-
-.centerImg img {
-  margin: 10px 1%;
+  margin: 10px 0;
 }
 
 ul {
@@ -171,21 +202,43 @@ ul {
 
 li {
   list-style-type: disc;
-  font-size: 1.6em;
 }
 
 /******************************************************
 * SHOWCASE
 *******************************************************/
 
+.showcases {
+  background-image: url('assets/img/blurred/1.png');
+}
+
 .showcase {
   position: relative;
   width: 40%;
+  min-width: 200px;
+  display: inline-block;
+  margin: 20px;
+  vertical-align: top;
 }
 
 .screenshot {
   max-width: none;
   width: 100%;
+  margin: 0;
+}
+
+.showcaseDetails {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.showcaseDetails:hover {
+  opacity: 1;
 }
 
 .showcase .logo {
@@ -199,11 +252,10 @@ li {
 }
 
 .showcase .title {
-  color: #000;
+  color: #fff;
   font-size: 1.6em;
-  padding: 0 0 20px;
   position: absolute;
-  top: 0;
+  top: 5px;
   left: 0;
   right: 0;
   text-align: center;
@@ -211,11 +263,18 @@ li {
 
 .showcase .description {
   text-align: left;
+  color: #fff;
+  position: absolute;
+  top: 30px;
+  bottom: 0;
+  left: 5px;
+  right: 60px;
+  display: inline-block;
 }
 
 .showcase .links {
   position: absolute;
-  bottom: 12px;
+  bottom: 0;
   right: 0;
   left: 0;
   text-align: center;
@@ -228,6 +287,7 @@ li {
 .showcase .links .btn {
   color: #fff;
   line-height: 30px;
+  padding: 0 5px;
 }
 
 /******************************************************
@@ -246,4 +306,35 @@ footer {
 
 footer a {
   color: inherit;
+}
+
+/******************************************************
+* MEDIA QUERY
+*******************************************************/
+
+@media screen and (max-width: 750px) {
+  header .title {
+    display: none;
+  }
+
+  section img {
+    width: 50%;
+    max-width: 50%;
+  }
+
+  p, .list {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 515px) {
+  header .btn.changelog {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 415px) {
+  header .btn.changelog, header .btn.options, header .btn.install {
+    display: none;
+  }
 }
