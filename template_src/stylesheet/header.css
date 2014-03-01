@@ -13,6 +13,11 @@ header {
 		line-height: 40px;
 	}
 
+	header .btn.multiple {
+		width: 80px;
+		height: 40px;
+	}
+
 	.chartsTypeContainer {
 		position: fixed;
 	}
