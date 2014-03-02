@@ -3,7 +3,13 @@ var parsersHelper = require('../lib/parsersHelper');
 
 var regexImports = /require\(['|"](.+)['|"]\)/;
 
-var foundName = function foundName(nodeName, filepath) {
+var foundName = function foundName(nodeName, filepath, isImport) {
+  
+  //lib like `mongoose`
+  if(nodeName.charAt(0) !== '.' && isImport === true) {
+    return nodeName;
+  }
+
   var path = filepath.split('/');
   path = _.initial(path);
   var names = nodeName.split('/');
@@ -28,7 +34,7 @@ var foundImports = function foundImports(regexImports, nodes, src, filepath, opt
   var count = 0;
   var imports = [];
   while(matches !== null) {
-    var name = foundName(matches[1], filepath);//.split('/');
+    var name = foundName(matches[1], filepath, true);//.split('/');
     //name = name[name.length-1];
     imports.push(name);
     
