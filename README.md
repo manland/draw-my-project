@@ -196,6 +196,12 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+###0.3.2
+
+* close #36 : beatiful [gh-pages](http://manland.github.io/draw-my-project/) ! Thx to @undless for its advices ! <3
+* close #49 : button file view in chrome(imum) was bad sized
+* close #7 : add nodejs type
+
 ###0.3.1
 
 * close #33 : size chart with screen size + redraw on window resize
