@@ -18,8 +18,7 @@ angular.module('publicApp', ['ngRoute'])
     });
 }]);
 
-angular.module('publicApp').controller('LoginController', [
-  '$scope', '$http', '$location',
+angular.module('publicApp').controller('LoginController', 
   function($scope, $http, $location) {
     $scope.showError = false;
     $scope.onLogin = function() {
@@ -34,10 +33,10 @@ angular.module('publicApp').controller('LoginController', [
       });
     };
   }
-]);
+);
 
-angular.module('publicApp').controller('LoggedController', [
-  '$scope', '$http', '$routeParams',
+angular.module('publicApp').controller('LoggedController', 
+
   function($scope, $http, $routeParams) {
 
     var buildViewPath = function(view) {
@@ -48,11 +47,9 @@ angular.module('publicApp').controller('LoggedController', [
       $scope.currentView = buildViewPath($routeParams.view);
     }
   }
-]);
+);
 
-angular.module('publicApp').factory('LoggedController5', [
-  '$scope', '$http', '$routeParams',
-  function($scope, $http, $routeParams) {
+angular.module('publicApp').factory('LoggedController5', function($scope, $http, $routeParams) {
 
     var buildViewPath = function(view) {
       return 'src/logged/' + view + '/' + view + '.tpl.html';
@@ -62,4 +59,4 @@ angular.module('publicApp').factory('LoggedController5', [
       $scope.currentView = buildViewPath($routeParams.view);
     }
   }
-]);
+);
