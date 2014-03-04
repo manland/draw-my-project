@@ -196,6 +196,11 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+###0.3.3
+
+* close #51 : permit to no-declare injection string in angularjs type (linked to add advice in #52)
+* close #50 : change width and height to max-width and max-height on logo header
+
 ###0.3.2
 
 * close #36 : beatiful [gh-pages](http://manland.github.io/draw-my-project/) ! Thx to @undless for its advices ! <3
