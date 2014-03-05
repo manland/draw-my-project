@@ -19,7 +19,7 @@ angular.module('publicApp', ['ngRoute'])
 }]);
 
 angular.module('publicApp').controller('LoginController', 
-  function($scope, $http, $location) {
+  function ($scope, $http, $location) {
     $scope.showError = false;
     $scope.onLogin = function() {
       console.log('login');

@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var parsersHelper = require('../lib/parsersHelper');
 
-var regexp = /.*?[^$](controller|provider|factory|service|value|constant|directive|config|run|filter)\(['|"](.+?)['|"](.+?)function\((.*?)\)/;
+var regexp = /.*?[^$](controller|provider|factory|service|value|constant|directive|config|run|filter)\(['|"](.+?)['|"](.+?)function\s?\((.*?)\)/;
 
 var foundNode = function foundNode(nodes, src, filepath, options) {
   var temp = src.split('\n').join(' ');
