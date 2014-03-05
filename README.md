@@ -202,6 +202,12 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+###0.3.4
+
+* close #54 #55 #56 : advice if filename doesn't end with a configurable pattern
+* close #38 : better node parsers architecture
+* close #53 : angular rexep is bad if there is a space before first function
+
 ###0.3.3
 
 * close #51 : permit to no-declare injection string in angularjs type (linked to add advice in #52)
