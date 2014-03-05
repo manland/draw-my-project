@@ -1,5 +1,5 @@
 var _ = require('underscore');
-var parsersHelper = require('../lib/parsersHelper');
+var parsersHelper = require('../lib/ParsersHelper');
 
 var regexImports = /require\(['|"](.+)['|"]\)/;
 

@@ -1,11 +1,11 @@
-var parsersHelper = require('../lib/parsersHelper');
+var inlineNodeParser = require('../lib/InlineNodeParser');
+var parsersHelper = require('../lib/ParsersHelper');
 
-var regexClassName = /(define)\(['|"](.+?)['|"]/,
-  regexImports = /function/;
+var regexp = /(define)\(['|"](.+?)['|"](.+?)function\s?\((.*?)\)/;
 
 module.exports = {
   foundNode: function(nodes, src, filepath, options) {
-    return parsersHelper.foundNode(regexClassName, regexImports, nodes, src, filepath, options);
+    return inlineNodeParser.parse(regexp, parsersHelper.buildNode, nodes, src, filepath, options);
   },
   callbackAfter: function(nodes, options) {
     return nodes;
