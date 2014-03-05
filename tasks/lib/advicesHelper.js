@@ -1,56 +1,59 @@
-var defaultAdvicesOptions = {
-  controllerImports: {
-    enable: true,
-    options: {},
-    service: require('../advices/ControllerImports')
-  },
-  fileClassName: {
-    enable: true,
-    options: {},
-    service: require('../advices/FileClassName')
-  },
-  notUsed: {
-    enable: true,
-    options: {},
-    service: require('../advices/NotUsed')
-  },
-  rootScope: {
-    enable: true,
-    options: {},
-    service: require('../advices/RootScope')
-  },
-  sizeControllerTooImportant: {
-    enable: true,
-    options: {},
-    service: require('../advices/SizeControllerTooImportant')
-  },
-  tooInjectDependencies: {
-    enable: true,
-    options: {},
-    service: require('../advices/TooInjectDependencies')
-  },
-  filenameEnd: {
-    enable: true,
-    options: {
-      suffix: {
-        'service': 'Srv',
-        'factory': 'Srv',
-        'controller': 'Ctrl'
-      }
+var defaultAdvicesOptions = function defaultAdvicesOptions() {
+  return {
+    controllerImports: {
+      enable: true,
+      options: {},
+      service: require('../advices/ControllerImports')
     },
-    service: require('../advices/FilenameEnd')
-  }
+    fileClassName: {
+      enable: true,
+      options: {},
+      service: require('../advices/FileClassName')
+    },
+    notUsed: {
+      enable: true,
+      options: {},
+      service: require('../advices/NotUsed')
+    },
+    rootScope: {
+      enable: true,
+      options: {},
+      service: require('../advices/RootScope')
+    },
+    sizeControllerTooImportant: {
+      enable: true,
+      options: {},
+      service: require('../advices/SizeControllerTooImportant')
+    },
+    tooInjectDependencies: {
+      enable: true,
+      options: {},
+      service: require('../advices/TooInjectDependencies')
+    },
+    filenameEnd: {
+      enable: true,
+      options: {
+        suffix: {
+          'service': 'Srv',
+          'factory': 'Srv',
+          'controller': 'Ctrl'
+        }
+      },
+      service: require('../advices/FilenameEnd')
+    }
+  };
 };
 
 module.exports = {
-  defaults: defaultAdvicesOptions,
+  defaults: defaultAdvicesOptions(),
   initOptions: function(advices) {
+    var _defaultAdvicesOptions = defaultAdvicesOptions();
     if(advices === false) {
       return {};
     } else {
-      for(var defaultKey in defaultAdvicesOptions) {
+      for(var defaultKey in _defaultAdvicesOptions) {
         if(advices[defaultKey] === undefined) {
-          advices[defaultKey] = defaultAdvicesOptions[defaultKey];
+          advices[defaultKey] = _defaultAdvicesOptions[defaultKey];
         }
       }
       for(var key in advices) {
@@ -58,7 +61,7 @@ module.exports = {
           delete advices[key];
         } else if(advices[key].service === undefined) {
           var options = advices[key];
-          advices[key] = defaultAdvicesOptions[key];
+          advices[key] = _defaultAdvicesOptions[key];
           advices[key].options = options;
         }
       }
