@@ -119,14 +119,20 @@ Advices :
 * rootScope : `Use of $rootScope is bad.`
 * sizeControllerTooImportant : `Controller size must not be greater than 20% of services.`
 * tooInjectDependencies : `A class must not inject more than 10 classes.`
+* fileNameEnd : `A class must end with Srv if it's a service, Ctrl for a controller.`
 
-An object to desable some options. To desable fileClassName and tooInjectDependencies advices just put :
+An object to desable some options. To desable fileClassName and tooInjectDependencies advices, or to configure fileNameEnd for service end with Service instead of Srv just put :
 
 ```js
 options: {
   advices: {
     fileClassName: false,
-    tooInjectDependencies: false
+    tooInjectDependencies: false,
+    filenameEnd: {
+      suffix: {
+        'service': 'Service'
+      }
+    }
   }
 }
 ```

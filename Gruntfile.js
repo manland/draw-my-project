@@ -190,7 +190,14 @@ module.exports = function(grunt) {
           description: 'Manage your social life !',
           link: 'http://blog.skimbo.fr',
           favicon: 'assets/img/skimbo.png',
-          urlLogo: 'assets/img/skimbo.png'
+          urlLogo: 'assets/img/skimbo.png',
+          advices: {
+            filenameEnd: {
+              suffix: {
+                'controller': 'Controller'
+              }
+            }
+          }
         },
         files: {
           'tmp/skimbo': ['test/fixtures/skimbo/**/*.js']

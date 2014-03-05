@@ -28,6 +28,17 @@ var defaultAdvicesOptions = {
     enable: true,
     options: {},
     service: require('../advices/TooInjectDependencies')
+  },
+  filenameEnd: {
+    enable: true,
+    options: {
+      suffix: {
+        'service': 'Srv',
+        'factory': 'Srv',
+        'controller': 'Ctrl'
+      }
+    },
+    service: require('../advices/FilenameEnd')
   }
 };
 
@@ -45,6 +56,10 @@ module.exports = {
       for(var key in advices) {
         if(advices[key] === false) {
           delete advices[key];
+        } else if(advices[key].service === undefined) {
+          var options = advices[key];
+          advices[key] = defaultAdvicesOptions[key];
+          advices[key].options = options;
         }
       }
       return advices;
