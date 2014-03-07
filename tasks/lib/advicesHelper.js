@@ -45,17 +45,18 @@ var defaultAdvicesOptions = function defaultAdvicesOptions() {
       },
       service: require('../advices/TooInjectDependencies')
     },
-    filenameEnd: {
+    filenameChecker: {
       enable: true,
       options: {
         gravityLevel: 2,
+        prefix: {},
         suffix: {
           'service': 'Srv',
           'factory': 'Srv',
           'controller': 'Ctrl'
         }
       },
-      service: require('../advices/FilenameEnd')
+      service: require('../advices/FilenameChecker')
     }
   };
 };

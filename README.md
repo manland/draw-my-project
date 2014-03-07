@@ -122,29 +122,34 @@ Advices :
   * options: __sizeMaxCtrlComparedToService__ `An integer between 0 and 1 wich represents the percent of services for controllers.` Default is `0.2`.
 * tooInjectDependencies : `A class must not inject more than 5 classes.`
   * options : __nbMax__ `An integer wich represent the number max of imports.` Default is `5`.
-* fileNameEnd : `A class must end with Srv if it's a service, Ctrl for a controller.`
-  * options : __suffix__ `An object where key is node type and value is the suffix.` Default is `{'service': 'Srv', 'factory': 'Srv', 'controller': 'Ctrl'}.`
+* filenameChecker : `A class must end with Srv if it's a service, Ctrl for a controller.`
+  * options : 
+    * __prefix__ `An object where key is node type and value is the prefix.` Default is `{}.`
+    * __suffix__ `An object where key is node type and value is the suffix.` Default is `{'service': 'Srv', 'factory': 'Srv', 'controller': 'Ctrl'}.`
 
 All advices can have a configured `gravityLevel` set to 0 (not serious), 1 (significant) or 2 (hot). For example to put controllerImports to `notSerious` advice just add to your options :
 
 ```js
 options: {
   advices: {
-    filenameEnd: {
+    filenameChecker: {
       gravityLevel: 0
     }
   }
 }
 ```
 
-To desable fileClassName and tooInjectDependencies advices, or to configure fileNameEnd for service end with `Service` instead of `Srv` just put :
+To desable fileClassName and tooInjectDependencies advices, or to configure filenameChecker for service end with `Service` instead of `Srv` and all directives start with `draw` (to avoid collision name) just put :
 
 ```js
 options: {
   advices: {
     fileClassName: false,
     tooInjectDependencies: false,
-    filenameEnd: {
+    filenameChecker: {
+      prefix: {
+        'directive': 'draw'
+      },
       suffix: {
         'service': 'Service'
       }

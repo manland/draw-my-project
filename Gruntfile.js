@@ -170,7 +170,10 @@ module.exports = function(grunt) {
       },
       simple: {
         options: {
-          nbNodeByFile: 3
+          nbNodeByFile: 3,
+          advices: {
+            filenameChecker: false
+          }
         },
         files: {
           'tmp/simple': ['test/fixtures/simple.js']
@@ -192,7 +195,10 @@ module.exports = function(grunt) {
           favicon: 'assets/img/skimbo.png',
           urlLogo: 'assets/img/skimbo.png',
           advices: {
-            filenameEnd: {
+            filenameChecker: {
+              prefix: {
+                'directive': 'skim'
+              },
               suffix: {
                 'controller': 'Controller'
               }
