@@ -10,13 +10,12 @@ module.exports = {
     sizeByType[node.type] = sizeByType[node.type] + node.size;
   },
   end: function(nodes, options) {
+    var size = options.advices.sizeControllerTooImportant.options.sizeMaxCtrlComparedToService;
     if(options.type === 'angularjs' && 
-       sizeByType['controller'] > (sizeByType['factory'] * 0.2)) {
+       sizeByType['controller'] > (sizeByType['factory'] * size)) {
       advices.push({
         node: undefined,
-        name: 'Your controllers are too important compared to services !',
-        gravityLevel: 2,
-        gravity: 'hot'
+        name: 'Your controllers are too important compared to services !'
       });
     }
     return advices;

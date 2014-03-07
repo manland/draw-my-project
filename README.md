@@ -115,13 +115,29 @@ Advices :
 
 * controllerImports : `A controller must import $scope and 1 service (its own).`
 * fileClassName : `A class must have same name as its own filename.`
-* notUsed : `A class with no import and no class point to it.`
+* notUsed : `A class with no import and no class point to it.` 
+  * options : __desableNodeType__ `An array of string node type (service, factory, directory...).` Default is `[]`.
 * rootScope : `Use of $rootScope is bad.`
 * sizeControllerTooImportant : `Controller size must not be greater than 20% of services.`
-* tooInjectDependencies : `A class must not inject more than 10 classes.`
+  * options: __sizeMaxCtrlComparedToService__ `An integer between 0 and 1 wich represents the percent of services for controllers.` Default is `0.2`.
+* tooInjectDependencies : `A class must not inject more than 5 classes.`
+  * options : __nbMax__ `An integer wich represent the number max of imports.` Default is `5`.
 * fileNameEnd : `A class must end with Srv if it's a service, Ctrl for a controller.`
+  * options : __suffix__ `An object where key is node type and value is the suffix.` Default is `{'service': 'Srv', 'factory': 'Srv', 'controller': 'Ctrl'}.`
 
-An object to desable some options. To desable fileClassName and tooInjectDependencies advices, or to configure fileNameEnd for service end with Service instead of Srv just put :
+All advices can have a configured `gravityLevel` set to 0 (not serious), 1 (significant) or 2 (hot). For example to put controllerImports to `notSerious` advice just add to your options :
+
+```js
+options: {
+  advices: {
+    filenameEnd: {
+      gravityLevel: 0
+    }
+  }
+}
+```
+
+To desable fileClassName and tooInjectDependencies advices, or to configure fileNameEnd for service end with `Service` instead of `Srv` just put :
 
 ```js
 options: {

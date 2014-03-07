@@ -13,9 +13,7 @@ module.exports = {
     if(suffix[node.type] !== undefined && endsWith(node.name, suffix[node.type]) === false) {
       advices.push({
         node: node,
-        name: node.name + ' does not end with ' + suffix[node.type] + '.',
-        gravityLevel: 2,
-        gravity: 'hot'
+        name: node.name + ' does not end with ' + suffix[node.type] + '.'
       });
     }
   },

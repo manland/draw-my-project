@@ -2,37 +2,53 @@ var defaultAdvicesOptions = function defaultAdvicesOptions() {
   return {
     controllerImports: {
       enable: true,
-      options: {},
+      options: {
+        gravityLevel: 1
+      },
       service: require('../advices/ControllerImports')
     },
     fileClassName: {
       enable: true,
-      options: {},
+      options: {
+        gravityLevel: 2
+      },
       service: require('../advices/FileClassName')
     },
     notUsed: {
       enable: true,
-      options: {},
+      options: {
+        gravityLevel: 2,
+        desableNodeType: []
+      },
       service: require('../advices/NotUsed')
     },
     rootScope: {
       enable: true,
-      options: {},
+      options: {
+        gravityLevel: 2
+      },
       service: require('../advices/RootScope')
     },
     sizeControllerTooImportant: {
       enable: true,
-      options: {},
+      options: {
+        gravityLevel: 2,
+        sizeMaxCtrlComparedToService: 0.2
+      },
       service: require('../advices/SizeControllerTooImportant')
     },
     tooInjectDependencies: {
       enable: true,
-      options: {},
+      options: {
+        gravityLevel: 1,
+        nbMax: 5
+      },
       service: require('../advices/TooInjectDependencies')
     },
     filenameEnd: {
       enable: true,
       options: {
+        gravityLevel: 2,
         suffix: {
           'service': 'Srv',
           'factory': 'Srv',
@@ -44,8 +60,12 @@ var defaultAdvicesOptions = function defaultAdvicesOptions() {
   };
 };
 
+var gravityNameByLevel = function gravityNameByLevel(gravityLevel) {
+  return gravityLevel === 2 ? 'hot' : gravityLevel === 1 ? 'significant' : 'notserious';
+};
+
 module.exports = {
-  defaults: defaultAdvicesOptions(),
+  defaults: defaultAdvicesOptions,
   initOptions: function(advices) {
     var _defaultAdvicesOptions = defaultAdvicesOptions();
     if(advices === false) {
@@ -61,6 +81,7 @@ module.exports = {
           delete advices[key];
         } else if(advices[key].service === undefined) {
           var options = advices[key];
+          options.gravityLevel = options.gravityLevel || _defaultAdvicesOptions[key].options.gravityLevel;
           advices[key] = _defaultAdvicesOptions[key];
           advices[key].options = options;
         }
@@ -73,24 +94,24 @@ module.exports = {
     var advices = [];
 
     for(var keyName in options.advices) {
-      if(keyName !== false) {
-        advices.push(options.advices[keyName].service);
-      }
+      advices.push(options.advices[keyName]);
     }
 
     advices.forEach(function(advice) {
-      advice.start(nodes, options);
+      advice.service.start(nodes, options);
     });
 
     advices.forEach(function(advice) {
       nodes.forEach(function(node) {
-        advice.visit(node, options);
+        advice.service.visit(node, options);
       });
     });
 
     advices.forEach(function(advice) {
-      advice.end(nodes, options).forEach(function(advice) {
-        advicesRes.push(advice);
+      advice.service.end(nodes, options).forEach(function(a) {
+        a.gravityLevel = a.gravityLevel || advice.options.gravityLevel;
+        a.gravity = gravityNameByLevel(a.gravityLevel);
+        advicesRes.push(a);
       });
     });
 

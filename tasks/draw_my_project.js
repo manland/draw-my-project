@@ -60,7 +60,7 @@ module.exports = function(grunt) {
       templateFiles: [
         'node_modules/grunt-draw-my-project/template/**/*'
       ],
-      advices: advicesHelper.defaults
+      advices: advicesHelper.defaults()
     });
 
     options.advices = advicesHelper.initOptions(options.advices);

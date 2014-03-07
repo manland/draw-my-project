@@ -8,9 +8,7 @@ module.exports = {
     if(node.name.indexOf('$rootScope') > -1) {
       advices.push({
         node: node,
-        name: 'Are you sur you want to use $rootScope ?',
-        gravityLevel: 2,
-        gravity: 'hot'
+        name: 'Are you sur you want to use $rootScope ?'
       });
     }
   },

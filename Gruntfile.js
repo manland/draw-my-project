@@ -196,6 +196,9 @@ module.exports = function(grunt) {
               suffix: {
                 'controller': 'Controller'
               }
+            },
+            notUsed: {
+              desableNodeType: ['filter', 'directive']
             }
           }
         },

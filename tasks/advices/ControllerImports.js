@@ -8,9 +8,7 @@ module.exports = {
     if(node.type === 'controller' && node.imports.length > 2) {
       advices.push({
         node: node,
-        name: 'A controller must import $scope and its service !',
-        gravityLevel: 1,
-        gravity: 'significant'
+        name: 'A controller must import $scope and its service !'
       });
     }
   },

@@ -15,9 +15,7 @@ module.exports = {
       if(name.toUpperCase() !== filename.toUpperCase()) {
         advices.push({
           node: node,
-          name: name + ' have not same name as filename ' + filename + ' !',
-          gravityLevel: 2,
-          gravity: 'hot'
+          name: name + ' have not same name as filename ' + filename + ' !'
         });
       }
     }

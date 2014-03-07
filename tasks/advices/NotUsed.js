@@ -11,7 +11,9 @@ module.exports = {
       potentialNotUsedNodes.push(node);
     }
   },
-  end: function(nodes) {
+  end: function(nodes, options) {
+    var myOptions = options.advices.notUsed.options;
+
     _.each(nodes, function(node) {
       potentialNotUsedNodes = _.reject(potentialNotUsedNodes, function(potentialNode) {
         return undefined !== _.find(node.imports, function(nodeName) {
@@ -19,16 +21,17 @@ module.exports = {
         });
       });
     });
+
+    if(myOptions.desableNodeType.length > 0) {
+      potentialNotUsedNodes = _.reject(potentialNotUsedNodes, function(potentialNode) {
+        return _.contains(myOptions.desableNodeType, potentialNode.type);
+      });
+    }
+
     return _.map(potentialNotUsedNodes, function(node) {
-      var gravityLevel = 2;
-      if(node.type === 'directive' || node.type === 'filter') {
-        gravityLevel = 0;
-      }
       return {
         node: node,
-        name: node.name + ' is never used !',
-        gravityLevel: gravityLevel,
-        gravity: gravityLevel === 2 ? 'hot' : 'notserious'
+        name: node.name + ' is never used !'
       };
     });
   }
