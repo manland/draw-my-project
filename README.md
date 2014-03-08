@@ -223,6 +223,14 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+###0.4.0
+
+* close #48 : permit to configure advices (need better doc) !
+* add angular-app tests + fix bugs with constant, value and provider + close #41 : all node hasn't type (only found in imports) is set to internal
+* close #57 : transform FilenamEnd advice in FilnameChecker to add prefix checker
+* close #30 : save background color into localStorage + better architecture for localStorage
+* close #22 : give focus to textInput when open filter view
+
 ###0.3.4
 
 * close #54 #55 #56 : advice if filename doesn't end with a configurable pattern
