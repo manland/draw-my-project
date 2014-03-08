@@ -240,6 +240,22 @@ module.exports = function(grunt) {
         files: {
           'tmp/timeChecking': ['test/fixtures/timeChecking/**/*.js']
         }
+      },
+      angularApp: {
+        options: {
+          nbNodeByFile: -1,
+          advices: {
+            fileClassName: false,
+            filenameChecker: {
+              suffix: {
+                'controller': 'Ctrl'
+              }
+            },
+          },
+        },
+        files: {
+          'tmp/angularApp': ['test/fixtures/angularApp/**/*.js']
+        }
       }
 
     }

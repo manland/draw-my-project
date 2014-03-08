@@ -10,8 +10,14 @@ module.exports = {
       var nodeType = matches[1];
       var name = matches[2];
 
-      var importsString = matches[3].replace(/(\[|\]|\s|'|")/g, '').split(',');
-      var importsFunc = matches[4].replace(/\s/g, '').split(',');
+      var importsString = [];
+      if(matches[3] !== undefined) {
+        importsString = matches[3].replace(/(\[|\]|\s|'|")/g, '').split(',');
+      }
+      var importsFunc = [];
+      if(matches[4] !== undefined) {
+        importsFunc = matches[4].replace(/\s/g, '').split(',');
+      }
 
       var imports = importsString.length >= importsFunc.length ? importsString : importsFunc;
       imports = _.filter(imports, function(imp) {

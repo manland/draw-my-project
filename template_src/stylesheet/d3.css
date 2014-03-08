@@ -42,6 +42,14 @@
   color: #3A015B;
 }
 
+.node.module {
+  fill: #0493D8;
+}
+
+.module {
+  color: #0493D8;
+}
+
 .node.angular, .node.config, .node.run {
   fill: #DF0400;
 }

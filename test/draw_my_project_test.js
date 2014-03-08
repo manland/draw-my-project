@@ -82,6 +82,15 @@ exports.draw_my_project = {
     test.equal(actual, expected, 'should transform nodejs files into chart.');
 
     test.done();
+  },
+  angularApp: function(test) {
+    test.expect(1);
+    
+    var actual = grunt.file.read('tmp/angularApp.json');
+    var expected = grunt.file.read('test/expected/angularApp.json');
+    test.equal(actual, expected, 'should transform angularjs files into chart.');
+
+    test.done();
   }
 
 };

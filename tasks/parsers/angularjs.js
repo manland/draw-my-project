@@ -1,7 +1,8 @@
 var inlineNodeParser = require('../lib/InlineNodeParser');
 var parsersHelper = require('../lib/ParsersHelper');
 
-var regexp = /.*?[^$](controller|provider|factory|service|value|constant|directive|config|run|filter)\(['|"](.+?)['|"](.+?)function\s?\((.*?)\)/;
+var regexp = /.*?[^$](controller|factory|service|directive|config|run|filter)\(['|"](.+?)['|"](.+?)function\s?\((.*?)\)/;
+var regexpCst = /.*?[^$](value|constant|provider)\(['|"](.+?)['|"]\s?/;
 
 var buildNode = function buildNode(name, optFilepath, optSize, optImports, optType) {
   var type = optType || '';
@@ -13,9 +14,20 @@ var buildNode = function buildNode(name, optFilepath, optSize, optImports, optTy
 
 module.exports = {
   foundNode: function(nodes, src, filepath, options) {
-    return inlineNodeParser.parse(regexp, buildNode, nodes, src, filepath, options);
+    var nbNodes = nodes.length;
+    nodes = inlineNodeParser.parse(regexp, buildNode, nodes, src, filepath, options);
+    if(options.nbNodeByFile === -1 || nodes.length <= nbNodes) {
+      nodes = inlineNodeParser.parse(regexpCst, buildNode, nodes, src, filepath, options);
+    }
+    return nodes;
   },
   callbackAfter: function(nodes, options) {
+    //add internal to all no typed node
+    for(key in nodes) {
+      if(nodes[key].type === '') {
+        nodes[key].type = 'internal';
+      }
+    }
     if(options.sortByAngularType === true) {
       var key;
       //first add path to imports
