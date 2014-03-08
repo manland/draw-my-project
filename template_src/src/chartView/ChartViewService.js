@@ -1,15 +1,6 @@
 angular.module('app').service('ChartViewService', [
-  function() {
-
-    var defaultVisible = {
-      legend: false,
-      filter: false,
-      advices: false
-    };
-
-    var userVisible = localStorage.userVisible;
-
-    var visible = userVisible === undefined ? defaultVisible : JSON.parse(userVisible);
+  'LocalStorageService',
+  function(localStorageService) {
 
     var callbacks = {
       switchLegend: [],
@@ -17,8 +8,10 @@ angular.module('app').service('ChartViewService', [
       switchAdvices: []
     };
 
+    var visible = localStorageService.get('visible');
+
     var fire = function fire(keyCallbacks) {
-      localStorage.userVisible = JSON.stringify(visible);
+      localStorageService.update('visible', visible);
       callbacks[keyCallbacks].forEach(function(callback) {
         callback();
       });

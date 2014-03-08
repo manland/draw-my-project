@@ -37,13 +37,8 @@ angular.module('app').controller('HeaderViewCtrl', [
       $scope.advicesVisible = headerViewService.isVisible('advices');
     };
 
-    var countClick = 0;
-
     $scope.switchBodyBackground = function() {
-      countClick = countClick + 1;
-      if(countClick % 2 === 0) {
-        headerViewService.switchBodyBackground();
-      }
+      headerViewService.switchBodyBackground();
     };
 
   }
