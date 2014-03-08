@@ -10,10 +10,10 @@ angular.module('app').service('ChartViewService', [
 
     var visible = localStorageService.get('visible');
 
-    var fire = function fire(keyCallbacks) {
+    var fire = function fire(keyCallbacks, value) {
       localStorageService.update('visible', visible);
       callbacks[keyCallbacks].forEach(function(callback) {
-        callback();
+        callback(value);
       });
     };
 
@@ -30,15 +30,15 @@ angular.module('app').service('ChartViewService', [
       },
       switchLegend: function() {
         visible.legend = !visible.legend;
-        fire('switchLegend');
+        fire('switchLegend', visible.legend);
       },
       switchFilter: function() {
         visible.filter = !visible.filter;
-        fire('switchFilter');
+        fire('switchFilter', visible.filter);
       },
       switchAdvices: function() {
         visible.advices = !visible.advices;
-        fire('switchAdvices');
+        fire('switchAdvices', visible.advices);
       }
     };
   }
