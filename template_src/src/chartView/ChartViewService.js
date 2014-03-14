@@ -1,6 +1,6 @@
 angular.module('app').service('ChartViewService', [
-  'LocalStorageService',
-  function(localStorageService) {
+  'LocalStorageService', 'AdviceViewService',
+  function(localStorageService, adviceViewService) {
 
     var callbacks = {
       switchLegend: [],
@@ -9,6 +9,13 @@ angular.module('app').service('ChartViewService', [
     };
 
     var visible = localStorageService.get('visible');
+
+    var checkAdvicesNotEmpty = function checkAdvicesNotEmpty() {
+      if(adviceViewService.getAdvices().length === 0) {
+        visible.advices = false;
+      }
+    };
+    checkAdvicesNotEmpty();
 
     var fire = function fire(keyCallbacks, value) {
       localStorageService.update('visible', visible);
@@ -28,6 +35,9 @@ angular.module('app').service('ChartViewService', [
       isVisible: function(name) {
         return visible[name];
       },
+      advicesAvailable: function() {
+        return adviceViewService.getAdvices().length > 0;
+      },
       switchLegend: function() {
         visible.legend = !visible.legend;
         fire('switchLegend', visible.legend);
@@ -38,6 +48,7 @@ angular.module('app').service('ChartViewService', [
       },
       switchAdvices: function() {
         visible.advices = !visible.advices;
+        checkAdvicesNotEmpty();
         fire('switchAdvices', visible.advices);
       }
     };

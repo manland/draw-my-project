@@ -12,6 +12,9 @@ angular.module('app').service('HeaderViewService', [
       isVisible: function(name) {
         return chartViewService.isVisible(name);
       },
+      advicesAvailable: function() {
+        return chartViewService.advicesAvailable();
+      },
       switchLegend: function() {
         chartViewService.switchLegend();
       },

@@ -22,6 +22,8 @@ angular.module('app').controller('HeaderViewCtrl', [
     $scope.filterVisible = headerViewService.isVisible('filter');
     $scope.advicesVisible = headerViewService.isVisible('advices');
 
+    $scope.advicesAvailable = headerViewService.advicesAvailable();
+
     $scope.switchLegend = function() {
       headerViewService.switchLegend();
       $scope.legendVisible = headerViewService.isVisible('legend');
