@@ -38,7 +38,10 @@ angular.module('app').service('PackageTreeChartService', [
       });
 
       node
-        .classed("hover", function(n) { return d !== undefined && n.name === d.name; })
+        .classed("hover", function(n) { 
+          return n.name === d.name ||
+            _.contains(chartMouseService.getKeepNodes(), n.name);
+        })
         .classed("node--target", function(n) { return n.target; })
         .classed("node--source", function(n) { return n.source; });
     };
@@ -47,17 +50,27 @@ angular.module('app').service('PackageTreeChartService', [
       chartMouseService.mouseClick(d.name);
     };
 
-    var mouseouted = function mouseouted(d) {
+    var mouseouted = function mouseouted() {
       link
-        .classed("link--target", false)
-        .classed("link--source", false);
+        .classed("link--target", function(l) { 
+          return _.contains(chartMouseService.getKeepNodes(), l.target.name);
+        })
+        .classed("link--source", function(l) { 
+          return _.contains(chartMouseService.getKeepNodes(), l.source.name);
+        });
 
       node
-        .classed("hover", function(d) { 
-          return d !== undefined && _.contains(chartMouseService.getKeepNodes(), d.name); 
+        .classed("hover", function(n) { 
+          return _.contains(chartMouseService.getKeepNodes(), n.name); 
         })
-        .classed("node--target", false)
-        .classed("node--source", false);
+        .classed("node--target",  function(n) { 
+          return _.contains(chartMouseService.getKeepNodes(), n.name) &&
+            n.target; 
+        })
+        .classed("node--source", function(n) { 
+          return _.contains(chartMouseService.getKeepNodes(), n.name) &&
+            n.source; 
+        });
     };
 
     return {

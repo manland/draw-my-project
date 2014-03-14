@@ -7,7 +7,9 @@ angular.module('app').service('SizePackageChartService', [
     var mouseovered = function mouseovered(d) {
       svg.selectAll(".node")
         .classed("hover", function(n) { 
-          return d !== undefined && n.name === d.name; 
+          return d !== undefined && 
+            (n.name === d.name ||
+              _.contains(chartMouseService.getKeepNodes(), n.name)); 
         });
     };
 

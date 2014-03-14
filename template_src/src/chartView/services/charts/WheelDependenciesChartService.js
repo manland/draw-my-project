@@ -15,27 +15,42 @@ angular.module('app').service('WheelDependenciesChartService', [
         if (l.source === d) {
           return l.target.target = true;
         }
-      }).filter(function(l) { 
+      }).filter(function(l) {//add on top a new link to pass first
         return l.target === d || l.source === d; 
-      }).each(function() { this.parentNode.appendChild(this); });
+      }).each(function() { 
+        this.parentNode.appendChild(this); 
+      });
 
       node
-        .classed("hover", function(n) { return n.name === d.name; })
+        .classed("hover", function(n) { 
+          return n.name === d.name ||
+            _.contains(chartMouseService.getKeepNodes(), n.name);
+        })
         .classed("node--target", function(n) { return n.target; })
         .classed("node--source", function(n) { return n.source; });
     };
 
     var mouseouted = function mouseouted() {
       link
-        .classed("link--target", false)
-        .classed("link--source", false);
+        .classed("link--target", function(l) { 
+          return _.contains(chartMouseService.getKeepNodes(), l.target.name);
+        })
+        .classed("link--source", function(l) { 
+          return _.contains(chartMouseService.getKeepNodes(), l.source.name);
+        });
 
       node
-        .classed("hover", function(d) { 
-          return _.contains(chartMouseService.getKeepNodes(), d.name); 
+        .classed("hover", function(n) { 
+          return _.contains(chartMouseService.getKeepNodes(), n.name); 
         })
-        .classed("node--target", false)
-        .classed("node--source", false);
+        .classed("node--target",  function(n) { 
+          return _.contains(chartMouseService.getKeepNodes(), n.name) &&
+            n.target; 
+        })
+        .classed("node--source", function(n) { 
+          return _.contains(chartMouseService.getKeepNodes(), n.name) &&
+            n.source; 
+        });
     };
 
     var mouseclick = function mouseclick(d) {
