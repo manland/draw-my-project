@@ -33,12 +33,18 @@ angular.module('app').service('SizePackageChartService', [
           .size([diameter - 4, diameter - 4])
           .value(function(d) { return d.size; });
 
-        svg = d3.select(domElement).append("svg")
-            .attr("width", diameter)
-            .attr("height", diameter)
+        var zoom = function zoom() {
+          svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        };
+
+        svg = d3.select(domElement)
+          .append("svg")
+            .attr("width", screenSizeService.getWidth())
+            .attr("height", screenSizeService.getHeightChart())
             .attr("viewBox", "0 0 "+diameter+" "+diameter)
-          .append("g")
-            .attr("transform", "translate(2,2)");
+            .attr("transform", "translate(2, 2)")
+            .call(d3.behavior.zoom().scaleExtent([-1, 16]).on("zoom", zoom))
+          .append("g");
 
         var draw = function draw(root) {
           node = svg.datum(root).selectAll(".node")

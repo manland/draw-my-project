@@ -77,21 +77,27 @@ angular.module('app').service('PackageTreeChartService', [
       buildChart: function(domElement, data) {
         var diameter = screenSizeService.getDiameterChart(),
           radius = diameter / 2,
-          innerRadius = radius - 100;
+          innerRadius = radius - 150;
 
         var tree = d3.layout.tree()
-            .size([360, innerRadius])
-            .separation(function(a, b) { return (a.parent === b.parent ? 1 : 2) / a.depth; });
+          .size([360, innerRadius])
+          .separation(function(a, b) { return (a.parent === b.parent ? 1 : 2) / a.depth; });
 
         var diagonal = d3.svg.diagonal.radial()
-            .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
+          .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
 
-        var svg = d3.select(domElement).append("svg")
-            .attr("width", diameter)
-            .attr("height", diameter)
+        var zoom = function zoom() {
+          svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        };
+
+        var svg = d3.select(domElement)
+          .append("svg")
+            .attr("width", screenSizeService.getWidth())
+            .attr("height", screenSizeService.getHeightChart())
             .attr("viewBox", "0 0 "+diameter+" "+diameter)
-          .append("g")
-            .attr("transform", "translate(" + radius + "," + radius + ")");
+            .attr("transform", "translate(" + radius + "," + radius + ")")
+            .call(d3.behavior.zoom().scaleExtent([-1, 16]).on("zoom", zoom))
+          .append("g");
 
         var draw = function draw(root) {
           nodes = tree.nodes(root);

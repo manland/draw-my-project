@@ -102,7 +102,7 @@ angular.module('app').service('WheelDependenciesChartService', [
       buildChart: function(domElement, data) {
         var diameter = screenSizeService.getDiameterChart(),
           radius = diameter / 2,
-          innerRadius = radius - 100;
+          innerRadius = radius - 150;
 
         var cluster = d3.layout.cluster()
           .size([360, innerRadius])
@@ -117,13 +117,21 @@ angular.module('app').service('WheelDependenciesChartService', [
           .radius(function(d) { return d.y; })
           .angle(function(d) { return d.x / 180 * Math.PI; });
 
-        var svg = d3.select(domElement).append("svg")
-            .attr("width", diameter)
-            .attr("height", diameter)
-            .attr("viewBox", "0 0 "+diameter+" "+diameter)
-          .append("g")
-            .attr("transform", "translate(" + radius + "," + radius + ")");
+        var zoom = function zoom() {
+          svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        };
 
+        var svg = d3.select(domElement)
+          .append("svg")
+            .attr("width", screenSizeService.getWidth())
+            .attr("height", screenSizeService.getHeightChart())
+            .attr("viewBox", "0 0 "+diameter+" "+diameter)
+            .attr("transform", "translate(" + radius + "," + radius + ")")
+            .attr("viewBox", "0 0 "+diameter+" "+diameter)
+            .call(d3.behavior.zoom().scaleExtent([-1, 16]).on("zoom", zoom))
+          .append("g");
+          
+        
         link = svg.append("g").selectAll(".link");
         node = svg.append("g").selectAll(".node");
 

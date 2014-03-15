@@ -66,30 +66,20 @@ angular.module('app').service('SizeChartService', [
         // Dimensions of sunburst.
         var width = screenSizeService.getDiameterChart();
         var height = screenSizeService.getDiameterChart();
-        var radius = screenSizeService.getDiameterChart() / 2;
+        var radius = (screenSizeService.getDiameterChart() / 2) - 25;
 
-        // Breadcrumb dimensions: width, height, spacing, width of tip/tail.
-        var b = {
-          w: 75, h: 30, s: 3, t: 10
+        var zoom = function zoom() {
+          vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
         };
 
-        // Mapping of step names to colors.
-        var colors = {
-          "home": "#5687d1",
-          "product": "#7b615c",
-          "search": "#de783b",
-          "account": "#6ab975",
-          "other": "#a173d1",
-          "end": "#bbbbbb"
-        };
-
-        vis = d3.select(domElement).append("svg:svg")
-            .attr("width", width)
-            .attr("height", height)
+        vis = d3.select(domElement)
+          .append("svg")
+            .attr("width", screenSizeService.getWidth())
+            .attr("height", screenSizeService.getHeightChart())
             .attr("viewBox", "0 0 "+width+" "+height)
-          .append("svg:g")
-            .attr("id", "container")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+            .call(d3.behavior.zoom().scaleExtent([-1, 16]).on("zoom", zoom))
+          .append("g");
 
         var partition = d3.layout.partition()
             .size([2 * Math.PI, radius * radius])
@@ -106,7 +96,7 @@ angular.module('app').service('SizeChartService', [
 
           // Bounding circle underneath the sunburst, to make it easier to detect
           // when the mouse leaves the parent g.
-          vis.append("svg:circle")
+          vis.append("circle")
               .attr("r", radius)
               .style("opacity", 0);
 
@@ -122,7 +112,6 @@ angular.module('app').service('SizeChartService', [
             .attr("display", function(d) { return d.depth ? null : "none"; })
             .attr("d", arc)
             .attr("fill-rule", "evenodd")
-            .style("fill", function(d) { return colors[d.name]; })
             .style("opacity", 1)
             .attr("class", function(d) { return "node " + d.type; })
             .on("mouseover", mouseovered);
