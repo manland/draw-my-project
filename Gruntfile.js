@@ -219,6 +219,11 @@ module.exports = function(grunt) {
       },
       sturvive: {
         options: {
+          title: 'Sturvive',
+          description: 'A starship survivor 3d game.',
+          link: 'http://manland.github.io/sturvive/',
+          favicon: 'assets/img/sturvive.png',
+          urlLogo: 'assets/img/sturvive.png',
           type: 'requirejs'
         },
         files: {
@@ -227,6 +232,11 @@ module.exports = function(grunt) {
       },
       goo: {
         options: {
+          title: 'Goo Engine',
+          description: 'A js lib to make 3D.',
+          link: 'http://www.gootechnologies.com/',
+          favicon: 'assets/img/goo.png',
+          urlLogo: 'assets/img/goo.png',
           type: 'requirejs',
           //source: false,
           advices: {
@@ -250,6 +260,11 @@ module.exports = function(grunt) {
       },
       angularApp: {
         options: {
+          title: 'Angular App',
+          description: 'Reference application for AngularJS',
+          link: 'https://github.com/angular-app/angular-app',
+          favicon: 'assets/img/angularApp.png',
+          urlLogo: 'assets/img/angularApp.png',
           nbNodeByFile: -1,
           advices: {
             fileClassName: false,
