@@ -16,14 +16,15 @@
 
     <header ng-include="'src/headerView/HeaderView.tpl.html'" ng-controller="HeaderViewCtrl" ng-style="style"></header>
     <section ng-view></section>
+    <div class="fileView" ng-show="selectedNodePath" ng-include="'src/fileView/FileView.tpl.html'" ng-controller="FileViewCtrl"></div>
     <footer>Generated in [%= timeGeneration %]msc with &#9829; by <a href="https://github.com/manland/draw-my-project" target="_blank">Draw my project</a></footer>
 
     
-      <link rel="stylesheet" type="text/css" href="stylesheet/grunt-draw-my-project-0.4.0.css">
+      <link rel="stylesheet" type="text/css" href="stylesheet/grunt-draw-my-project-0.5.0.css">
     
 
     
-      <script type="text/javascript" src="grunt-draw-my-project-0.4.0.js"></script>
+      <script type="text/javascript" src="grunt-draw-my-project-0.5.0.js"></script>
     
 
 	</body>

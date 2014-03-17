@@ -158,6 +158,15 @@ options: {
 }
 ```
 
+#### options.source
+Type: `Object`
+Default value: `{ srcInCode : false }`
+Special value: `false` no source
+
+An object to configure `source` generation. By default, it create a file for each source, and download it runtime (be carefull when you access to file:// with chrome doesn't permit to download source).
+
+For a little project you can set `{ srcInCode : true }` to take source with the generate site (and so avoid chrome security).
+
 ### Usage Examples
 
 #### Default Options
@@ -222,6 +231,14 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+
+###0.5.0
+
+* close #42 : link source code ! This feature is in intensive development !
+* close #45 : min version grunt + update dev dependencies
+* close #61 : better chart size + add zoom and move chart feature
+* close #21 : keep node and links selected on click
+* close #59 : disable advices on 0 advice
 
 ###0.4.0
 
