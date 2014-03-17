@@ -54,7 +54,7 @@ angular.module('app').service('WheelDependenciesChartService', [
     };
 
     var mouseclick = function mouseclick(d) {
-      chartMouseService.mouseClick(d.name);
+      chartMouseService.mouseClick(d);
     };
 
     var packageHierarchy = function packageHierarchy(classes) {
@@ -126,10 +126,10 @@ angular.module('app').service('WheelDependenciesChartService', [
             .attr("width", screenSizeService.getWidth())
             .attr("height", screenSizeService.getHeightChart())
             .attr("viewBox", "0 0 "+diameter+" "+diameter)
-            .attr("transform", "translate(" + radius + "," + radius + ")")
             .attr("viewBox", "0 0 "+diameter+" "+diameter)
             .call(d3.behavior.zoom().scaleExtent([-1, 16]).on("zoom", zoom))
-          .append("g");
+          .append("g")
+            .attr("transform", "translate(" + radius + "," + radius + ")");
           
         
         link = svg.append("g").selectAll(".link");

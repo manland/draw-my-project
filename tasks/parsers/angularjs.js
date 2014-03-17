@@ -4,12 +4,12 @@ var parsersHelper = require('../lib/ParsersHelper');
 var regexp = /.*?[^$](controller|factory|service|directive|config|run|filter)\(['|"](.+?)['|"](.+?)function\s?\((.*?)\)/;
 var regexpCst = /.*?[^$](value|constant|provider)\(['|"](.+?)['|"]\s?/;
 
-var buildNode = function buildNode(name, optFilepath, optSize, optImports, optType) {
+var buildNode = function buildNode(name, options, optFilepath, optSize, optImports, optType, optSrc) {
   var type = optType || '';
   if(name.charAt(0) === '$' && type === '') {
     type = 'angular';
   }
-  return parsersHelper.buildNode(name, optFilepath, optSize, optImports, type);
+  return parsersHelper.buildNode(name, options, optFilepath, optSize, optImports, type, optSrc);
 };
 
 module.exports = {

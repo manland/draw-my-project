@@ -21,7 +21,7 @@ angular.module('app').service('SizePackageChartService', [
     };
 
     var mouseclick = function mouseclick(d) {
-      chartMouseService.mouseClick(d.name);
+      chartMouseService.mouseClick(d);
     };
 
     return {
@@ -42,9 +42,9 @@ angular.module('app').service('SizePackageChartService', [
             .attr("width", screenSizeService.getWidth())
             .attr("height", screenSizeService.getHeightChart())
             .attr("viewBox", "0 0 "+diameter+" "+diameter)
-            .attr("transform", "translate(2, 2)")
             .call(d3.behavior.zoom().scaleExtent([-1, 16]).on("zoom", zoom))
-          .append("g");
+          .append("g")
+            .attr("transform", "translate(2, 2)");
 
         var draw = function draw(root) {
           node = svg.datum(root).selectAll(".node")

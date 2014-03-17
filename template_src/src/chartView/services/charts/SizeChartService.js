@@ -1,6 +1,6 @@
 angular.module('app').service('SizeChartService', [
-  'ConstantsService', 'ScreenSizeService',
-  function(constantsService, screenSizeService) {
+  'ConstantsService', 'ScreenSizeService', 'ChartMouseService',
+  function(constantsService, screenSizeService, chartMouseService) {
 
     var totalSize = 0, vis, nodes;
 
@@ -61,6 +61,10 @@ angular.module('app').service('SizeChartService', [
       d3.select('#percentage').text('');
     };
 
+    var mouseclick = function mouseclick(d) {
+      chartMouseService.mouseClick(d);
+    };
+
     return {
       buildChart: function(domElement, data) {
         // Dimensions of sunburst.
@@ -77,9 +81,9 @@ angular.module('app').service('SizeChartService', [
             .attr("width", screenSizeService.getWidth())
             .attr("height", screenSizeService.getHeightChart())
             .attr("viewBox", "0 0 "+width+" "+height)
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
             .call(d3.behavior.zoom().scaleExtent([-1, 16]).on("zoom", zoom))
-          .append("g");
+          .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + ((height / 2)+25) + ")");
 
         var partition = d3.layout.partition()
             .size([2 * Math.PI, radius * radius])
@@ -98,7 +102,8 @@ angular.module('app').service('SizeChartService', [
           // when the mouse leaves the parent g.
           vis.append("circle")
               .attr("r", radius)
-              .style("opacity", 0);
+              .style("opacity", 0)
+              .on("mouseleave", mouseouted);
 
           // For efficiency, filter nodes to keep only those large enough to see.
           nodes = partition.nodes(json)
@@ -114,10 +119,8 @@ angular.module('app').service('SizeChartService', [
             .attr("fill-rule", "evenodd")
             .style("opacity", 1)
             .attr("class", function(d) { return "node " + d.type; })
-            .on("mouseover", mouseovered);
-
-          // Add the mouseleave handler to the bounding circle.
-          d3.select("#container").on("mouseleave", mouseouted);
+            .on("mouseover", mouseovered)
+            .on("click", mouseclick);
 
           // Get total size of the tree = value of root node from partition.
           totalSize = path.node().__data__.value;

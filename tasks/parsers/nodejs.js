@@ -39,7 +39,7 @@ var foundImports = function foundImports(regexImports, nodes, src, filepath, opt
     imports.push(name);
     
     if(nodes[name] === undefined) {
-      nodes[name] = parsersHelper.buildNode(name);
+      nodes[name] = parsersHelper.buildNode(name, options);
     }
     count = count + 1;//kill infinite recursion
     if(count < 1000) {
@@ -60,7 +60,7 @@ module.exports = {
     name = foundName(name, filepath);
     var nodeType = 'nodejs';
     imports = foundImports(regexImports, nodes, src, filepath, options);
-    nodes[name] = parsersHelper.buildNode(name, filepath, src.length, imports, nodeType);
+    nodes[name] = parsersHelper.buildNode(name, options, filepath, src.length, imports, nodeType, src);
     return nodes;
   },
   callbackAfter: function(nodes, options) {

@@ -16,6 +16,7 @@
     "d3": false,
     "document": false,
     "self": false,
-    "_": false
+    "_": false,
+    "hljs": false
   }
 }

@@ -51,6 +51,9 @@ module.exports = function(grunt) {
       type: 'angularjs',
       nbNodeByFile: 1,
       pathSeparator: '/',
+      source: {
+        srcInCode: false
+      },
       sortByAngularType: true,
       title: 'Draw_my_project',
       description: 'Draw your project dependencies !',
@@ -85,6 +88,8 @@ module.exports = function(grunt) {
         };
       });
 
+      options.destinationDirectory = f.dest;
+
       // Write the json file.
       var resData = exec(filesIn, options);
       grunt.file.write(f.dest + '.json', JSON.stringify(resData));
@@ -113,7 +118,11 @@ module.exports = function(grunt) {
           var extension = files[i].split('.');
           extension = extension[extension.length-1];
           if(extension === 'js' || extension === 'css' || extension === 'html') {
-            var content = grunt.template.process(grunt.file.read(files[i]), {
+            var content = grunt.file.read(files[i]);
+            content = content.replace(/"\[%= jsonData %\]"/, '[%= jsonData %]');
+            content = content.replace(/"\[%= jsonAdvices %\]"/, '[%= jsonAdvices %]');
+
+            content = grunt.template.process(content, {
               delimiters: 'square',
               data: {
                 title: options.title,
@@ -126,23 +135,11 @@ module.exports = function(grunt) {
                 timeGeneration: (time2 - time),
                 jsonData: JSON.stringify(resData.nodes),
                 jsonAdvices: JSON.stringify(resData.advices),
+                source: options.source === false ? false : true,
+                srcInCode: options.source === false ? '' : options.source.srcInCode
               }
             });
 
-            //Replace JSON.parse("...") by JSON.parse('...') because all objects are write with ""
-            var matches = content.match(/JSON.parse\((\".+?)\"\)/g);
-            if(matches !== null && matches.length > 0) {
-              //data
-              var toUpdate = matches[0];
-              toUpdate = toUpdate.replace(/JSON.parse\(\"/g, "JSON.parse('");
-              toUpdate = toUpdate.replace(/\"\)/g, "')");
-              content = content.replace(matches[0], toUpdate);
-              //advices
-              toUpdate = matches[1];
-              toUpdate = toUpdate.replace(/JSON.parse\(\"/g, "JSON.parse('");
-              toUpdate = toUpdate.replace(/\"\)/g, "')");
-              content = content.replace(matches[1], toUpdate);
-            }
             grunt.file.write(f.dest+'/'+finalPath, content);
           } else {
             grunt.file.copy(files[i], f.dest+'/'+finalPath);

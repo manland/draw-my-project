@@ -16,6 +16,7 @@
 
     <header ng-include="'src/headerView/HeaderView.tpl.html'" ng-controller="HeaderViewCtrl" ng-style="style"></header>
     <section ng-view></section>
+    <div class="fileView" ng-show="selectedNodePath" ng-include="'src/fileView/FileView.tpl.html'" ng-controller="FileViewCtrl"></div>
     <footer>Generated in [%= timeGeneration %]msc with &#9829; by <a href="https://github.com/manland/draw-my-project" target="_blank">Draw my project</a></footer>
 
     <% styles.forEach( function ( file ) { %>

@@ -1,0 +1,27 @@
+.fileView {
+	position: fixed;
+	top: 45px;
+	bottom: 0;
+	left: 0;
+	width: 33%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+.fileView:hover {
+	background-color: rgba(0, 0, 0, 0.95);
+}
+
+.filePath {
+	color: #ccc;
+	background-color: rgba(0, 0, 0, 0.6);
+	line-height: 30px;
+	position: fixed;
+	text-align: center;
+	top: 50px;
+	width: 30%;
+}
+
+.codeContainer {
+	padding-top: 30px;
+}

@@ -15,17 +15,10 @@ angular.module('app').service('DataService', [
         var lastPackage, find;
         packages.forEach(function(p) {
           if(lastPackage === undefined) {
-            lastPackage = {
-              name: p,
-              children: [],
-              type: node.type,
-              size: node.size
-            };
-            find = undefined;
-            res.children.forEach(function(child) {
-              if(child.name === p) {
-                find = child;
-              }
+            lastPackage = _.extend({children: []}, node);
+            lastPackage.name = p;
+            find = _.find(res.children, function(child) {
+              return child.name === p;
             });
             if(find === undefined) {
               res.children.push(lastPackage);
@@ -33,19 +26,13 @@ angular.module('app').service('DataService', [
               lastPackage = find;
             }
           } else {
-            find = undefined;
-            lastPackage.children.forEach(function(child) {
-              if(child.name === p) {
-                find = child;
-              }
+            find = _.find(lastPackage.children, function(child) {
+              return child.name === p;
             });
             if(find === undefined) {
-              lastPackage.children.push({
-                name: p,
-                children: [],
-                type: node.type,
-                size: node.size
-              });
+              var t = _.extend({children: []}, node);
+              t.name = p;
+              lastPackage.children.push(t);
             } else {
               lastPackage = find;
             }

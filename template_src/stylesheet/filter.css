@@ -8,7 +8,6 @@
 	border-right: 2px solid #D4D4D4;
 	max-width: 20%;
 	z-index: 90;
-	background-color: #fff;
 }
 
 	.filterView input {
@@ -27,7 +26,10 @@
 
 	.filterView ul li {
 		cursor: pointer;
-		padding: 2px;
+		background-color: #FAFAFA;
+		border-radius: 3px;
+		margin: 2px;
+		padding: 5px;
 	}
 
 	.filterView ul li:hover, .filterView ul li.hover, .filterView ul li.selected {

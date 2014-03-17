@@ -25,18 +25,11 @@ module.exports = {
       });
       _.each(imports, function(imp) {
         if(nodes[imp] === undefined) {
-          nodes[imp] = buildNodeFunc(imp);
+          nodes[imp] = buildNodeFunc(imp, options);
         }
       });
 
-      if(nodes[name] === undefined) {
-        nodes[name] = buildNodeFunc(name, filepath, src.length, imports, nodeType);
-      } else {
-        nodes[name].filepath = filepath;
-        nodes[name].size = src.length;
-        nodes[name].imports = imports;
-        nodes[name].type = nodeType;
-      }
+      nodes[name] = buildNodeFunc(name, options, filepath, src.length, imports, nodeType, src);
 
       count = count + 1;
       if(options.nbNodeByFile === -1 || count < options.nbNodeByFile) {

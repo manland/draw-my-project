@@ -47,7 +47,10 @@ angular.module('app').service('PackageTreeChartService', [
     };
 
     var mouseclick = function mouseclick(d) {
-      chartMouseService.mouseClick(d.name);
+      var res = node.filter(function(e, i) { return e.name === d.name; });
+      if(res.length > 0) {
+        chartMouseService.mouseClick(res[0][0].__data__);
+      }
     };
 
     var mouseouted = function mouseouted() {
@@ -95,9 +98,9 @@ angular.module('app').service('PackageTreeChartService', [
             .attr("width", screenSizeService.getWidth())
             .attr("height", screenSizeService.getHeightChart())
             .attr("viewBox", "0 0 "+diameter+" "+diameter)
-            .attr("transform", "translate(" + radius + "," + radius + ")")
             .call(d3.behavior.zoom().scaleExtent([-1, 16]).on("zoom", zoom))
-          .append("g");
+          .append("g")
+            .attr("transform", "translate(" + radius + "," + radius + ")");
 
         var draw = function draw(root) {
           nodes = tree.nodes(root);

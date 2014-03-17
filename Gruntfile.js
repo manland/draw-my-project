@@ -56,7 +56,8 @@ module.exports = function(grunt) {
             src: [ 
               '<%= app_files.js %>',
               '<%= app_files.tplHtml %>',
-              '<%= vendor_files.js %>', 
+              '<%= vendor_files.js %>',
+              '<%= vendor_files.css %>', 
               '<%= app_files.assets %>', 
               '<%= app_files.stylesheet %>' 
             ],
@@ -95,6 +96,7 @@ module.exports = function(grunt) {
         },
         src: [
           'template_src/stylesheet/reset.css',
+          '<%= vendor_files.css %>', 
           '<%= app_files.stylesheet %>',
         ],
         dest: '<%= compile_dir %>/stylesheet/<%= pkg.name %>-<%= pkg.version %>.css'
@@ -132,7 +134,6 @@ module.exports = function(grunt) {
         dir: '<%= compile_dir %>',
         src: [
           '<%= concat.compile_js.dest %>',
-          '<%= vendor_files.css %>',
           '<%= concat.compile_css.dest %>'
         ]
       }
@@ -173,6 +174,9 @@ module.exports = function(grunt) {
           nbNodeByFile: 3,
           advices: {
             filenameChecker: false
+          },
+          source: {
+            srcInCode: true
           }
         },
         files: {
@@ -181,7 +185,8 @@ module.exports = function(grunt) {
       },
       complexe: {
         options: {
-          advices: false
+          advices: false,
+          source: false
         },
         files: {
           'tmp/complexe': ['test/fixtures/complexe/**/*.js']
@@ -223,6 +228,7 @@ module.exports = function(grunt) {
       goo: {
         options: {
           type: 'requirejs',
+          //source: false,
           advices: {
             fileClassName: false,
             tooInjectDependencies: false
@@ -235,7 +241,8 @@ module.exports = function(grunt) {
       },
       timeChecking: {
         options: {
-          type: 'nodejs'
+          type: 'nodejs',
+          source: false
         },
         files: {
           'tmp/timeChecking': ['test/fixtures/timeChecking/**/*.js']
