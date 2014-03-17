@@ -25,10 +25,10 @@ module.exports = {
       'template_src/vendor/angular/angular.js',
       'template_src/vendor/angular-route/angular-route.js',
       'template_src/vendor/underscore/underscore.js',
-      'template_src/vendor-ext/highlightjs/highlight.pack.js'
+      'template_src/vendor/highlightjs/highlight.pack.js'
     ],
     css: [
-      'template_src/vendor-ext/highlightjs/styles/monokai_sublime.css'
+      'template_src/vendor/highlightjs/styles/monokai_sublime.css'
     ],
     assets: []
   },
