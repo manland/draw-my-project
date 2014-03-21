@@ -1,0 +1,57 @@
+  
+<section class="container">
+    <h1 class="field"> Bonjour {{user.login}}  </h1>
+
+
+
+
+<hr>
+<h2 class="field">Ma ferme:</h2>
+            <div class="field">
+                <input type="text" placeholder="{{user.farm[0].name}}" ng-model="newFarmName">
+            </div>
+            <button ng-click="changeFarmName()" class="bouton">Changer de nom de ferme</button>            
+ 
+<hr>
+<h2 class="field">Mes plots actuels :</h2>
+            <div class="field" ng-repeat="plot in user.farm[0].plots" >
+                <div class="field">
+
+                <table >
+                    <tr> <td >Nom: </td><td > <input type="text" placeholder="{{plot.name}}" ng-model="plot.name"> </td></tr>
+                    <tr> <td >Coordonnées (lat,lon): </td>
+                        <td > <input type="text" placeholder="{{plot.latitude}}" ng-model="plot.latitude">,
+                                <input type="text" placeholder="{{plot.longitude}}" ng-model="plot.longitude"> </td></tr>
+                    <tr> <td >Taille : </td><td ><input type="text" placeholder="{{plot.area}}" ng-model="plot.area">  </td></tr>
+                </table>
+
+                </div>
+                <div class="field">
+                     <button ng-click="deletePlot(plot)" class="bouton boutonDelete">Supprimer ce plot</button>
+                     <button ng-click="clickOnChangePlot(plot)" class="bouton">Enregistrer les modifications</button>
+                </div>
+                
+            </div>
+
+
+<hr>
+<h2 class="field">Créer un nouveau plot :</h2>
+<form novalidate id="createNewPlot">
+    <div class="field" >
+                <div class="field">
+
+                    <table >
+                        <tr> <td >Nom: </td><td > <input type="text" ng-model="newPlotName">  </td></tr>
+                        <tr> <td >Coordonnées (lat,lon): </td>
+                            <td >  <input type="text" ng-model="newPlotLat">,
+                                    <input type="text" ng-model="newPlotLon"> </td></tr>
+                        <tr> <td >Taille : </td><td ><input type="text" ng-model="newPlotArea">  </td></tr>
+                    </table>
+                </div>
+               
+    </div>
+                       
+ <button ng-click="createPlot(user)" class="bouton">Créer le plot</button>
+
+</section>
+

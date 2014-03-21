@@ -2,7 +2,7 @@
   <h1>Legend</h1>
   <div class="link--target">Used by</div>
   <div class="link--source">Depends on</div>
-  <div class="angularjsLegend" ng-show="isAngularjsType">
+  <div ng-show="isAngularjsType">
     <div class="angular">AngularJs class</div>
     <div class="module">Module</div>
     <div class="directive">Directive</div>
@@ -10,5 +10,12 @@
     <div class="factory">Service</div>
     <div class="filter">Filter</div>
     <div class="node">Internal</div>
+  </div>
+  <div ng-show="isJavaType">
+    <div class="controller">Controller</div>
+    <div class="restcontroller">RestController</div>
+    <div class="factory">Service</div>
+    <div class="aspect">Aspect</div>
+    <div class="configuration">Configuration</div>
   </div>
 </div>

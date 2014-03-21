@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dataset SYSTEM "classpath:hday.dtd" >
+
+<dataset>
+	
+	<mother id="1" name="super maman"/>	
+	<mother id="2" name="killed mother"/>
+	
+	<child id="1" name="child 1" mother_id="1" />
+	<child id="2" name="child 2" mother_id="1" />
+	
+	<person id="1" firstname="Toto" lastname="Cutugno"/>
+	<cpam person_id="1" ss_number="118218"/>
+	
+	<author id="1" firstname="William" lastname="Shakespeare" />
+	
+	<book id="1" title="Hamlet" year="1602"/>
+	<book id="2" title="Macbeth" year="1607"/>
+	<book id="3" title="King Lear" year="1606"/>
+	
+	<book_author book_id="1" author_id="1"/>
+	<book_author book_id="2" author_id="1"/>
+	<book_author book_id="3" author_id="1"/>
+	
+</dataset>

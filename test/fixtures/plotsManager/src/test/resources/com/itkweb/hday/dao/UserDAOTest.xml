@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dataset SYSTEM "classpath:hday.dtd" >
+<dataset>
+
+	<user id="1" login="super login" password="super password" />
+	
+	<user id="2" login="login 2" password="password 2" />
+	
+	<farm id="2" name="my farm 2" user_id="2" />
+	
+	<plot id="1" name="kiwi plot" latitude="45.078854" longitude="5.550442" area="12" farm_id="2" />
+	<plot id="2" name="brussels sprouts plot" latitude="45.078854" longitude="5.550442" area="1" farm_id="2" />
+	<plot id="3" name="mango plot" latitude="45.078854" longitude="5.550442" area="7" farm_id="2" />
+	
+</dataset>

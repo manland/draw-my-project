@@ -52,7 +52,7 @@ grunt.initConfig({
 #### options.type
 Type: `String`
 Default value: `angularjs`
-Accepted values : `angularjs`, `requirejs`
+Accepted values : `angularjs`, `requirejs`, `nodejs`, 'java'
 
 A string value that is used to find node and dependecies type.
 

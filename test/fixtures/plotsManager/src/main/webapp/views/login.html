@@ -1,0 +1,52 @@
+  
+<section class="container">
+    <h1 class="field"> Se connecter...  </h1>
+    
+    <div ng-show="field errorMessage">
+        <label class="userLoginErrorMessage" > {{errorMessage}} </label>
+    </div>
+
+
+    <div class="field">
+
+        <form novalidate id="connexion" class="field formStyle">
+
+            <div  id="login">
+                <label >Utilisateur <span class="error_message"></span>: </label>
+                <input type="text" placeholder="ex: JohnDoe" ng-model="login">
+            </div>
+            <div  id="password">
+                <label >Mot de passe <span class="error_message"></span>: </label>
+                <input type="password" ng-model="password">
+            </div>
+
+            <button type="submit" ng-click="clickOnLogin()" class="bouton bouton-principal">Se connecter</button><br/>
+           
+        </form>
+
+        <form novalidate id="createNewUser" class="field formStyle">
+
+            <div  id="loginCreate">
+                <label >Utilisateur <span class="error_message"></span>: </label>
+                <input type="text" placeholder="ex: JohnDoe" ng-model="loginCreate">
+            </div>
+            <div  id="passwordCreate">
+                <label >Mot de passe <span class="error_message"></span>: </label>
+                <input type="password" ng-model="passwordCreate">
+            </div>
+            <div  id="passwordCreateConfirm">
+                <label > Confirmez le mot de passe <span class="error_message"></span>: </label>
+                <input type="password" ng-model="passwordCreateConfirm">
+            </div>            
+
+            <button type="submit" ng-click="clickOnNewUser()" class="bouton bouton-principal">Créer un nouvel utilisateur</button>
+           
+        </form>
+    </div>
+         
+
+
+
+</section>
+
+

@@ -64,6 +64,9 @@ angular.module('app').service('WheelDependenciesChartService', [
         var node = map[name], i;
         if (!node) {
           node = map[name] = data || {name: name, children: []};
+          if(node.children === undefined) {
+            node.children = [];
+          }
           if (name.length) {
             node.parent = find(name.substring(0, i = name.lastIndexOf(constantsService.getPathSeparator())));
             node.parent.children.push(node);

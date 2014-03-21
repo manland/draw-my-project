@@ -1,0 +1,127 @@
+html{height:100%;}
+body {
+	min-height:100%;
+	height:auto;
+	margin: 0 auto;
+	font-family:sans-serif;
+	font-size:0.9em;
+	background: #f0f0f0;
+	color: #444;
+}
+
+h1{
+	text-align: center;
+}
+
+.container{
+	position:relative;
+	min-height:100%;
+	height:100%;
+
+}
+
+
+.field{
+	width: 60%;
+	margin: 10px auto;
+
+}
+.formStyle{
+	margin: 50px auto;
+}
+/*//////////////////////////*\
+GENERAL BOUTON
+\*\\\\\\\\\\\\\\\\\\\\\\\\\\*/
+
+.bouton{
+	margin: 0 8px 0 0;
+	padding: 6px 10px;
+	border-radius: 4px;
+	cursor: pointer;
+	display: inline-block;
+	vertical-align: top;
+	text-decoration:none;
+
+	color:#444;
+	box-shadow: 0 0 1px 0 #FFF inset;
+	border:solid 1px #AAA;
+	background: #E9E9E9;
+}
+.bouton:active{
+	padding: 7px 10px 5px;
+}
+.bouton:hover,
+.bouton:focus{
+	background: #F5F5F5;
+	border-color:#888;
+}
+
+/*//////////////////////////*\
+PRINCIPAL
+\*\\\\\\\\\\\\\\\\\\\\\\\\\\*/
+
+.bouton-principal{
+	box-shadow: 0 0 1px 0 rgba(255,255,255,0.8) inset;
+	transition:background-position 200ms;
+}
+
+.bouton-principal:hover,
+.bouton-principal:focus{
+	background-position: 100px 0;
+}
+
+.boutonDelete{
+	background-color: #EB9999;
+}
+
+
+/*POP UP*/
+
+
+.glass{
+	width:100%;
+	height:100%;
+	position:fixed;
+	top:0;
+	left:0;
+	background-color:#000;
+	opacity:0.6;
+}
+
+.popup{
+	width:60%;
+	max-height:80%;
+	position:fixed;
+	top:10%;
+	left:50%;
+	margin-left:-30%;
+	padding:20px 20px 10px;
+	background-color:#FFF;
+	border-radius:2px;
+	box-shadow: 0 0 4px 0 #222222;
+	text-align:center;
+}
+
+
+.popup-header{
+	padding:20px 0;
+	color: #000000;
+	background-color:#F5F5F5;
+}
+.popup-section{
+	border-bottom:1px solid #F5F5F5;
+	padding:30px 10px;
+}
+.popup-footer{
+}
+
+
+
+
+
+
+
+
+
+
+

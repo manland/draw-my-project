@@ -278,6 +278,16 @@ module.exports = function(grunt) {
         files: {
           'tmp/angularApp': ['test/fixtures/angularApp/**/*.js']
         }
+      },
+      plotsManager: {
+        options: {
+          title: 'My plots',
+          type: 'java',
+          advices: false
+        },
+        files: {
+          'tmp/plotsManager': ['test/fixtures/plotsManager/src/main/java/**/*.java']
+        }
       }
 
     }

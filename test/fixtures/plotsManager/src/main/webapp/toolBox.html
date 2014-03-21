@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" media="screen" href="stylesheets/toolBox.css">    
+
+    <title>Titre de l'onglet</title>
+  </head>
+
+<!-- Ici on définit la div qui contiendra toute notre application "app" -->
+<body ng-app="app" ng-controller="toolboxController">
+
+<!-- les div peuvent contenir les differents elements à placer -->
+  <div class="field fieldOne"> Je suis une div !</div>
+  <div class="field fieldTwo"> Je suis une autre div </div>
+  
+  <hr> 
+  
+  <!-- des boutons peuvent declencher des actions -->
+  <div class="field" > 
+    <label class="label">Boutons: </label>
+    <button ng-click="actionClicAngular()" class="bouton">clique moi !</button> 
+    <button ng-click="actionClicAngular2()" class="bouton">
+        <img src="./assets/plus.png" /> non, moi je fais des trucs plus cool et en plus j'ai une image !
+    </button> 
+  </div>
+
+  <hr> 
+
+  <div class="field" > 
+    <label class="label" >Mise en page </label>
+      <ul>
+        <li> puce 1</li>
+        <li> puce 2</li>
+        <li> puce 3</li>
+      </ul>
+  </div>
+
+  <hr> 
+    
+  <div class="field" > 
+    <label class="label">Tableaux: </label>
+    <table class="tableau">
+      <tr> <td > ceci</td><td > est </td></tr>
+      <tr> <td > un  </td><td > tableau </td></tr>
+    </table>
+  </div>
+
+  <hr> 
+    
+  <!-- données modifiables par l'utilisateur -->
+  <div class="field" > 
+    <label class="label" >Inputs: </label>
+    <input type="text" placeholder="texte simple" ng-model="variableDansMonControleur">
+    <input type="password" placeholder="mot de passe">
+  </div>
+
+  <hr> 
+  
+  <!-- exemple de data bingind 2 way d'angular, la magie du direct -->
+  <div class="field" > 
+    <label class="label" >Data binding angular: </label> {{variableDansMonControleur}} 
+  </div>  
+
+  <!-- Le code javascript nécessaire pour réaliser ça -->
+  <script type="text/javascript" src="vendor/angular.min.js"></script>
+  <script type="text/javascript" src="javascripts/app.js"></script>
+  <script type="text/javascript" src="javascripts/services/network.js"></script>
+  <script type="text/javascript" src="javascripts/controllers/toolboxController.js"></script>
+ 
+  </body>
+</html> 

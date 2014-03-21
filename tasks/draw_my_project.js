@@ -11,9 +11,10 @@
 var advicesHelper = require('./lib/advicesHelper');
 
 var configs = {
-  angularjs: require('./parsers/angularjs'),
-  requirejs: require('./parsers/requirejs'),
-  nodejs: require('./parsers/nodejs')
+  'angularjs': require('./parsers/angularjs'),
+  'requirejs': require('./parsers/requirejs'),
+  'nodejs': require('./parsers/nodejs'),
+  'java': require('./parsers/java')
 };
 
 var exec = function exec(files, options) {

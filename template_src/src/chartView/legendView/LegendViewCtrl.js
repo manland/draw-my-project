@@ -3,6 +3,7 @@ angular.module('app').controller('LegendViewCtrl', [
 	function($scope, legendViewService, constantsService) {
 
 		$scope.isAngularjsType = constantsService.getType() === 'angularjs';
+		$scope.isJavaType = constantsService.getType() === 'java';
 
 	}
 ]);

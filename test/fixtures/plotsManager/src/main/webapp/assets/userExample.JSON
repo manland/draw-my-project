@@ -1,0 +1,25 @@
+{
+  "userId": 1,
+  "login": "aaa",
+  "password": "aaa",
+  "farm": {
+    "farmId": 1,
+    "name": "La ferme",
+    "plots": [
+      {
+        "plotId": 1,
+        "name": "Ma belle parcelle",
+        "area": 33.5,
+        "longitude": 47.63,
+        "latitude": 2.22
+      },
+      {
+        "plotId": 2,
+        "name": "Ma pas belle parcelle",
+        "area": 37.5,
+        "longitude": 42.68,
+        "latitude": 1.22
+      }
+    ]
+  }
+}

@@ -10,19 +10,19 @@
   stroke-width: 1.5px;
 }
 
-.node.controller {
+.node.controller, .node.restcontroller {
   fill: #87C338;
 }
 
-.controller {
+.controller, .restcontroller {
   color: #87C338;
 }
 
-.node.filter {
+.node.filter, .node.aspect {
   fill: #3F447E;
 }
 
-.filter {
+.filter, .aspect {
   color: #3F447E;
 }
 
@@ -34,11 +34,11 @@
   color: #F05B29;
 }
 
-.node.directive {
+.node.directive, .node.configuration {
   fill: #3A015B;
 }
 
-.directive {
+.directive, .configuration {
   color: #3A015B;
 }
 

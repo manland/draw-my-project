@@ -1,0 +1,27 @@
+  
+<section class="container">
+    <h1 class="field"> Bonjour {{user.login}} !! </h1>
+
+
+
+<hr>
+
+        <h2 class="field"> Votre ferme: </h2>
+        <div class="field"> {{user.farm[0].name}} </div>
+ 
+<hr>
+<h2 class="field"> Vos plots : </h2>
+            <div class="field" ng-repeat="plot in user.farm[0].plots">
+                <table class="field">
+                    <tr> <td >Nom: </td><td >{{plot.name}} </td></tr>
+                    <tr> <td >Coordonnées (lat,lon): </td><td > {{plot.latitude}}, {{plot.longitude}} </td></tr>
+                    <tr> <td >Taille : </td><td >{{plot.area}} </td></tr>
+                </table>
+               <hr>
+            </div>
+                 
+ <div class="field">
+    <button ng-click="clickOnChangeInformation()" class="bouton center">Modifier ces informations</button>
+</div>
+</section>
+
