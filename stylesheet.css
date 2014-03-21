@@ -163,11 +163,11 @@ h2 {
   border-top: none;
 }
 
-.feature.f2, .feature.f6 {
+.feature.f2, .feature.f6, .feature.f10 {
   background-image: url('assets/img/blurred/2.png');
 }
 
-.feature.f3, .feature.f7 {
+.feature.f3, .feature.f7, .feature.f11 {
   background-image: url('assets/img/blurred/3.png');
 }
 
