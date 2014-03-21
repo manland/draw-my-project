@@ -95,6 +95,17 @@ module.exports = function(grunt) {
       var resData = exec(filesIn, options);
       grunt.file.write(f.dest + '.json', JSON.stringify(resData));
 
+      if(options.source !== false && 
+        options.source.srcInCode === false) {
+        var alreadyWrite = {};
+        resData.nodes.forEach(function(node) {
+          if(node.filepath !== '' && alreadyWrite[node.filepath] === undefined) {
+            grunt.file.copy(node.filepath, f.dest + '/src/' + node.filepath);
+            alreadyWrite[node.filepath] = true;
+          }
+        });
+      }
+
       var time2 = new Date().getTime();
 
       var files = grunt.file.expand(options.templateFiles);

@@ -11,7 +11,7 @@ module.exports = {
     if(optSrc !== undefined && 
         options.source !== false && 
         options.source.srcInCode === false) {
-      src = fileWriteHelper.write(filepath, optSrc, options);
+      src = 'src/' + filepath;
     } else if(optSrc !== undefined && 
         options.source !== false && 
         options.source.srcInCode === true) {
