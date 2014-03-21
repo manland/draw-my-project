@@ -81,7 +81,10 @@ angular.module('app').service('SizeChartService', [
             .attr("width", screenSizeService.getWidth())
             .attr("height", screenSizeService.getHeightChart())
             .attr("viewBox", "0 0 "+width+" "+height)
-            .call(d3.behavior.zoom().scaleExtent([-1, 16]).on("zoom", zoom))
+            .call(d3.behavior.zoom()
+              .scaleExtent([0.1, 15])
+              .translate([radius, radius])
+              .on("zoom", zoom))
           .append("g")
             .attr("transform", "translate(" + width / 2 + "," + ((height / 2)+25) + ")");
 

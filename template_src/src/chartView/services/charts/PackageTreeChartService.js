@@ -98,7 +98,10 @@ angular.module('app').service('PackageTreeChartService', [
             .attr("width", screenSizeService.getWidth())
             .attr("height", screenSizeService.getHeightChart())
             .attr("viewBox", "0 0 "+diameter+" "+diameter)
-            .call(d3.behavior.zoom().scaleExtent([-1, 16]).on("zoom", zoom))
+            .call(d3.behavior.zoom()
+              .scaleExtent([0.1, 15])
+              .translate([radius, radius])
+              .on("zoom", zoom))
           .append("g")
             .attr("transform", "translate(" + radius + "," + radius + ")");
 

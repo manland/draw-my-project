@@ -121,7 +121,9 @@ angular.module('app').service('WheelDependenciesChartService', [
           .angle(function(d) { return d.x / 180 * Math.PI; });
 
         var zoom = function zoom() {
-          svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+          svg.attr("transform", 
+            "translate("+d3.event.translate+")scale("+d3.event.scale+")"
+          );
         };
 
         var svg = d3.select(domElement)
@@ -130,7 +132,10 @@ angular.module('app').service('WheelDependenciesChartService', [
             .attr("height", screenSizeService.getHeightChart())
             .attr("viewBox", "0 0 "+diameter+" "+diameter)
             .attr("viewBox", "0 0 "+diameter+" "+diameter)
-            .call(d3.behavior.zoom().scaleExtent([-1, 16]).on("zoom", zoom))
+            .call(d3.behavior.zoom()
+              .scaleExtent([0.1, 15])
+              .translate([radius, radius])
+              .on("zoom", zoom))
           .append("g")
             .attr("transform", "translate(" + radius + "," + radius + ")");
           
