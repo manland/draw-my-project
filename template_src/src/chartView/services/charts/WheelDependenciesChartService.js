@@ -2,7 +2,7 @@ angular.module('app').service('WheelDependenciesChartService', [
   'ConstantsService', 'ScreenSizeService', 'ChartMouseService',
   function(constantsService, screenSizeService, chartMouseService) {
 
-    var link, node;
+    var svg, link, node;
 
     var mouseovered = function mouseovered(d) {
       node.each(function(n) { n.target = n.source = false; });
@@ -126,7 +126,11 @@ angular.module('app').service('WheelDependenciesChartService', [
           );
         };
 
-        var svg = d3.select(domElement)
+        if(svg !== undefined) {
+          svg.remove();
+        }
+
+        svg = d3.select(domElement)
           .append("svg")
             .attr("width", screenSizeService.getWidth())
             .attr("height", screenSizeService.getHeightChart())
@@ -139,7 +143,6 @@ angular.module('app').service('WheelDependenciesChartService', [
           .append("g")
             .attr("transform", "translate(" + radius + "," + radius + ")");
           
-        
         link = svg.append("g").selectAll(".link");
         node = svg.append("g").selectAll(".node");
 
