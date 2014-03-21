@@ -159,8 +159,14 @@ module.exports = function(grunt) {
         }
       }
 
-      // Print a success message.
-      grunt.log.writeln('File "' + f.dest + '" created.');
+      if(resData.advices.length > 0) {
+        if(resData.advices.length > 1) {
+          grunt.log.error('There are ' + resData.advices.length + ' advices.');
+        } else {
+          grunt.log.error('There is ' + resData.advices.length + ' advice.');
+        }
+      }
+      grunt.log.ok('Open the draw of your project in "' + f.dest + '/index.html".');
     });
   });
 
