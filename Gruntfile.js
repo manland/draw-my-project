@@ -171,6 +171,7 @@ module.exports = function(grunt) {
       },
       simple: {
         options: {
+          title: 'simple',
           nbNodeByFile: 3,
           advices: {
             filenameChecker: false
@@ -185,6 +186,7 @@ module.exports = function(grunt) {
       },
       complexe: {
         options: {
+          title: 'complexe',
           advices: false,
           source: false
         },
@@ -251,6 +253,7 @@ module.exports = function(grunt) {
       },
       timeChecking: {
         options: {
+          title: 'timeChecking',
           type: 'nodejs',
           source: false
         },
