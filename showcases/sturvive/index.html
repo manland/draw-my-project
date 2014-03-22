@@ -3,10 +3,10 @@
 	<head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="description" content="Draw your project dependencies !"/>
+    <meta name="description" content="A starship survivor 3d game."/>
     <meta name="viewport" content="width=device-width"/>
-    <link rel="shortcut icon" type="image/png" href="assets/img/logo.png" />
-    <title>Draw_my_project</title>
+    <link rel="shortcut icon" type="image/png" href="assets/img/sturvive.png" />
+    <title>Sturvive</title>
   </head>
 	<body ng-app="app" on-off-switch>
 
@@ -16,14 +16,15 @@
 
     <header ng-include="'src/headerView/HeaderView.tpl.html'" ng-controller="HeaderViewCtrl" ng-style="style"></header>
     <section ng-view></section>
-    <footer>Generated in 15msc with &#9829; by <a href="https://github.com/manland/draw-my-project" target="_blank">Draw my project</a></footer>
+    <div class="fileView" ng-show="selectedNodePath" ng-include="'src/fileView/FileView.tpl.html'" ng-controller="FileViewCtrl"></div>
+    <footer>Generated in 30msc with &#9829; by <a href="https://github.com/manland/draw-my-project" target="_blank">Draw my project</a></footer>
 
     
-      <link rel="stylesheet" type="text/css" href="stylesheet/grunt-draw-my-project-0.3.1.css">
+      <link rel="stylesheet" type="text/css" href="stylesheet/grunt-draw-my-project-0.5.1.css">
     
 
     
-      <script type="text/javascript" src="grunt-draw-my-project-0.3.1.js"></script>
+      <script type="text/javascript" src="grunt-draw-my-project-0.5.1.js"></script>
     
 
 	</body>
