@@ -232,6 +232,13 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
+###0.5.1
+
+* close #62 : copy files after instead of during (need async callback for this)
+* close #64 : add red and green output in console
+* close #63 : first drag or zoom move chart top-left
+* close #35 : add java type (experimental)
+
 ###0.5.0
 
 * close #42 : link source code ! This feature is in intensive development !
