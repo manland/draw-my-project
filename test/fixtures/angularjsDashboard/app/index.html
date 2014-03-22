@@ -1,0 +1,114 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html ng-app="dashboardApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html ng-app="dashboardApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html ng-app="dashboardApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html ng-app="dashboardApp" class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="./fonts/track.css">
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="./styles/reset.css">
+        <link rel="stylesheet" href="./styles/app.css">
+        <!-- endbuild -->
+  </head>
+  <body ng-controller="MainController">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+      <script src="bower_components/es5-shim/es5-shim.js"></script>
+      <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- ============================================ The MEAT ===================================================== -->
+
+
+  <div class="branch-status" ng-controller="BranchStatusController">
+    <div class="branch" ng-repeat="branch in branches">
+      <h2 class="branch-title" bind-markdown="branch.title"></h2>
+
+      <card ng-repeat="card in branch.cards" card-data="card"></card>
+    </div>
+  </div>
+
+  <div class="github-status" ng-controller="GithubStatusController">
+    <div class="branch-title milestone-title" bind-markdown="milestone.title"></div>
+    <progress-bar done="milestone.done" total="milestone.total"></progress-bar>
+
+    <card ng-repeat="card in milestone.cards" card-data="card"></card>
+    <div class="totals">
+      <card ng-repeat="card in milestone.totalCards" card-data="card"></card>
+    </div>
+  </div>
+
+
+  <div class="notification notification-error" id="notification" ng-class="{'notification-active':brokenBuild}">
+    <div class="notification-title">
+      <div bind-markdown="brokenBuild.branch"></div>
+      <small>Build</small>
+    </div>
+    <div class="notification-value">Broken</div>
+    <div class="notification-note">by <strong>{{brokenBuild.author}}</strong></div>
+  </div>
+
+  <div class="notification notification-success" id="notification" ng-class="{'notification-active':fixedBuild}">
+    <div class="notification-title">
+      <div bind-markdown="fixedBuild.branch"></div>
+      <small>Build</small>
+    </div>
+    <div class="notification-value">Fixed</div>
+    <div class="notification-note">by <strong>{{fixedBuild.author}}</strong></div>
+  </div>
+
+
+    <!-- ======================================================================================================= -->
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/services/configService.js"></script>
+        <script src="scripts/services/githubService.js"></script>
+        <script src="scripts/services/scheduleService.js"></script>
+        <script src="scripts/services/travisService.js"></script>
+
+        <script src="scripts/filters/prettyDateFilter.js"></script>
+
+        <script src="scripts/factories/CardFactory.js"></script>
+        <script src="scripts/factories/BuildCardFactory.js"></script>
+        <script src="scripts/factories/Google3CardFactory.js"></script>
+        <script src="scripts/factories/ShaCountCardFactory.js"></script>
+        <script src="scripts/factories/GithubCardFactory.js"></script>
+        <script src="scripts/factories/UntriagedCardFactory.js"></script>
+
+        <script src="scripts/directives/progressBarDirective.js"></script>
+        <script src="scripts/directives/cardDirective.js"></script>
+        <script src="scripts/directives/bindMarkdownDirective.js"></script>
+        <script src="scripts/directives/burnDownChart.js"></script>
+
+        <script src="scripts/controllers/MainController.js"></script>
+        <script src="scripts/controllers/GithubStatusController.js"></script>
+        <script src="scripts/controllers/BranchStatusController.js"></script>
+        <script src="directive/dashGraph.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

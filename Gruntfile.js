@@ -291,6 +291,15 @@ module.exports = function(grunt) {
         files: {
           'tmp/plotsManager': ['test/fixtures/plotsManager/src/main/java/**/*.java']
         }
+      },
+      angularjsDashboard: {
+        options: {
+          title: 'Angularjs_dashboard',
+          nbNodeByFile: -1
+        },
+        files: {
+          'tmp/angularjsDashboard': ['test/fixtures/angularjsDashboard/**/*.js']
+        }
       }
 
     }

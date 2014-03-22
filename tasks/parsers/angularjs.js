@@ -1,7 +1,8 @@
 var inlineNodeParser = require('../lib/InlineNodeParser');
 var parsersHelper = require('../lib/ParsersHelper');
 
-var regexp = /.*?[^$](controller|factory|service|directive|config|run|filter)\(['|"](.+?)['|"](.+?)function\s?\((.*?)\)/;
+var regexp = // /.*?[^$](controller|factory|service|directive|config|run|filter)\(['|"](.+?)['|"](.+?)function\s?\((.*?)\)/;
+    /.*?[^$](controller|factory|service|directive|config|run|filter)\(['|"]([^\)]+?)['|"]([^\)]+?)function\s?\((.*?)\)/;
 var regexpCst = /.*?[^$](value|constant|provider)\(['|"](.+?)['|"]\s?/;
 
 var buildNode = function buildNode(name, options, optFilepath, optSize, optImports, optType, optSrc) {

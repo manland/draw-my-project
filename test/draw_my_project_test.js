@@ -100,6 +100,15 @@ exports.draw_my_project = {
     test.equal(actual, expected, 'should transform java files into chart.');
 
     test.done();
+  },
+  angularjsDashboard: function(test) {
+    test.expect(1);
+    
+    var actual = grunt.file.read('tmp/angularjsDashboard.json');
+    var expected = grunt.file.read('test/expected/angularjsDashboard.json');
+    test.equal(actual, expected, 'should transform js files into chart.');
+
+    test.done();
   }
 
 
