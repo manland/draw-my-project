@@ -295,7 +295,8 @@ module.exports = function(grunt) {
       angularjsDashboard: {
         options: {
           title: 'Angularjs_dashboard',
-          nbNodeByFile: -1
+          nbNodeByFile: -1,
+          checkAngularjsInject: true
         },
         files: {
           'tmp/angularjsDashboard': ['test/fixtures/angularjsDashboard/**/*.js']

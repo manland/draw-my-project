@@ -56,6 +56,7 @@ module.exports = function(grunt) {
         srcInCode: false
       },
       sortByAngularType: true,
+      checkAngularjsInject: false,
       title: 'Draw_my_project',
       description: 'Draw your project dependencies !',
       favicon: 'assets/img/logo.png',
