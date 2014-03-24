@@ -72,9 +72,16 @@ A string value to indicate the path separator. Permit to aggregate same classes 
 #### options.sortByAngularType
 Type: `Boolean`
 Default value: `true`
-<i>Ignored if options.type is requirejs</i>
+<i>Ignored if options.type is  not angularjs</i>
 
 A boolean value to indicate if classes must be grouped by service, factory, directive, controller or filter.
+
+#### options.checkAngularjsInject
+Type: `Boolean`
+Default value: `false`
+<i>Ignored if options.type is  not angularjs</i>
+
+A boolean value to indicate if $inject is used in the project (due to performance issue you must enable this option).
 
 #### options.title
 Type: `String`
@@ -231,6 +238,11 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
+
+###0.5.2
+
+* close #72 : better angularjs regexp
+* close #26 and #74 : add $inject for angularjs type (need `checkAngularjsInject` option at `true`)
 
 ###0.5.1
 
