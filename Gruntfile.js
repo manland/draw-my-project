@@ -295,11 +295,26 @@ module.exports = function(grunt) {
       angularjsDashboard: {
         options: {
           title: 'Angularjs_dashboard',
+          link: 'https://github.com/angular/dashboard.angularjs.org',
           nbNodeByFile: -1,
           checkAngularjsInject: true
         },
         files: {
           'tmp/angularjsDashboard': ['test/fixtures/angularjsDashboard/**/*.js']
+        }
+      },
+      textAngular: {
+        options: {
+          title: 'textAngular',
+          link: 'http://www.textangular.com/',
+          nbNodeByFile: -1,
+          advices: {
+            fileClassName: false,
+            filenameChecker: false
+          }
+        },
+        files: {
+          'tmp/textAngular': ['test/fixtures/textAngular.js']
         }
       }
 
