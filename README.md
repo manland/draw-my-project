@@ -280,7 +280,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ###0.3.2
 
-* close #36 : beatiful [gh-pages](http://manland.github.io/draw-my-project/) ! Thx to @undless for its advices ! <3
+* close #36 : beautiful [gh-pages](http://manland.github.io/draw-my-project/) ! Thx to @undless for its advices ! <3
 * close #49 : button file view in chrome(imum) was bad sized
 * close #7 : add nodejs type
 
@@ -330,7 +330,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ###0.2.0
 
-* new beatiful skin made by @undless
+* new beautiful skin made by @undless
 * add hierarchical chart
 * close #6
 * close #3
